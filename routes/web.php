@@ -25,8 +25,9 @@ Route::get('/forgot-password.html', function () {
     return view('forgot-password');
 });
 
-Route::get('/header', function () {
-    return view('header');
+
+Route::get('/sidebar', function () {
+    return view('navigation-bar');
 });
 
 Route::get('/create-event', function () {
