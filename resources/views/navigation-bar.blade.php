@@ -49,7 +49,7 @@
     <script src="{{ asset('vendors/list.js/list.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
 
-    
+
     <script>
       var isRTL = JSON.parse(localStorage.getItem('isRTL'));
       if (isRTL) {
@@ -96,7 +96,7 @@
               <a class="navbar-brand" href="{{ url('../index.html') }}">
                   <div class="d-flex align-items-center py-3">
                       <img class="me-2" src="{{ asset('assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" />
-                      <span class="font-sans-serif text-primary">falcon</span>
+                      <span class="font-sans-serif text-primary">AFMAMS</span>
                   </div>
               </a>
           </div>
@@ -114,6 +114,7 @@
                                   <span class="nav-link-text ps-1">Dashboard</span>
                               </div>
                           </a>
+                   
                       </li>
 
                       <!-- Main Menu -->
