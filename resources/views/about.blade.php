@@ -10,17 +10,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
-    <title>Falcon | Dashboard &amp; Web App Template</title>
+    <title>AFMAMS | Dashboard </title>
 
     <!-- =============================================== -->
     <!-- Favicons -->
     <!-- =============================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicons/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicons/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicons/favicon-16x16.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicons/favicon.ico') }}">
-    <link rel="manifest" href="{{ asset('assets/img/favicons/manifest.json') }}">
-    <meta name="msapplication-TileImage" content="{{ asset('assets/img/favicons/mstile-150x150.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon/favicon-16x16.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon/favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('assets/images/favicons/manifest.json') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('assets/images/favicons/mstile-150x150.png') }}">
     <meta name="theme-color" content="#ffffff">
     <script src="{{ asset('assets/js/config.js') }}"></script>
     <script src="{{ asset('vendors/simplebar/simplebar.min.js') }}"></script>
@@ -78,7 +78,7 @@
             <div class="toggle-icon-wrapper">
               <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             </div><a class="navbar-brand" href="../index.html">
-              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ url('assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
+              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ url ('assets/images/logo/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
             </a>
           </div>
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
@@ -107,7 +107,7 @@
                     </div>
 
                     <!-- Attendance-->
-                    <a class="nav-link" href="#" role="button">
+                    <a class="nav-link" href="attendance.blade.php" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-calendar-alt"></span></span>
                             <span class="nav-link-text ps-1">Attendance</span>
@@ -115,7 +115,7 @@
                     </a>
 
                     <!-- Fines -->
-                    <a class="nav-link" href="../app/chat.html" role="button">
+                    <a class="nav-link" href="{{ url('fines.blade.php') }}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-coins"></span></span>
                             <span class="nav-link-text ps-1">Fines</span>
@@ -132,7 +132,7 @@
                     <ul class="nav collapse" id="email">
                     <!-- Create an Activity Bar  -->
                         <li class="nav-item">
-                        <a class="nav-link" href="../app/email/inbox.html">
+                        <a class="nav-link" href="{{ url('create-activity.blade.php') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Create an Activity</span></div>
                             </a>
                         </li>
@@ -150,7 +150,7 @@
                     </ul>
 
                     <!-- Community -->
-                    <a class="nav-link" href="../app/chat.html" role="button">
+                    <a class="nav-link" href="{{ url('community.blade.php') }}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-comments"></span></span>
                             <span class="nav-link-text ps-1">Community</span>
@@ -177,7 +177,7 @@
           <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
             <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             <a class="navbar-brand me-1 me-sm-3" href="../index.html">
-              <div class="d-flex align-items-center"><img class="me-2" src="{{ url('assets/img/icons/spot-illustrations/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
+              <div class="d-flex align-items-center"><img class="me-2" src="<?php echo url('assets/images/logo/afmams.png') ?>" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
             </a>
 
             <!-- search -->
@@ -285,7 +285,7 @@
 
               <!-- lalagyan ng inbox -->
               <li class="nav-item d-none d-sm-block">
-                <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait" href="../app/e-commerce/shopping-cart.html"><span class="fas fa-shopping-cart" data-fa-transform="shrink-7" style="font-size: 33px;"></span><span class="notification-indicator-number">1</span></a>
+                <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait" href="../app/e-commerce/shopping-cart.html"><span class="fas fa-inbox" data-fa-transform="shrink-7" style="font-size: 33px;"></span><span class="notification-indicator-number">1</span></a>
               </li>
 
               <!-- Notification -->
@@ -385,13 +385,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                   <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                    <a class="dropdown-item fw-bold text-warning" href="#!"><span class="fas fa-crown me-1"></span><span>Go Pro</span></a>
+                    <a class="dropdown-item" href="{{ url('profile-settings.blade.php') }}">Profile Settings</a>
+                    <a class="dropdown-item" href="#!">Manage Admin</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#!">Set status</a>
-                    <a class="dropdown-item" href="../pages/user/profile.html">Profile &amp; account</a>
-                    <a class="dropdown-item" href="#!">Feedback</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../pages/user/settings.html">Settings</a>
                     <a class="dropdown-item" href="../pages/authentication/card/logout.html">Logout</a>
                   </div>
                 </div>
@@ -401,6 +397,10 @@
 
           <!-- division -->
           
+
+
+          
+           
         </div>
       </div>
     </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->

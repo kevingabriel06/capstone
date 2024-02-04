@@ -10,17 +10,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
-    <title>Falcon | Dashboard &amp; Web App Template</title>
+    <title>AFMAMS | Create Activity </title>
 
     <!-- =============================================== -->
     <!-- Favicons -->
     <!-- =============================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicons/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicons/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicons/favicon-16x16.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicons/favicon.ico') }}">
-    <link rel="manifest" href="{{ asset('assets/img/favicons/manifest.json') }}">
-    <meta name="msapplication-TileImage" content="{{ asset('assets/img/favicons/mstile-150x150.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon/favicon-16x16.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon/favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('assets/images/favicons/manifest.json') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('assets/images/favicons/mstile-150x150.png') }}">
     <meta name="theme-color" content="#ffffff">
     <script src="{{ asset('assets/js/config.js') }}"></script>
     <script src="{{ asset('vendors/simplebar/simplebar.min.js') }}"></script>
@@ -78,7 +78,7 @@
             <div class="toggle-icon-wrapper">
               <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             </div><a class="navbar-brand" href="../index.html">
-              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ url('assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
+              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ url('assets/images/logo/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
             </a>
           </div>
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
@@ -87,7 +87,7 @@
                 
                 <!-- Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#dashboard" role="button" aria-expanded="false" aria-controls="dashboard">
+                    <a class="nav-link" href="{{ url('dashboard') }}" role="button" aria-expanded="false" aria-controls="dashboard">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-chart-pie"></span>
@@ -107,7 +107,7 @@
                     </div>
 
                     <!-- Attendance-->
-                    <a class="nav-link" href="#" role="button">
+                    <a class="nav-link" href="{{ url('attendance.blade.php') }}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-calendar-alt"></span></span>
                             <span class="nav-link-text ps-1">Attendance</span>
@@ -115,7 +115,7 @@
                     </a>
 
                     <!-- Fines -->
-                    <a class="nav-link" href="../app/chat.html" role="button">
+                    <a class="nav-link" href="{{ url('fines.blade.php') }} role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-coins"></span></span>
                             <span class="nav-link-text ps-1">Fines</span>
@@ -132,7 +132,7 @@
                     <ul class="nav collapse" id="email">
                     <!-- Create an Activity Bar  -->
                         <li class="nav-item">
-                        <a class="nav-link" href="../app/email/inbox.html">
+                        <a class="nav-link" href="{{ url('create-activity.blade.php') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Create an Activity</span></div>
                             </a>
                         </li>
@@ -150,7 +150,7 @@
                     </ul>
 
                     <!-- Community -->
-                    <a class="nav-link" href="../app/chat.html" role="button">
+                    <a class="nav-link" href="{{ url('community.blade.php') }}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-comments"></span></span>
                             <span class="nav-link-text ps-1">Community</span>
@@ -177,7 +177,7 @@
           <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
             <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             <a class="navbar-brand me-1 me-sm-3" href="../index.html">
-              <div class="d-flex align-items-center"><img class="me-2" src="{{ url('assets/img/icons/spot-illustrations/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
+              <div class="d-flex align-items-center"><img class="me-2" src="{{ url('assets/images/logo/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
             </a>
 
             <!-- search -->
@@ -285,7 +285,7 @@
 
               <!-- lalagyan ng inbox -->
               <li class="nav-item d-none d-sm-block">
-                <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait" href="../app/e-commerce/shopping-cart.html"><span class="fas fa-shopping-cart" data-fa-transform="shrink-7" style="font-size: 33px;"></span><span class="notification-indicator-number">1</span></a>
+                <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait" href="../app/e-commerce/shopping-cart.html"><span class="fas fa-inbox" data-fa-transform="shrink-7" style="font-size: 33px;"></span><span class="notification-indicator-number">1</span></a>
               </li>
 
               <!-- Notification -->
@@ -385,13 +385,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                   <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                    <a class="dropdown-item fw-bold text-warning" href="#!"><span class="fas fa-crown me-1"></span><span>Go Pro</span></a>
+                    <a class="dropdown-item" href="{{ url('profile-settings.blade.php') }}">Profile Settings</a>
+                    <a class="dropdown-item" href="#!">Manage Admin</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#!">Set status</a>
-                    <a class="dropdown-item" href="../pages/user/profile.html">Profile &amp; account</a>
-                    <a class="dropdown-item" href="#!">Feedback</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../pages/user/settings.html">Settings</a>
                     <a class="dropdown-item" href="../pages/authentication/card/logout.html">Logout</a>
                   </div>
                 </div>
@@ -400,6 +396,124 @@
           </nav>
 
           <!-- division -->
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="row flex-between-center">
+                  <div class="col-md">
+                    <h5 class="mb-2 mb-md-0">Create Activity</h5>
+                  </div>
+                  <div class="col-auto"><button class="btn btn-falcon-default btn-sm me-2" role="button">Save</button></div>
+                </div>
+              </div>
+            </div>
+            <div class="card cover-image mb-3"><img class="card-img-top" src="{{ url('assets/img/generic/13.jpg') }}" alt="" /><input class="d-none" id="upload-cover-image" type="file" /><label class="cover-image-file-input" for="upload-cover-image"><span class="fas fa-camera me-2"></span><span>Change cover photo</span></label></div>
+            <div class="row g-0">
+              <div class="col-lg-8 pe-lg-2">
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <h5 class="mb-0">Activity Details</h5>
+                  </div>
+                  <div class="card-body bg-body-tertiary">
+                    <form>
+                      <div class="row gx-2">
+                        <div class="col-12 mb-3"><label class="form-label" for="event-name">Event Title</label><input class="form-control" id="event-name" type="text" placeholder="Event Title" /></div>
+                        <div class="col-sm-6 mb-3"><label class="form-label" for="start-date">Start Date</label><input class="form-control datetimepicker" id="start-date" type="text" placeholder="dd/mm/yy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' /></div>
+                        <div class="col-sm-6 mb-3"><label class="form-label" for="start-time">Start Time</label><input class="form-control datetimepicker" id="start-time" type="text" placeholder="H:i" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' /></div>
+                        <div class="col-sm-6 mb-3"><label class="form-label" for="end-date">End Date</label><input class="form-control datetimepicker" id="end-date" type="text" placeholder="dd/mm/yy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' /></div>
+                        <div class="col-sm-6 mb-3"><label class="form-label" for="end-time">End Time</label><input class="form-control datetimepicker" id="end-time" type="text" placeholder="H:i" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' /></div>
+                        <div class="col-sm-6"><label class="form-label" for="registration-deadline">Registration Deadline</label><input class="form-control datetimepicker" id="registration-deadline" type="text" placeholder="dd/mm/yy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' /></div>
+                        <div class="col-sm-6"><label class="form-label" for="registration-fee">Registration Fee</label><input class="form-control" id="registration-fee" type="text" placeholder="₱ 00.00"/></div>
+                        <div class="col-12">
+                          <div class="border-bottom border-dashed my-3"></div>
+                        </div>
+                        <div class="col-12"><label class="form-label" for="event-description">Description</label><textarea class="form-control" id="event-description" rows="6"></textarea></div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                
+                <!-- adding of photos -->
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <h5 class="mb-0">Upload Photos</h5>
+                  </div>
+                  <div class="card-body bg-body-tertiary">
+                    <form class="dropzone dropzone-multiple p-0" id="my-awesome-dropzone" data-dropzone="data-dropzone" action="#!">
+                      <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
+                      <div class="dz-message" data-dz-message="data-dz-message"> <img class="me-2" src="../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
+                      <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
+                        <div class="d-flex media align-items-center mb-3 pb-3 border-bottom btn-reveal-trigger"><img class="dz-image" src="../../assets/img/generic/image-file-2.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
+                          <div class="flex-1 d-flex flex-between-center">
+                            <div>
+                              <h6 data-dz-name="data-dz-name"></h6>
+                              <div class="d-flex align-items-center">
+                                <p class="mb-0 fs-10 text-400 lh-1" data-dz-size="data-dz-size"></p>
+                                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                              </div>
+                            </div>
+                            <div class="dropdown font-sans-serif"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h"></span></button>
+                              <div class="dropdown-menu dropdown-menu-end border py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-lg-4 ps-lg-2">
+                <div class="sticky-sidebar">
+                  <div class="card mb-lg-0">
+                    <div class="card-header">
+                      <h5 class="mb-0">Other Info</h5>
+                    </div>
+                    <div class="card-body bg-body-tertiary">
+                      <div class="mb-3"><label class="form-label" for="organizer">Organizer</label><select class="form-select" id="organizer" name="organizer">
+                          <option id= "default" name="default">Select Organizer...</option>
+                          <option id= "org" name= "org">Organization</option>
+                          <option id= "department" name= "department">Department</option>
+                          
+                        </select></div>
+                      <div class="mb-3"><label class="form-label" for="event-topic">Event Topic</label><select class="form-select" id="event-topic" name="even-topic">
+                          <option value="" selected="selected">Select a topic</option>
+                          <option>Auto, Boat &amp; Air</option>
+                          <option>Business &amp; Professional</option>
+                          <option>Charity &amp; Causes</option>
+                          <option>Community &amp; Culture</option>
+                          <option>Family &amp; Education</option>
+                          <option>Fashion &amp; Beauty</option>
+                          <option>Film, Media &amp; Entertainment</option>
+                          <option>Food &amp; Drink</option>
+                          <option>Government &amp; Politics</option>
+                        </select></div>
+                      <div class="border-bottom border-dashed my-3"></div>
+                      <h6>Listing Privacy</h6>
+                      <div class="mb-3 form-check"><input class="form-check-input" id="customRadio4" type="radio" name="listingPrivacy" checked="checked" /><label class="form-label mb-0" for="customRadio4"> <strong>Public</strong></label>
+                        <div class="form-text mt-0">Discoverable by anyone on City College of Calapan.</div>
+                      </div>
+                      <div class="mb-3 form-check"><input class="form-check-input" id="customRadio5" type="radio" name="listingPrivacy" /><label class="form-label mb-0" for="customRadio5"> <strong>Private</strong></label>
+                        <div class="form-text mt-0">Accessible only by organization and department specified. </div>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card mt-3">
+              <div class="card-body">
+                <div class="row justify-content-between align-items-center">
+                  <div class="col-md">
+                    <h5 class="mb-2 mb-md-0">Nice Job! You're almost done</h5>
+                  </div>
+                  <div class="col-auto"><button class="btn btn-falcon-default btn-sm me-2">Save</button></div>
+                </div>
+              </div>
+            </div>
+
           
         </div>
       </div>

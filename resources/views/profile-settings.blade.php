@@ -10,17 +10,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
-    <title>Falcon | Dashboard &amp; Web App Template</title>
+    <title>AFMAMS | Dashboard </title>
 
     <!-- =============================================== -->
     <!-- Favicons -->
     <!-- =============================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicons/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicons/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicons/favicon-16x16.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicons/favicon.ico') }}">
-    <link rel="manifest" href="{{ asset('assets/img/favicons/manifest.json') }}">
-    <meta name="msapplication-TileImage" content="{{ asset('assets/img/favicons/mstile-150x150.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon/favicon-16x16.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon/favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('assets/images/favicons/manifest.json') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('assets/images/favicons/mstile-150x150.png') }}">
     <meta name="theme-color" content="#ffffff">
     <script src="{{ asset('assets/js/config.js') }}"></script>
     <script src="{{ asset('vendors/simplebar/simplebar.min.js') }}"></script>
@@ -78,7 +78,7 @@
             <div class="toggle-icon-wrapper">
               <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             </div><a class="navbar-brand" href="../index.html">
-              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ url('assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
+              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ url ('assets/images/logo/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
             </a>
           </div>
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
@@ -87,7 +87,7 @@
                 
                 <!-- Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#dashboard" role="button" aria-expanded="false" aria-controls="dashboard">
+                    <a class="nav-link" href="dashboard" role="button" aria-expanded="false" aria-controls="dashboard">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-chart-pie"></span>
@@ -107,7 +107,7 @@
                     </div>
 
                     <!-- Attendance-->
-                    <a class="nav-link" href="#" role="button">
+                    <a class="nav-link" href="attendance.blade.php" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-calendar-alt"></span></span>
                             <span class="nav-link-text ps-1">Attendance</span>
@@ -115,7 +115,7 @@
                     </a>
 
                     <!-- Fines -->
-                    <a class="nav-link" href="../app/chat.html" role="button">
+                    <a class="nav-link" href="{{ url('fines.blade.php') }}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-coins"></span></span>
                             <span class="nav-link-text ps-1">Fines</span>
@@ -132,7 +132,7 @@
                     <ul class="nav collapse" id="email">
                     <!-- Create an Activity Bar  -->
                         <li class="nav-item">
-                        <a class="nav-link" href="../app/email/inbox.html">
+                        <a class="nav-link" href="{{ url('create-activity.blade.php') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Create an Activity</span></div>
                             </a>
                         </li>
@@ -150,7 +150,7 @@
                     </ul>
 
                     <!-- Community -->
-                    <a class="nav-link" href="../app/chat.html" role="button">
+                    <a class="nav-link" href="{{ url('community.blade.php') }}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-comments"></span></span>
                             <span class="nav-link-text ps-1">Community</span>
@@ -177,7 +177,7 @@
           <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
             <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             <a class="navbar-brand me-1 me-sm-3" href="../index.html">
-              <div class="d-flex align-items-center"><img class="me-2" src="{{ url('assets/img/icons/spot-illustrations/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
+              <div class="d-flex align-items-center"><img class="me-2" src="<?php echo url('assets/images/logo/afmams.png') ?>" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
             </a>
 
             <!-- search -->
@@ -285,7 +285,7 @@
 
               <!-- lalagyan ng inbox -->
               <li class="nav-item d-none d-sm-block">
-                <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait" href="../app/e-commerce/shopping-cart.html"><span class="fas fa-shopping-cart" data-fa-transform="shrink-7" style="font-size: 33px;"></span><span class="notification-indicator-number">1</span></a>
+                <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait" href="../app/e-commerce/shopping-cart.html"><span class="fas fa-inbox" data-fa-transform="shrink-7" style="font-size: 33px;"></span><span class="notification-indicator-number">1</span></a>
               </li>
 
               <!-- Notification -->
@@ -385,13 +385,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                   <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                    <a class="dropdown-item fw-bold text-warning" href="#!"><span class="fas fa-crown me-1"></span><span>Go Pro</span></a>
+                    <a class="dropdown-item" href="{{ url('profile-settings.blade.php') }}">Profile Settings</a>
+                    <a class="dropdown-item" href="#!">Manage Admin</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#!">Set status</a>
-                    <a class="dropdown-item" href="../pages/user/profile.html">Profile &amp; account</a>
-                    <a class="dropdown-item" href="#!">Feedback</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../pages/user/settings.html">Settings</a>
                     <a class="dropdown-item" href="../pages/authentication/card/logout.html">Logout</a>
                   </div>
                 </div>
@@ -400,7 +396,95 @@
           </nav>
 
           <!-- division -->
+            <div class="row">
+                <div class="col-12">
+                <div class="card mb-3 btn-reveal-trigger">
+                    <div class="card-header position-relative min-vh-25 mb-8">
+                    <div class="cover-image">
+                        <div class="bg-holder rounded-3 rounded-bottom-0" style="background-image:url(../../assets/img/generic/4.jpg);"></div><!--/.bg-holder-->
+                        <input class="d-none" id="upload-cover-image" type="file" /><label class="cover-image-file-input" for="upload-cover-image"><span class="fas fa-camera me-2"></span><span>Change cover photo</span></label>
+                    </div>
+                    <div class="avatar avatar-5xl avatar-profile shadow-sm img-thumbnail rounded-circle">
+                        <div class="h-100 w-100 rounded-circle overflow-hidden position-relative"> <img src="../../assets/img/team/2.jpg" width="200" alt="" data-dz-thumbnail="data-dz-thumbnail" /><input class="d-none" id="profile-image" type="file" /><label class="mb-0 overlay-icon d-flex flex-center" for="profile-image"><span class="bg-holder overlay overlay-0"></span><span class="z-1 text-white dark__text-white text-center fs-10"><span class="fas fa-camera"></span><span class="d-block">Update</span></span></label></div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row g-0">
+                <div class="col-lg-8 pe-lg-2">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                        <h5 class="mb-0">Profile Settings</h5>
+                        </div>
+                        <div class="card-body bg-body-tertiary">
+                        <form class="row g-3">
+                            <div class="col-lg-6"> <label class="form-label" for="first-name">First Name</label><input class="form-control" id="first-name" type="text" value="Anthony" /></div>
+                            <div class="col-lg-6"> <label class="form-label" for="last-name">Last Name</label><input class="form-control" id="last-name" type="text" value="Hopkins" /></div>
+                            <div class="col-lg-6"> <label class="form-label" for="program">Program</label><input class="form-control" id="program" type="text" value="BSIS" /></div>
+                            <div class="col-lg-6"> <label class="form-label" for="year-level">Year Level</label><input class="form-control" id="year-level" type="text" value="3rd Year" /></div>
+                            <div class="col-12 d-flex justify-content-end"><button class="btn btn-primary" type="submit">Update </button></div>
+                        </form>
+                        </div>
+                    </div>
+
+                    <!-- Organization -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                        <h5 class="mb-0">Organization</h5>
+                        </div>
+                        <div class="card-body bg-body-tertiary"><a class="mb-4 d-block d-flex align-items-center" href="#organization-form1" data-bs-toggle="collapse" aria-expanded="false" aria-controls="organization-form1"><span class="circle-dashed"><span class="fas fa-plus"></span></span><span class="ms-3">Add new Organization</span></a>
+                            <div class="collapse" id="experience-form1">
+                                <form class="row">
+                                <div class="col-3 mb-3 text-lg-end"><label class="form-label" for="organization">Organization</label></div>
+                                <div class="col-9 col-sm-7 mb-3"> <input class="form-control form-control-sm" id="organization" name="organization" type="text" /></div>
+                                <div class="col-3 mb-3 text-lg-end"><label class="form-label" for="position">Position</label></div>
+                                <div class="col-9 col-sm-7 mb-3"> <input class="form-control form-control-sm" id="position" name="position" type="text" /></div>
+                                <div class="col-3 text-lg-end"><label class="form-label" for="experience-form2">From </label></div>
+                                <div class="col-9 col-sm-7 mb-3"> <input class="form-control form-control-sm text-500 datetimepicker" id="experience-form2" type="text" placeholder="dd/mm/yy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' /></div>
+                                <div class="col-3 text-lg-end"><label class="form-label" for="experience-to">To </label></div>
+                                <div class="col-9 col-sm-7 mb-3"> <input class="form-control form-control-sm text-500 datetimepicker" id="experience-to" type="text" placeholder="dd/mm/yy" data-options='{"dateFormat":"d/m/y","disableMobile":true}' /></div>
+                                <div class="col-9 col-sm-7 offset-3"><button class="btn btn-primary" type="button">Save</button></div>
+                                </form>
+                                <div class="border-dashed-bottom my-4"></div>
+                            </div>
+                            <div class="d-flex"><a href="#!"> <img class="img-fluid" src="../../assets/img/logos/g.png" alt="" width="56" /></a>
+                                <div class="flex-1 position-relative ps-3">
+                                <h6 class="fs-9 mb-0">JPCS-CCC<span data-bs-toggle="tooltip" data-bs-placement="top" title="Verified"><small class="fa fa-check-circle text-primary" data-fa-transform="shrink-4 down-2"></small></span></h6>
+                                <p class="mb-1"> <a href="#!">Member</a></p>
+                                <p class="text-1000 mb-0">August 2021 - Present</p>
+                                <div class="border-bottom border-dashed my-3"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Change Password -->
+                <div class="col-lg-4 ps-lg-2">
+                <div class="sticky-sidebar">
+                    <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="mb-0">Change Password</h5>
+                    </div>
+                    <div class="card-body bg-body-tertiary">
+                        <form>
+                        <div class="mb-3"><label class="form-label" for="old-password">Old Password</label><input class="form-control" id="old-password" type="password" /></div>
+                        <div class="mb-3"><label class="form-label" for="new-password">New Password</label><input class="form-control" id="new-password" type="password" /></div>
+                        <div class="mb-3"><label class="form-label" for="confirm-password">Confirm Password</label><input class="form-control" id="confirm-password" type="password" /></div><button class="btn btn-primary d-block w-100" type="submit">Update Password </button>
+                        </form>
+                    </div>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+
+
           
+           
         </div>
       </div>
     </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->

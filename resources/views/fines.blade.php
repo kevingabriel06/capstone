@@ -10,17 +10,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
-    <title>Falcon | Dashboard &amp; Web App Template</title>
+    <title>AFMAMS | Dashboard </title>
 
     <!-- =============================================== -->
     <!-- Favicons -->
     <!-- =============================================== -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicons/apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/favicons/favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/img/favicons/favicon-16x16.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicons/favicon.ico') }}">
-    <link rel="manifest" href="{{ asset('assets/img/favicons/manifest.json') }}">
-    <meta name="msapplication-TileImage" content="{{ asset('assets/img/favicons/mstile-150x150.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/images/favicon/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon/favicon-16x16.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon/favicon.ico') }}">
+    <link rel="manifest" href="{{ asset('assets/images/favicons/manifest.json') }}">
+    <meta name="msapplication-TileImage" content="{{ asset('assets/images/favicons/mstile-150x150.png') }}">
     <meta name="theme-color" content="#ffffff">
     <script src="{{ asset('assets/js/config.js') }}"></script>
     <script src="{{ asset('vendors/simplebar/simplebar.min.js') }}"></script>
@@ -78,7 +78,7 @@
             <div class="toggle-icon-wrapper">
               <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             </div><a class="navbar-brand" href="../index.html">
-              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ url('assets/img/icons/spot-illustrations/falcon.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
+              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ url ('assets/images/logo/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
             </a>
           </div>
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
@@ -87,7 +87,7 @@
                 
                 <!-- Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#dashboard" role="button" aria-expanded="false" aria-controls="dashboard">
+                    <a class="nav-link" href="dashboard" role="button" aria-expanded="false" aria-controls="dashboard">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-chart-pie"></span>
@@ -107,7 +107,7 @@
                     </div>
 
                     <!-- Attendance-->
-                    <a class="nav-link" href="#" role="button">
+                    <a class="nav-link" href="attendance.blade.php" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-calendar-alt"></span></span>
                             <span class="nav-link-text ps-1">Attendance</span>
@@ -115,7 +115,7 @@
                     </a>
 
                     <!-- Fines -->
-                    <a class="nav-link" href="../app/chat.html" role="button">
+                    <a class="nav-link" href="{{ url('fines.blade.php') }}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-coins"></span></span>
                             <span class="nav-link-text ps-1">Fines</span>
@@ -132,7 +132,7 @@
                     <ul class="nav collapse" id="email">
                     <!-- Create an Activity Bar  -->
                         <li class="nav-item">
-                        <a class="nav-link" href="../app/email/inbox.html">
+                        <a class="nav-link" href="{{ url('create-activity.blade.php') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Create an Activity</span></div>
                             </a>
                         </li>
@@ -150,7 +150,7 @@
                     </ul>
 
                     <!-- Community -->
-                    <a class="nav-link" href="../app/chat.html" role="button">
+                    <a class="nav-link" href="{{ url('community.blade.php') }}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-comments"></span></span>
                             <span class="nav-link-text ps-1">Community</span>
@@ -177,7 +177,7 @@
           <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
             <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             <a class="navbar-brand me-1 me-sm-3" href="../index.html">
-              <div class="d-flex align-items-center"><img class="me-2" src="{{ url('assets/img/icons/spot-illustrations/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
+              <div class="d-flex align-items-center"><img class="me-2" src="<?php echo url('assets/images/logo/afmams.png') ?>" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
             </a>
 
             <!-- search -->
@@ -285,7 +285,7 @@
 
               <!-- lalagyan ng inbox -->
               <li class="nav-item d-none d-sm-block">
-                <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait" href="../app/e-commerce/shopping-cart.html"><span class="fas fa-shopping-cart" data-fa-transform="shrink-7" style="font-size: 33px;"></span><span class="notification-indicator-number">1</span></a>
+                <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait" href="../app/e-commerce/shopping-cart.html"><span class="fas fa-inbox" data-fa-transform="shrink-7" style="font-size: 33px;"></span><span class="notification-indicator-number">1</span></a>
               </li>
 
               <!-- Notification -->
@@ -385,13 +385,9 @@
                 </a>
                 <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                   <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                    <a class="dropdown-item fw-bold text-warning" href="#!"><span class="fas fa-crown me-1"></span><span>Go Pro</span></a>
+                    <a class="dropdown-item" href="../pages/user/profile.html">Profile Settings</a>
+                    <a class="dropdown-item" href="#!">Manage Admin</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#!">Set status</a>
-                    <a class="dropdown-item" href="../pages/user/profile.html">Profile &amp; account</a>
-                    <a class="dropdown-item" href="#!">Feedback</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../pages/user/settings.html">Settings</a>
                     <a class="dropdown-item" href="../pages/authentication/card/logout.html">Logout</a>
                   </div>
                 </div>
@@ -400,7 +396,87 @@
           </nav>
 
           <!-- division -->
-          
+          <div class="card mb-3" id="ordersTable" data-list='{"valueNames":["order","date","address","status","amount"],"page":10,"pagination":true}'>
+            <div class="card-header">
+              <div class="row flex-between-center">
+                <div class="col-4 col-sm-auto d-flex align-items-center pe-0">
+                  <h4 class="fs-9 mb-0 text-nowrap py-2 py-xl-0">FINES</h4>
+                </div>
+                <div class="col-8 col-sm-auto ms-auto text-end ps-0">
+                  <div id="orders-actions"><button class="btn btn-falcon-default btn-sm mx-2" type="button"><span class="fas fa-filter" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Filter</span></button><button class="btn btn-falcon-default btn-sm" type="button"><span class="fas fa-external-link-alt" data-fa-transform="shrink-3 down-2"></span><span class="d-none d-sm-inline-block ms-1">Export</span></button></div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive scrollbar">
+              <table class="table table-sm table-striped fs-10 mb-0 overflow-hidden">
+                  <thead class="bg-200">
+                    <tr>
+                      <th class="text-900 align-middle white-space-wrap" data-sort="id-number" style="min-width: 150px;">ID Number</th>
+                      <th class="text-900 sort pe-1 align-middle white-space-wrap" data-sort="name">Name</th>
+                      <th class="text-900 align-middle white-space-wrap text-center" data-sort="status">Status</th>
+                      <th class="text-900 align-middle white-space-wrap text-center" data-sort="amount">Amount</th>
+                      <th class="align-middle no-sort"></th>
+                    </tr>
+                  </thead>
+                  <tbody class="list" id="table-customers-body">
+                    <tr class="btn-reveal-trigger">
+                      <td class="id-number align-middle white-space-nowrap py-2"><a href="customer-details.html">
+                          <div class="d-flex d-flex align-items-center">
+                            <div class="flex-1">
+                              <h5 class="mb-0 fs-10"><strong> 11-00001 </strong></h5>
+                            </div>
+                          </div>
+                        </a></td>
+                      <td class="name align-middle py-2"><a href="#">Juan Dela Cruz</a></td>
+                      <td class="status py-2 align-middle text-center fs-9 white-space-wrap"><span class="badge badge rounded-pill d-block badge-subtle-success">Paid<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span></td>
+                      <td class="amount py-2 align-middle text-center fs-9 fw-medium">₱ 99</td>
+                      <td class="align-middle white-space-nowrap py-2 text-end">
+                        <div class="dropdown font-sans-serif position-static"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button" id="customer-dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                          <div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="customer-dropdown-0">
+                            <div class="py-2">
+                                <a class="dropdown-item" href="#!">Paid</a>
+                                <a class="dropdown-item" href="#!">Unpaid</a>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr class="btn-reveal-trigger">
+                      <td class="id-number align-middle white-space-nowrap py-2"><a href="customer-details.html">
+                          <div class="d-flex d-flex align-items-center">
+                            <div class="flex-1">
+                              <h5 class="mb-0 fs-10"><strong> 12-70001 </strong> </h5>
+                            </div>
+                          </div>
+                        </a></td>
+                      <td class="name align-middle py-2"><a href="#">Pedro Gomez</a></td>
+                      <td class="status py-2 align-middle text-center fs-9 white-space-wrap"><span class="badge badge rounded-pill d-block badge-subtle-warning">Unpaid<span class="ms-1 fas fa-times" data-fa-transform="shrink-2"></span></span></td>
+                      <td class="amount py-2 align-middle text-center fs-9 fw-medium">₱ 99</td>
+                      <td class="align-middle white-space-nowrap py-2 text-end">
+                        <div class="dropdown font-sans-serif position-static"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button" id="customer-dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                          <div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="customer-dropdown-0">
+                            <div class="py-2">
+                                <a class="dropdown-item" href="#!">Paid</a>
+                                <a class="dropdown-item" href="#!">Unpaid</a>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- dito ifefetch ang data from data base -->
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="d-flex align-items-center justify-content-center"><button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right">             </span></button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
