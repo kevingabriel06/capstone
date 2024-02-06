@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +32,11 @@ Route::get('/sidebar', function () {
     return view('navigation-bar');
 });
 
-Route::get('/create-activity.blade.php', function () {
-    return view('create-activity');
-});
+//create an activity route
+Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
+Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
+Route::post('/create-activity/department', [DepartmentController::class, 'department'])->name('create-activity.department');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
