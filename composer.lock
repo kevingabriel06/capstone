@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
+    "content-hash": "70b26213bebd763fa034e75d92e92adc",
+=======
     "content-hash": "068a626f4990de09d17eb59726362c03",
+>>>>>>> 3af7b4fde5bba9a97fc33c6cb4704bbd03f6ecbb
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1092,6 +1096,29 @@
             "time": "2023-12-03T20:05:35+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "haruncpi/laravel-h",
+            "version": "v0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/haruncpi/laravel-h.git",
+                "reference": "cf56d69925d8a8f31758c0202eed4fdc9556b17e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/haruncpi/laravel-h/zipball/cf56d69925d8a8f31758c0202eed4fdc9556b17e",
+                "reference": "cf56d69925d8a8f31758c0202eed4fdc9556b17e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Haruncpi\\LaravelH\\LaravelHServiceProvider"
+=======
             "name": "laravel/cashier",
             "version": "v13.17.0",
             "source": {
@@ -1140,17 +1167,42 @@
                 "laravel": {
                     "providers": [
                         "Laravel\\Cashier\\CashierServiceProvider"
+>>>>>>> 3af7b4fde5bba9a97fc33c6cb4704bbd03f6ecbb
                     ]
                 }
             },
             "autoload": {
+<<<<<<< HEAD
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Haruncpi\\LaravelH\\": "src/"
+=======
                 "psr-4": {
                     "Laravel\\Cashier\\": "src/",
                     "Laravel\\Cashier\\Database\\Factories\\": "database/factories/"
+>>>>>>> 3af7b4fde5bba9a97fc33c6cb4704bbd03f6ecbb
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
+<<<<<<< HEAD
+                "cc-by-4.0"
+            ],
+            "authors": [
+                {
+                    "name": "Md.Harun-Ur-Rashid",
+                    "email": "harun.cox@gmail.com"
+                }
+            ],
+            "description": "A helper package for Laravel Framework",
+            "support": {
+                "issues": "https://github.com/haruncpi/laravel-h/issues",
+                "source": "https://github.com/haruncpi/laravel-h/tree/v0.0.3"
+            },
+            "time": "2021-01-16T06:18:43+00:00"
+=======
                 "MIT"
             ],
             "authors": [
@@ -1174,6 +1226,7 @@
                 "source": "https://github.com/laravel/cashier"
             },
             "time": "2023-03-01T09:33:20+00:00"
+>>>>>>> 3af7b4fde5bba9a97fc33c6cb4704bbd03f6ecbb
         },
         {
             "name": "laravel/framework",

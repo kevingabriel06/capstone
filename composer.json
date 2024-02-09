@@ -8,7 +8,11 @@
         "php": "^7.3|^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+<<<<<<< HEAD
+        "haruncpi/laravel-h": "^0.0.3",
+=======
         "laravel/cashier": "^13.17",
+>>>>>>> 3af7b4fde5bba9a97fc33c6cb4704bbd03f6ecbb
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5"

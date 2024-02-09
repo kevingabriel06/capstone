@@ -445,10 +445,20 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($activities as $activity)
                     <tr>
-                        <td>January 1, 2023</td>
-                        <td>TAGISLAKASAN</td>
-                        <td><span class="badge badge rounded-pill d-block p-2 badge-subtle-success">Completed<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span></td>
+                        <td>{{$activity->date_start}}</td>
+                        <td>{{$activity->title}}</td>
+                        <td>
+                            @if($activity->status == 'Upcoming')
+                                <span class="badge badge rounded-pill d-block p-2 badge-subtle-primary">{{$activity->status}}<span class="ms-1 fas fa-redo" data-fa-transform="shrink-2"></span></span>
+                            @elseif($activity->status == 'Ongoing')
+                                <span class="badge badge rounded-pill d-block p-2 badge-subtle-warning">{{$activity->status}}<span class="ms-1 fas fa-stream" data-fa-transform="shrink-2"></span></span>
+                            @else
+                                <span class="badge badge rounded-pill d-block p-2 badge-subtle-success">{{$activity->status}}<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>
+                            @endif
+                        </td>
+
                         <td class="text-end">
                         <div>
                             <button class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
@@ -458,38 +468,10 @@
                             <button class="btn btn-link p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                 <span class="text-500 fas fa-trash-alt"></span></button>
                         </div>
-                        </td>
+                        </td> 
                     </tr>
-                    <tr>
-                        <td>January 1, 2024</td>
-                        <td>TAGISLAKASAN</td>
-                        <td><span class="badge badge rounded-pill d-block p-2 badge-subtle-warning">Ongoing<span class="ms-1 fas fa-stream" data-fa-transform="shrink-2"></span></span></td>
-                        <td class="text-end">
-                            <div>
-                                <button class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                    <span class="text-500 fas fa-edit"></span></button>
-                                <button class="btn btn-link p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                    <span class="text-500 far fa-eye"></span></button>
-                                <button class="btn btn-link p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                    <span class="text-500 fas fa-trash-alt"></span></button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>January 1, 2025</td>
-                        <td>TAGISLAKASAN</td>
-                        <td><span class="badge badge rounded-pill d-block p-2 badge-subtle-primary">Upcoming<span class="ms-1 fas fa-redo" data-fa-transform="shrink-2"></span></span></td>
-                        <td class="text-end">
-                            <div>
-                                <button class="btn btn-link p-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                    <span class="text-500 fas fa-edit"></span></button>
-                                <button class="btn btn-link p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                    <span class="text-500 far fa-eye"></span></button>
-                                <button class="btn btn-link p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                    <span class="text-500 fas fa-trash-alt"></span></button>
-                            </div>
-                       </td>
-                    </tr>
+                    @endforeach
+
                     </tbody>
                 </table>
             </div>

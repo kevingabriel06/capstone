@@ -432,41 +432,69 @@
                       @method('post')
                       <div class="row gx-2">
                         <div class="col-12 mb-3"><label class="form-label" for="event-name">Activity Title</label><input class="form-control" id="event-name" type="text" placeholder="Activity Title" name="title"/></div>
-                        <div class="col-sm-6 mb-3"><label class="form-label" for="start-date">Start Date</label><input class="form-control datetimepicker" id="start-date" type="text" placeholder="dd/mm/yy" name="date_start" data-options='{"dateFormat":"d/m/y","disableMobile":true}' /></div>
-                        <div class="col-sm-6 mb-3"><label class="form-label" for="start-time">Start Time</label><input class="form-control datetimepicker" id="start-time" type="text" placeholder="H:i" name="start_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' /></div>
-                        <div class="col-sm-6 mb-3"><label class="form-label" for="end-date">End Date</label><input class="form-control datetimepicker" id="end-date" type="text" placeholder="dd/mm/yy" name="date_end" data-options='{"dateFormat":"d/m/y","disableMobile":true}' /></div>
-                        <div class="col-sm-6 mb-3"><label class="form-label" for="end-time">End Time</label><input class="form-control datetimepicker" id="end-time" type="text" placeholder="H:i" name="end_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' /></div>
-                        <div class="col-sm-6"><label class="form-label" for="registration-deadline">Registration Deadline</label><input class="form-control datetimepicker" id="registration-deadline" type="text" placeholder="dd/mm/yy" name="registration_deadline" data-options='{"dateFormat":"d/m/y","disableMobile":true}' /></div>
+                        <div class="col-sm-6 mb-3"><label class="form-label" for="start-date">Start Date</label><input class="form-control datetimepicker" id="start-date" type="text" placeholder="yyyy-mm-dd" name="date_start" data-options='{"dateFormat":"y/m/d","disableMobile":true}' /></div>
+                        <div class="col-sm-6 mb-3"><label class="form-label" for="start-time">Start Time</label><input class="form-control datetimepicker" id="start-time" type="text" placeholder="hh:mm" name="start_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' /></div>
+                        <div class="col-sm-6 mb-3"><label class="form-label" for="end-date">End Date</label><input class="form-control datetimepicker" id="end-date" type="text" placeholder="yyyy-mm-dd" name="date_end" data-options='{"dateFormat":"y/m/d","disableMobile":true}' /></div>
+                        <div class="col-sm-6 mb-3"><label class="form-label" for="end-time">End Time</label><input class="form-control datetimepicker" id="end-time" type="text" placeholder="hh:mm" name="end_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' /></div>
+                        <div class="col-sm-6"><label class="form-label" for="registration-deadline">Registration Deadline</label><input class="form-control datetimepicker" id="registration-deadline" type="text" placeholder="yyyy-mm-dd" name="registration_deadline" data-options='{"dateFormat":"y/m/d","disableMobile":true}' /></div>
                         <div class="col-sm-6"><label class="form-label" for="registration-fee">Registration Fee</label><input class="form-control" id="registration-fee" type="text" placeholder="₱ 00.00" name="registration_fee"/></div>
                         <div class="border-bottom border-dashed my-3"></div>
-                        <!--organizer  -->
-                        <div class="col-sm-6 mb-3"><label class="form-label" for="organizer">Organizer</label>
+                        
+                        <!-- Organizer Dropdown -->
+                        <div class="col-sm-6 mb-3">
+                            <label class="form-label" for="organizer">Organizer</label>
                             <select class="form-select" id="organizer" name="organizer">
-                              <option id= "default" name="default">Select Organizer...</option>
-                              <option id= "institution" name= "institution">Institution</option>
-                              <option id= "department" name= "department">Department</option>
-                              <option id= "organization" name= "organization">Organization</option>
+                                <option id="default" name="default">Select Organizer...</option>
+                                <option id="institution" name="institution">Institution</option>
+                                <option id="department" name="department">Department</option>
+                                <option id="organization" name="organization">Organization</option>
                             </select>
-                          </div>
+                        </div>
 
-                        <!-- department option -->
-                        <div class="col-sm-6 mb-3"><label class="form-label" for="specific-org">Specific Department</label>
-                          <select class="form-select" id="event-topic" name="even-topic">
-                            <option selected disabled>Select .. </option>
-                              @foreach($data as $row)
-                                <option value="{{$row->department_id}}">
-                                  {{$row->department_name}}
-                                </option>
-                              @endforeach
-                          </select>
+                        <!-- Department Dropdown - Initially Hidden -->
+                        <div class="col-sm-6 mb-3" id="departmentDropdown" style="display: none;">
+                            <label class="form-label" for="specific-dept">Specific Department</label>
+                            <select class="form-select" id="department" name="department">
+                                <option selected disabled>Select Department</option>
+                                @foreach($departments as $department)
+                                    <option value="{{$department->department_id}}" name="department_id">
+                                        {{$department->department_name}}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>  
-                        <!-- organization option -->
-                        <!-- <div class="col-sm-6 mb-3"><label class="form-label" for="specific-org">Specific Organization</label>
-                          <select class="form-select" id="event-topic" name="even-topic">
-                            <option value="" selected="selected">Select .. </option>
-                            <option id= "JPCS" name= "JPCS">JPCS</option>
-                          </select>
-                        </div> -->
+
+                        <!-- Organization Dropdown - Initially Hidden -->
+                        <div class="col-sm-6 mb-3" id="organizationDropdown" style="display: none;">
+                            <label class="form-label" for="specific-org">Specific Organization</label>
+                            <select class="form-select" id="event-topic" name="organization">
+                                @foreach($organizations as $organization)
+                                    <option value="{{$organization->organization_id}}" name="department_id">
+                                        {{$organization->organization_name}}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <!-- JavaScript to Toggle Dropdowns based on Organizer Selection -->
+                        <script>
+                            document.getElementById('organizer').addEventListener('change', function() {
+                                var departmentDropdown = document.getElementById('departmentDropdown');
+                                var organizationDropdown = document.getElementById('organizationDropdown');
+                                
+                                // Reset dropdowns
+                                departmentDropdown.style.display = 'none';
+                                organizationDropdown.style.display = 'none';
+                                
+                                // Show/hide dropdowns based on organizer selection
+                                if (this.value === 'department') {
+                                    departmentDropdown.style.display = 'block';
+                                } else if (this.value === 'organization') {
+                                    organizationDropdown.style.display = 'block';
+                                }
+                            });
+                        </script>
+
   
                         <div class="col-12">
                           <div class="border-bottom border-dashed my-3"></div>
@@ -477,26 +505,38 @@
 
                         <!-- upload photos -->
                         <div class="card-header">
-                          <h5 class="mb-1">Upload Photos</h5>
+                            <h5 class="mb-1">Upload Photos</h5>
                         </div>
-                        <div class="fallback"><input name="file" type="file" multiple="multiple" /></div>
-                        <div class="dz-message" data-dz-message="data-dz-message"> <img class="me-2" src="../../assets/img/icons/cloud-upload.svg" width="25" alt="" />Drop your files here</div>
+                        <div class="fallback">
+                            <input name="file" type="file" multiple="multiple" />
+                        </div>
+                        <div class="dz-message" data-dz-message="data-dz-message">
+                            <img class="me-2" src="{{ asset('assets/img/icons/cloud-upload.svg') }}" width="25" alt="" />
+                            Drop your files here
+                        </div>
                         <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                          <div class="d-flex media align-items-center mb-3 pb-3 border-bottom btn-reveal-trigger"><img class="dz-image" src="../../assets/img/generic/image-file-2.png" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
-                            <div class="flex-1 d-flex flex-between-center">
-                              <div>
-                                <h6 data-dz-name="data-dz-name"></h6>
-                                <div class="d-flex align-items-center">
-                                  <p class="mb-0 fs-10 text-400 lh-1" data-dz-size="data-dz-size"></p>
-                                  <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                            <div class="d-flex media align-items-center mb-3 pb-3 border-bottom btn-reveal-trigger">
+                                <img class="dz-image" src="{{ asset('assets/img/generic/image-file-2.png') }}" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
+                                <div class="flex-1 d-flex flex-between-center">
+                                    <div>
+                                        <h6 data-dz-name="data-dz-name"></h6>
+                                        <div class="d-flex align-items-center">
+                                            <p class="mb-0 fs-10 text-400 lh-1" data-dz-size="data-dz-size"></p>
+                                            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown font-sans-serif">
+                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="fas fa-ellipsis-h"></span>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end border py-2">
+                                            <a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="dropdown font-sans-serif"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h"></span></button>
-                                <div class="dropdown-menu dropdown-menu-end border py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
-                              </div>
                             </div>
-                          </div>
                         </div>
+
 
                         <div class="border-bottom border-dashed my-3"></div>
                         <h6>Listing Privacy</h6>
