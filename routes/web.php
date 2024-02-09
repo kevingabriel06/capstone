@@ -38,7 +38,7 @@ Route::post('/create-activity/store', [ActivityController::class, 'store'])->nam
 Route::post('/create-activity/department', [DepartmentController::class, 'department'])->name('create-activity.department');
 
 
-Route::get('/dashboard', function () {
+Route::post('/dashboard', function () {
     return view('dashboard');
 });
 
