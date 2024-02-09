@@ -27,9 +27,7 @@ class CreateActivitiesTable extends Migration
             $table->binary('image');
             $table->integer('department_id');
             $table->integer('organization_id');
-            $table->dateTime('updated_at');
             $table->timestamp('created_at');
-            
         });
     }
 

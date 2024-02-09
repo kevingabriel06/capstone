@@ -2,37 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Activity;
-use App\Models\Department;
+use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
-    public function activityCreate(){
-        return view("create-activity");
-    }
+    public function index(){
+        $activities = Activity::all();
 
+        return view('dashboard', ['activities'=> $activities]);
+    }
     public function store(Request $request){
         $data = $request->validate([
-            'title'=> 'required',
-            'date_start'=> 'required|date|after:tomorrow',
+            'title' => 'required',
+            'date_start'=> 'required|date',
+            'date_end'=> 'required|date',
             'start_time'=> 'required',
-            'date_end'=> 'required|date|after:date_start',
             'end_time'=> 'required',
-            'registration_deadline'=> 'date|after:tomorrow',
+            'registration_deadline'=> 'date',
             'registration_fee'=> 'numeric',
+            'department_id'=> 'numeric',
             'description'=> 'nullable',
-            'status'=> 'nullable',
-            'department_id'=> 'nullable',
             'image'=> 'nullable',
-            'organization_id'=> 'nullable',
-
-
         ]);
 
-        $newActivity = Activity::create( $data );
+        $newActivity = Activity::create($data);
 
-        return redirect(route('create-activity'));
+        return redirect(route('create-activity'))->with('success','Activity Added!');
+
     }
 
 }

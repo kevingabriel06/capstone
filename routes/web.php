@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\OrganizationController;
+use App\Models\Organization;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,45 +17,14 @@ use App\Http\Controllers\DepartmentController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// sa pagkuha to ng data sa database yung sa department at organization table
+Route::get("/create-activity", [DepartmentController::class, "indexDept"])->name("create-activity-dept");
+Route::get("/create-activity/org", [OrganizationController::class, "indexOrg"])->name("create-activity-org");
 
-Route::get('/login', function () {
-    return view('login');
-});
+//dashboard
+Route::get("/dashboard", [ActivityController::class,"index"])->name("dashboard.index");
 
-Route::get('/forgot-password.html', function () {
-    return view('forgot-password');
-});
+//are naman ay sa activity table
+Route::post("/create-activity", [ActivityController::class, "store"])->name("create-activity.store");
+Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
 
-
-Route::get('/sidebar', function () {
-    return view('navigation-bar');
-});
-
-//create an activity route
-Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
-Route::post('/create-activity/department', [DepartmentController::class, 'department'])->name('create-activity.department');
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
-Route::get('/attendance.blade.php', function () {
-    return view('attendance');
-});
-
-Route::get('/fines.blade.php', function () {
-    return view('fines');
-});
-
-Route::get('/community.blade.php', function () {
-    return view('community');
-});
-
-Route::get('/profile-settings.blade.php', function () {
-    return view('profile-settings');
-});
