@@ -28,7 +28,7 @@ class ActivityController extends Controller
 
         $newActivity = Activity::create($data);
 
-        return redirect(route('create-activity'))->with('success','Activity Added!');
+        return redirect(route('create-activity'))->with('success','Activity Saved!');
 
     }
 
