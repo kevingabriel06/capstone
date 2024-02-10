@@ -132,7 +132,7 @@
                     <ul class="nav collapse" id="email">
                     <!-- Create an Activity Bar  -->
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ url('create-activity.blade.php') }}">
+                        <a class="nav-link" href="{{ url('create-activity') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Create an Activity</span></div>
                             </a>
                         </li>

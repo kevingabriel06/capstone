@@ -5,6 +5,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\OrganizerController;
 use App\Models\Organization;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +17,14 @@ use App\Models\Organization;
 |
 */
 
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::post('/dashboard', function () {
+    return view('dashboard');
+});
+
 // sa pagkuha to ng data sa database yung sa department at organization table
 Route::get("/create-activity", [OrganizerController::class, "index"])->name("create-activity-organizer");
 
@@ -26,4 +35,38 @@ Route::get("/dashboard", [ActivityController::class,"index"])->name("dashboard.i
 Route::post("/create-activity", [ActivityController::class, "store"])->name("create-activity.store");
 //Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
 
+<<<<<<< HEAD
 Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
+=======
+// <<<<<<< HEAD
+
+Route::get('/sidebar', function () {
+    return view('navigation-bar');
+});
+
+//create an activity route
+Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
+Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
+Route::post('/create-activity/department', [DepartmentController::class, 'department'])->name('create-activity.department');
+
+
+
+
+Route::get('/attendance.blade.php', function () {
+    return view('attendance');
+});
+
+Route::get('/fines.blade.php', function () {
+    return view('fines');
+});
+
+Route::get('/community.blade.php', function () {
+    return view('community');
+});
+
+Route::get('/profile-settings.blade.php', function () {
+    return view('profile-settings');
+});
+// =======
+// >>>>>>> 4c10bf08817c3070cf6676cd1f3ef546967c6d9f
+>>>>>>> 10a36bc4cd2001f0bf783022adffcc7d7749380b

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
-    <title>AFMAMS | Login &amp; Web App Template</title>
+    <title>AFMAMS | Login</title>
 
     <!-- ===============================================--><!--    Favicons--><!-- ===============================================-->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/favicons/apple-touch-icon.png') }}">
@@ -55,14 +55,16 @@
             <div class="row justify-content-center g-0">
               <div class="col-lg-9 col-xl-8 col-xxl-6">
                 <div class="card">
-                  <div class="card-header bg-circle-shape bg-shape text-center p-2"><a class="font-sans-serif fw-bolder fs-5 z-1 position-relative link-light" href="../../../index.html" data-bs-theme="light">falcon</a></div>
+                  <div class="card-header bg-circle-shape bg-shape text-center p-2"><a class="font-sans-serif fw-bolder fs-5 z-1 position-relative link-light" href="../../../index.html" data-bs-theme="light">AFMAMS</a></div>
                   <div class="card-body p-4">
                     <div class="row flex-between-center">
                       <div class="col-auto">
                         <h3>Login</h3>
                       </div>
                     </div>
-                    <form>
+                    <form method="POST" action="dashboard">
+                      @csrf 
+                      @method('post')
                       <div class="mb-3"><label class="form-label" for="split-login-username">Username</label><input class="form-control" id="split-login-username" type="text" /></div>
                       <div class="mb-3">
                         <div class="d-flex justify-content-between"><label class="form-label" for="split-login-password">Password</label></div><input class="form-control" id="split-login-password" type="password" />
