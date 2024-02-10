@@ -35,10 +35,10 @@ Route::get("/dashboard", [ActivityController::class,"index"])->name("dashboard.i
 Route::post("/create-activity", [ActivityController::class, "store"])->name("create-activity.store");
 //Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
 
-<<<<<<< HEAD
+
 Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
-=======
-// <<<<<<< HEAD
+
+
 
 Route::get('/sidebar', function () {
     return view('navigation-bar');
@@ -47,10 +47,11 @@ Route::get('/sidebar', function () {
 //create an activity route
 Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
 Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
-Route::post('/create-activity/department', [DepartmentController::class, 'department'])->name('create-activity.department');
 
 
-
+Route::get('/activity-details.blade.php', function () {
+    return view('activity-details');
+});
 
 Route::get('/attendance.blade.php', function () {
     return view('attendance');
@@ -67,6 +68,3 @@ Route::get('/community.blade.php', function () {
 Route::get('/profile-settings.blade.php', function () {
     return view('profile-settings');
 });
-// =======
-// >>>>>>> 4c10bf08817c3070cf6676cd1f3ef546967c6d9f
->>>>>>> 10a36bc4cd2001f0bf783022adffcc7d7749380b
