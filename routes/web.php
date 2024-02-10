@@ -39,32 +39,32 @@ Route::post("/create-activity$", [ActivityController::class, "show"])->name("cre
 
 // <<<<<<< HEAD
 
-// Route::get('/sidebar', function () {
-//     return view('navigation-bar');
-// });
+Route::get('/sidebar', function () {
+    return view('navigation-bar');
+});
 
-// //create an activity route
-// Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-// Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
-// Route::post('/create-activity/department', [DepartmentController::class, 'department'])->name('create-activity.department');
-
-
+//create an activity route
+Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
+Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
+Route::post('/create-activity/department', [DepartmentController::class, 'department'])->name('create-activity.department');
 
 
-// Route::get('/attendance.blade.php', function () {
-//     return view('attendance');
-// });
 
-// Route::get('/fines.blade.php', function () {
-//     return view('fines');
-// });
 
-// Route::get('/community.blade.php', function () {
-//     return view('community');
-// });
+Route::get('/attendance.blade.php', function () {
+    return view('attendance');
+});
 
-// Route::get('/profile-settings.blade.php', function () {
-//     return view('profile-settings');
-// });
+Route::get('/fines.blade.php', function () {
+    return view('fines');
+});
+
+Route::get('/community.blade.php', function () {
+    return view('community');
+});
+
+Route::get('/profile-settings.blade.php', function () {
+    return view('profile-settings');
+});
 // =======
 // >>>>>>> 4c10bf08817c3070cf6676cd1f3ef546967c6d9f
