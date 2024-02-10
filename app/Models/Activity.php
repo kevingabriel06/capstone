@@ -17,7 +17,12 @@ class Activity extends Model
         "registration_deadline",
         "registration_fee",
         "department_id",
+        "organization_id",
         "description",
         "image",
     ] ;
+
+  
+
+    
 }

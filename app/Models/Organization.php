@@ -9,5 +9,9 @@ class Organization extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['organization_name'];
+    protected $fillable = [
+        'organization_name',
+    ];
+
+    
 }

@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\DepartmentController;
-use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\OrganizerController;
 use App\Models\Organization;
 
 /*
@@ -18,13 +17,13 @@ use App\Models\Organization;
 */
 
 // sa pagkuha to ng data sa database yung sa department at organization table
-Route::get("/create-activity", [DepartmentController::class, "indexDept"])->name("create-activity-dept");
-Route::get("/create-activity/org", [OrganizationController::class, "indexOrg"])->name("create-activity-org");
+Route::get("/create-activity", [OrganizerController::class, "index"])->name("create-activity-organizer");
 
 //dashboard
 Route::get("/dashboard", [ActivityController::class,"index"])->name("dashboard.index");
 
 //are naman ay sa activity table
 Route::post("/create-activity", [ActivityController::class, "store"])->name("create-activity.store");
-Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
+//Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
 
+Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");

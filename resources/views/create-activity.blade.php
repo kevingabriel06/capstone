@@ -440,60 +440,66 @@
                         <div class="col-sm-6"><label class="form-label" for="registration-fee">Registration Fee</label><input class="form-control" id="registration-fee" type="text" placeholder="₱ 00.00" name="registration_fee"/></div>
                         <div class="border-bottom border-dashed my-3"></div>
                         
-                        <!-- Organizer Dropdown -->
-                        <div class="col-sm-6 mb-3">
-                            <label class="form-label" for="organizer">Organizer</label>
-                            <select class="form-select" id="organizer" name="organizer">
-                                <option id="default" name="default">Select Organizer...</option>
-                                <option id="institution" name="institution">Institution</option>
-                                <option id="department" name="department">Department</option>
-                                <option id="organization" name="organization">Organization</option>
-                            </select>
-                        </div>
+                      <!-- Organizer Dropdown -->
+                      <div class="col-sm-6 mb-3">
+                          <label class="form-label" for="organizer">Organizer</label>
+                          <select class="form-select" id="organizerSelect" name="organizer">
+                              <option id="default" value="default">Select Organizer...</option>
+                              <option id="institution" value="institution">Institution</option>
+                              <option id="department" value="department">Department</option>
+                              <option id="organization" value="organization">Organization</option>
+                          </select>
+                      </div>
 
-                        <!-- Department Dropdown - Initially Hidden -->
-                        <div class="col-sm-6 mb-3" id="departmentDropdown" style="display: none;">
-                            <label class="form-label" for="specific-dept">Specific Department</label>
-                            <select class="form-select" id="department" name="department">
-                                <option selected disabled>Select Department</option>
-                                @foreach($departments as $department)
-                                    <option value="{{$department->department_id}}" name="department_id">
-                                        {{$department->department_name}}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>  
+                      <!-- Department Dropdown - Initially Hidden -->
+                      <div class="col-sm-6 mb-3" id="departmentDropdown" style="display:none;">
+                          <label class="form-label" for="specific-dept">Specific Department</label>
+                          <select class="form-select" id="departmentSelect" name="department_name">
+                              <option value="default" selected disabled>Select Department</option>
+                              @foreach($departments as $department)
+                                  <option value="{{$department->department_name}}" name="department_name">
+                                      {{$department->department_name}}
+                                  </option>
+                              @endforeach
+                          </select>
+                          
+                      </div>
 
-                        <!-- Organization Dropdown - Initially Hidden -->
-                        <div class="col-sm-6 mb-3" id="organizationDropdown" style="display: none;">
-                            <label class="form-label" for="specific-org">Specific Organization</label>
-                            <select class="form-select" id="event-topic" name="organization">
-                                @foreach($organizations as $organization)
-                                    <option value="{{$organization->organization_id}}" name="department_id">
-                                        {{$organization->organization_name}}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                      <!-- Organization Dropdown - Initially Hidden -->
+                      <div class="col-sm-6 mb-3" id="organizationDropdown" style="display:none;">
+                          <label class="form-label" for="specific-org">Specific Organization</label>
+                          <select class="form-select" id="organizationSelect" name="organization_name">
+                              <option value="default" selected disabled>Select Organization</option>
+                              @foreach($organizations as $organization)
+                                  <option value="{{$organization->organization_name}}" name="organization_name">
+                                      {{$organization->organization_name}}
+                                  </option>
+                              @endforeach
+                          </select>
+                        
+                      </div>
 
-                        <!-- JavaScript to Toggle Dropdowns based on Organizer Selection -->
-                        <script>
-                            document.getElementById('organizer').addEventListener('change', function() {
-                                var departmentDropdown = document.getElementById('departmentDropdown');
-                                var organizationDropdown = document.getElementById('organizationDropdown');
-                                
-                                // Reset dropdowns
-                                departmentDropdown.style.display = 'none';
-                                organizationDropdown.style.display = 'none';
-                                
-                                // Show/hide dropdowns based on organizer selection
-                                if (this.value === 'department') {
-                                    departmentDropdown.style.display = 'block';
-                                } else if (this.value === 'organization') {
-                                    organizationDropdown.style.display = 'block';
-                                }
-                            });
-                        </script>
+                      <script>
+                        document.getElementById('organizerSelect').addEventListener('change', function() {
+                            var organizer = this.value;
+                            if (organizer == 'department') {
+                                document.getElementById('departmentDropdown').style.display = 'block'; // Show department dropdown
+                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
+                                document.getElementById('selectedOrganization').value = 'default'; // Set value of organization to null
+                            } else if (organizer == 'organization') {
+                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
+                                document.getElementById('organizationDropdown').style.display = 'block'; // Show organization dropdown
+                                document.getElementById('selectedDepartment').value = 'default'; // Set value of department to null
+                            } else if (organizer == 'institution') {
+                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
+                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
+                                document.getElementById('selectedDepartment').value = ''; // Set value of department to null
+                                document.getElementById('selectedOrganization').value = ''; // Set value of organization to null
+                            }
+                        });
+                    </script>
+
+
 
   
                         <div class="col-12">
@@ -585,6 +591,28 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="{{ asset('vendors/list.js/list.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
+
+
+    <!-- JavaScript to Toggle Dropdowns based on Organizer Selection -->
+    <script>
+        window.onload = function() {
+            document.getElementById('organizer').addEventListener('change', function() {
+                var departmentDropdown = document.getElementById('departmentDropdown');
+                var organizationDropdown = document.getElementById('organizationDropdown');
+                
+                // Reset dropdowns
+                departmentDropdown.style.display = 'none';
+                organizationDropdown.style.display = 'none';
+                
+                // Show/hide dropdowns based on organizer selection
+                if (this.value === 'department') {
+                    departmentDropdown.style.display = 'block';
+                } else if (this.value === 'organization') {
+                    organizationDropdown.style.display = 'block';
+                }
+            });
+        };
+    </script>
 
   </body>
 
