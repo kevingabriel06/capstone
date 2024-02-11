@@ -76,3 +76,7 @@ Route::get('/profile-settings.blade.php', function () {
 Route::get('/qr-scanner.blade.php', function () {
     return view('qr-scanner');
 });
+
+Route::get('/capture-photo.blade.php', function () {
+    return view('capture-photo');
+});
