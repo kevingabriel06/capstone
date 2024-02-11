@@ -440,6 +440,28 @@
                         <div class="col-sm-6"><label class="form-label" for="registration-fee">Registration Fee</label><input class="form-control" id="registration-fee" type="text" placeholder="₱ 00.00" name="registration_fee"/></div>
                         <div class="border-bottom border-dashed my-3"></div>
                         
+                        <script>
+                        document.getElementById('organizerSelect').addEventListener('change', function() {
+                            var organizer = this.value;
+                            if (organizer == 'department') {
+                                document.getElementById('departmentDropdown').style.display = 'block'; // Show department dropdown
+                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
+                                document.getElementById('selectedOrganization').value = 'defaultorg'; // Set value of organization to null
+                            } else if (organizer == 'organization') {
+                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
+                                document.getElementById('organizationDropdown').style.display = 'block'; // Show organization dropdown
+                                document.getElementById('selectedDepartment').value = 'defaultdep'; // Set value of department to null
+                            } else if (organizer == 'institution') {
+                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
+                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
+                                document.getElementById('selectedDepartment').value = ''; // Set value of department to null
+                                document.getElementById('selectedOrganization').value = ''; // Set value of organization to null
+                            }
+                        });
+                    </script>
+
+
+
                       <!-- Organizer Dropdown -->
                       <div class="col-sm-6 mb-3">
                           <label class="form-label" for="organizer">Organizer</label>
@@ -455,7 +477,7 @@
                       <div class="col-sm-6 mb-3" id="departmentDropdown" style="display:none;">
                           <label class="form-label" for="specific-dept">Specific Department</label>
                           <select class="form-select" id="departmentSelect" name="department_name">
-                              <option value="default" selected disabled>Select Department</option>
+                              <option value="defaultdep" selected disabled>Select Department</option>
                               @foreach($departments as $department)
                                   <option value="{{$department->department_name}}" name="department_name">
                                       {{$department->department_name}}
@@ -469,7 +491,7 @@
                       <div class="col-sm-6 mb-3" id="organizationDropdown" style="display:none;">
                           <label class="form-label" for="specific-org">Specific Organization</label>
                           <select class="form-select" id="organizationSelect" name="organization_name">
-                              <option value="default" selected disabled>Select Organization</option>
+                              <option value="defaultorg" selected disabled>Select Organization</option>
                               @foreach($organizations as $organization)
                                   <option value="{{$organization->organization_name}}" name="organization_name">
                                       {{$organization->organization_name}}
@@ -479,25 +501,7 @@
                         
                       </div>
 
-                      <script>
-                        document.getElementById('organizerSelect').addEventListener('change', function() {
-                            var organizer = this.value;
-                            if (organizer == 'department') {
-                                document.getElementById('departmentDropdown').style.display = 'block'; // Show department dropdown
-                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
-                                document.getElementById('selectedOrganization').value = 'default'; // Set value of organization to null
-                            } else if (organizer == 'organization') {
-                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
-                                document.getElementById('organizationDropdown').style.display = 'block'; // Show organization dropdown
-                                document.getElementById('selectedDepartment').value = 'default'; // Set value of department to null
-                            } else if (organizer == 'institution') {
-                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
-                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
-                                document.getElementById('selectedDepartment').value = ''; // Set value of department to null
-                                document.getElementById('selectedOrganization').value = ''; // Set value of organization to null
-                            }
-                        });
-                    </script>
+                      
 
 
 
