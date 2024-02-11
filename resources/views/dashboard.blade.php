@@ -448,7 +448,7 @@
                     @foreach($activities as $activity)
                     <tr>
                         <td>{{$activity->date_start}}</td>
-                        <td><a href="{{ url('activity-details.blade.php')}}">{{$activity->title}}</a></td>
+                        <td><a href="{{ url('activity-details')}}">{{$activity->title}}</a></td>
                         <td>
                             @if($activity->status == 'Upcoming')
                                 <span class="badge badge rounded-pill d-block p-2 badge-subtle-primary">{{$activity->status}}<span class="ms-1 fas fa-redo" data-fa-transform="shrink-2"></span></span>

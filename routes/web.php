@@ -36,22 +36,20 @@ Route::post("/create-activity", [ActivityController::class, "store"])->name("cre
 //Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
 
 
-Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
+//Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
 
-
+Route::get("/activity-details", [ActivityController::class,"show"])->name("activity-details.show");
 
 Route::get('/sidebar', function () {
     return view('navigation-bar');
 });
 
 //create an activity route
-Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
+// Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
+// Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
 
 
-Route::get('/activity-details.blade.php', function () {
-    return view('activity-details');
-});
+
 
 Route::get('/attendance.blade.php', function () {
     return view('attendance');

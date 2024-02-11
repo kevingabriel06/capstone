@@ -72,6 +72,12 @@ class ActivityController extends Controller
         // return redirect(route('create-activity'))->with('success', 'Activity Saved!');
     }
 
+    public function show(){
+        $activities = Activity::all();
+
+        return view('/activity-details', ['activities' => $activities]);
+    }
+
     
 
 
