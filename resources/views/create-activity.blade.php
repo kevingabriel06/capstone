@@ -36,6 +36,7 @@
     <link href="{{ asset('assets/css/theme.min.css') }}" rel="stylesheet" id="style-default">
     <link href="{{ asset('assets/css/user-rtl.min.css') }}" rel="stylesheet" id="user-style-rtl">
     <link href="{{ asset('assets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
+    <link href="{{ asset('vendors/choices/choices.min.css')}}" rel="stylesheet" />
 
 
     <script>
@@ -439,26 +440,6 @@
                         <div class="col-sm-6"><label class="form-label" for="registration-deadline">Registration Deadline</label><input class="form-control datetimepicker" id="registration-deadline" type="text" placeholder="yyyy-mm-dd" name="registration_deadline" data-options='{"dateFormat":"y/m/d","disableMobile":true}' /></div>
                         <div class="col-sm-6"><label class="form-label" for="registration-fee">Registration Fee</label><input class="form-control" id="registration-fee" type="text" placeholder="₱ 00.00" name="registration_fee"/></div>
                         <div class="border-bottom border-dashed my-3"></div>
-                        
-                        <script>
-                        document.getElementById('organizerSelect').addEventListener('change', function() {
-                            var organizer = this.value;
-                            if (organizer == 'department') {
-                                document.getElementById('departmentDropdown').style.display = 'block'; // Show department dropdown
-                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
-                                document.getElementById('selectedOrganization').value = 'defaultorg'; // Set value of organization to null
-                            } else if (organizer == 'organization') {
-                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
-                                document.getElementById('organizationDropdown').style.display = 'block'; // Show organization dropdown
-                                document.getElementById('selectedDepartment').value = 'defaultdep'; // Set value of department to null
-                            } else if (organizer == 'institution') {
-                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
-                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
-                                document.getElementById('selectedDepartment').value = ''; // Set value of department to null
-                                document.getElementById('selectedOrganization').value = ''; // Set value of organization to null
-                            }
-                        });
-                    </script>
 
 
 
@@ -490,7 +471,7 @@
                       <!-- Organization Dropdown - Initially Hidden -->
                       <div class="col-sm-6 mb-3" id="organizationDropdown" style="display:none;">
                           <label class="form-label" for="specific-org">Specific Organization</label>
-                          <select class="form-select" id="organizationSelect" name="organization_name">
+                          <select class="form-select js-choice" id="organizationSelect" multiple="multiple" size="1" name="organizerMultiple" data-options='{"removeItemButton":true,"placeholder":true}'>
                               <option value="defaultorg" selected disabled>Select Organization</option>
                               @foreach($organizations as $organization)
                                   <option value="{{$organization->organization_name}}" name="organization_name">
@@ -500,6 +481,26 @@
                           </select>
                         
                       </div>
+
+                      <script>
+                        document.getElementById('organizerSelect').addEventListener('change', function() {
+                            var organizer = this.value;
+                            if (organizer == 'department') {
+                                document.getElementById('departmentDropdown').style.display = 'block'; // Show department dropdown
+                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
+                                document.getElementById('selectedOrganization').value = 'defaultorg'; // Set value of organization to null
+                            } else if (organizer == 'organization') {
+                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
+                                document.getElementById('organizationDropdown').style.display = 'block'; // Show organization dropdown
+                                document.getElementById('selectedDepartment').value = 'defaultdep'; // Set value of department to null
+                            } else if (organizer == 'institution') {
+                                document.getElementById('departmentDropdown').style.display = 'none'; // Hide department dropdown
+                                document.getElementById('organizationDropdown').style.display = 'none'; // Hide organization dropdown
+                                document.getElementById('selectedDepartment').value = ''; // Set value of department to null
+                                document.getElementById('selectedOrganization').value = ''; // Set value of organization to null
+                            }
+                        });
+                    </script>
 
                       
 
@@ -595,6 +596,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="{{ asset('vendors/list.js/list.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
+    <script src="{{ asset('vendors/choices/choices.min.js') }}"></script>
 
 
     <!-- JavaScript to Toggle Dropdowns based on Organizer Selection -->
