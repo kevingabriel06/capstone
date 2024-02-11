@@ -65,3 +65,8 @@ Route::get('/community.blade.php', function () {
 Route::get('/profile-settings.blade.php', function () {
     return view('profile-settings');
 });
+
+
+Route::get('/qr-scanner.blade.php', function () {
+    return view('qr-scanner');
+});

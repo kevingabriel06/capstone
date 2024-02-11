@@ -396,7 +396,39 @@
           </nav>
 
           <!-- division -->
+
+          <div class="card mb-3" style="flex-wrap:wrap; min-width: 700px;"  >
+            <div class="card-img-top">
+                <script src="{{ asset('assets/js/qrScript.js') }}"></script>
+                <div id="reader" style="flex-wrap: wrap;"></div>
+                <div id="show" style="display: none; text-align: center;">
+                    <h4>Scanned Result</h4>
+                    <p style="color: blue;" id="result"></p>
+                </div>
+                <script>
+                    const html5Qrcode = new Html5Qrcode('reader');
+                    const qrCodeSuccessCallback = (decodedText, decodedResult)=>{
+                        if(decodedText){
+                            document.getElementById('show').style.display = 'block';
+                            document.getElementById('result').textContent = decodedText;
+                            html5Qrcode.stop();
+                        }
+                    }
+                    const config = {fps:10, qrbox:{width:350, height:350}}
+                    html5Qrcode.start({facingMode:"environment"}, config, qrCodeSuccessCallback);
+                </script>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p><a class="btn btn-primary btn-sm" href="#!">Capture</a>
+            </div>
+          </div>
           
+          <div class="card mb 3">
+            <div>
+                
+            </div>
+        </div>
 
           
         </div>
