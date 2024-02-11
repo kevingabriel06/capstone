@@ -45,8 +45,8 @@ Route::get('/sidebar', function () {
 });
 
 //create an activity route
-Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
+// Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
+// Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
 
 
 Route::get('/activity-details.blade.php', function () {
