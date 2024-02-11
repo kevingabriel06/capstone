@@ -33,7 +33,7 @@ Route::get("/dashboard", [ActivityController::class,"index"])->name("dashboard.i
 
 //are naman ay sa activity table
 Route::post("/create-activity", [ActivityController::class, "store"])->name("create-activity.store");
-//Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
+Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
 
 
 //Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
@@ -46,9 +46,13 @@ Route::get('/sidebar', function () {
 
 //create an activity route
 
+
 //ito yung comment mo neil
-// Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-// Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
+Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
+Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
+
+//Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
+//Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
 
 
 
