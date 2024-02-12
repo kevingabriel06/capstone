@@ -470,9 +470,8 @@
 
                       <!-- Organization Dropdown - Initially Hidden -->
                       <div class="col-sm-6 mb-3" id="organizationDropdown" style="display:none;">
-                          <label class="form-label" for="specific-org">Specific Organization</label>
+                          <label class="form-label" for="specific-org">Select Organization</label>
                           <select class="form-select js-choice" id="organizationSelect" multiple="multiple" size="1" name="organizerMultiple" data-options='{"removeItemButton":true,"placeholder":true}'>
-                              <option value="defaultorg" selected disabled>Select Organization</option>
                               @foreach($organizations as $organization)
                                   <option value="{{$organization->organization_name}}" name="organization_name">
                                       {{$organization->organization_name}}

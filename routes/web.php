@@ -1,8 +1,10 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\OrganizerController;
+use App\Http\Controllers\QRCodeController;
 use App\Models\Organization;
 
 
@@ -17,6 +19,9 @@ use App\Models\Organization;
 |
 */
 
+//start
+
+//LOGIN
 Route::get('/login', function () {
     return view('login');
 });
@@ -26,19 +31,19 @@ Route::post('/dashboard', function () {
 });
 
 // sa pagkuha to ng data sa database yung sa department at organization table
-Route::get("/create-activity", [OrganizerController::class, "index"])->name("create-activity-organizer");
+
 
 //dashboard
 Route::get("/dashboard", [ActivityController::class,"index"])->name("dashboard.index");
 
 //are naman ay sa activity table
 Route::post("/create-activity", [ActivityController::class, "store"])->name("create-activity.store");
-//Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
+Route::get("/create-activity", [ActivityController::class, "organizer"])->name("create-activity.organizer");
+
+Route::get("/activity-details", [ActivityController::class,"show"])->name("activity-details");
 
 
-//Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
-
-Route::get("/activity-details", [ActivityController::class,"show"])->name("activity-details.show");
+//Route::get("/qr-scanner", [QRCodeController::class, "processQRCode"])->name("qr-scanner");
 
 Route::get('/sidebar', function () {
     return view('navigation-bar');
@@ -54,6 +59,10 @@ Route::get('/attendance.blade.php', function () {
     return view('attendance');
 });
 
+// Route::get('/create-activity', function () {
+//     return view('create-activity');
+// });
+
 Route::get('/fines.blade.php', function () {
     return view('fines');
 });
@@ -67,6 +76,11 @@ Route::get('/profile-settings.blade.php', function () {
 });
 
 
-Route::get('/qr-scanner.blade.php', function () {
+Route::get('/qr-scanner', function () {
     return view('qr-scanner');
 });
+
+Route::get('/forgot-password', function () {
+    return view('forgot-password');
+});
+

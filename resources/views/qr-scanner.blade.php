@@ -397,31 +397,46 @@
 
           <!-- division -->
 
-          <div class="card mb-3" style="flex-wrap:wrap; min-width: 700px;"  >
+          <div class="card mb-3" style="flex-wrap:wrap; min-width: 700px;">
             <div class="card-img-top">
                 <script src="{{ asset('assets/js/qrScript.js') }}"></script>
                 <div id="reader" style="flex-wrap: wrap;"></div>
                 <div id="show" style="display: none; text-align: center;">
                     <h4>Scanned Result</h4>
-                    <p style="color: blue;" id="result"></p>
+                    <p style="color: blue;" id="result" name="scanned_data"></p>
                 </div>
                 <script>
                     const html5Qrcode = new Html5Qrcode('reader');
-                    const qrCodeSuccessCallback = (decodedText, decodedResult)=>{
-                        if(decodedText){
+                    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                        if (decodedText) {
                             document.getElementById('show').style.display = 'block';
                             document.getElementById('result').textContent = decodedText;
                             html5Qrcode.stop();
+                            // Send scanned data to Laravel route
+                            const scannedData = decodedText;
+                            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                            fetch('/process-scanned-data', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-Token': token
+                                },
+                                body: JSON.stringify({ scanned_data: scannedData })
+                            })
+                            .then(response => response.json())
+                            .then(data => console.log(data))
+                            .catch(error => console.error('Error:', error));
                         }
-                    }
-                    const config = {fps:10, qrbox:{width:350, height:350}}
-                    html5Qrcode.start({facingMode:"environment"}, config, qrCodeSuccessCallback);
+                    };
+                    const config = { fps: 10, qrbox: { width: 350, height: 350 } }
+                    html5Qrcode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
                 </script>
                 <div class="card-body">
-                <a class="btn btn-primary btn-sm" href="#!">Capture</a>
+                    <a class="btn btn-primary btn-sm" href="#!">Capture</a>
                 </div>
-                </div>
-          </div>  
+            </div>
+        </div>
+
         </div>
 
           

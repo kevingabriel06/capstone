@@ -403,14 +403,13 @@
                   <div class="d-flex">
                   <div class="calendar me-2">
                       @foreach($activities as $activity)
-                          @php
-                              // Convert start date to Carbon instance for easy formatting
-                              $startDate = \Carbon\Carbon::parse($activity->date_start);
-                          @endphp
+                          <?php $startDate = \Carbon\Carbon::parse($activity->date_start); ?>
                           <span class="calendar-month">{{ $startDate->format('M') }}</span>
                           <span class="calendar-day">{{ $startDate->format('d') }}</span>
                       @endforeach
                   </div>
+
+
 
                       
                     <div class="flex-1 fs-10">
@@ -421,7 +420,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-auto mt-4 mt-md-0"><button class="btn btn-falcon-default btn-sm me-2" type="button"><span class="fas far fa-user text-danger me-1"></span>235</button><button class="btn btn-falcon-default btn-sm me-2" type="button"><span class="fas fa-share-alt me-1"></span>Share</button><button class="btn btn-falcon-primary btn-sm px-4 px-sm-5" type="button"><span class="far fa-address-card me-1"></span><a href="{{ url('qr-scanner.blade.php')}}">Scan QR</a></button></div>
+                <div class="col-md-auto mt-4 mt-md-0"><button class="btn btn-falcon-default btn-sm me-2" type="button"><span class="fas far fa-user text-danger me-1"></span>235</button><button class="btn btn-falcon-default btn-sm me-2" type="button"><span class="fas fa-share-alt me-1"></span>Share</button><button class="btn btn-falcon-primary btn-sm px-4 px-sm-5" type="button"><span class="far fa-address-card me-1"></span><a href="{{ url('qr-scanner')}}">Scan QR</a></button></div>
               </div>
             </div>
           </div>

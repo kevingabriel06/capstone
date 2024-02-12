@@ -14,9 +14,17 @@ class ActivityController extends Controller
 
         return view('dashboard', ['activities'=> $activities]);
     }
+
+    public function organizer(){
+        $departments = Department::all();
+        $organizations = Organization::all();
+    
+        return view('create-activity', compact('departments', 'organizations'));
+    }
+
     public function store(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
         // // Validate the incoming data
         $data = $request->validate([
             'title' => 'required',
@@ -29,36 +37,23 @@ class ActivityController extends Controller
             'description' => 'nullable',
             'image' => 'nullable',
             'department_name' => 'nullable|string|exists:departments,department_name',
-            'organization_name' => 'nullable|string|exists:organizations,organization_name',
+            'organizerMultiple' => 'nullable|string|exists:organizations,organization_name',
             // Add validation rules for other form fields
         ]);
 
+        $organizationId = $data['organizerMultiple'] ? Organization::where('organization_name', $data['organizerMultiple'])->value('organization_id') : null;
+
+        $departmentId = $data['department_name'] ? Department::where('department_name', $data['department_name'])->value('department_id') : null;
+
         // If only department name is provided, set organization ID to null
         if ($data['department_name']) {
-        $organizationId = null;
-        
-}
-        // If only organization name is provided, set department ID to null
-        elseif ($data['organization_name']) {
-         $departmentId = null;
-        
-}
-
-$organizationId = $data['organization_name'] ? Organization::where('organization_name', $data['organization_name'])->value('organization_id') : null;
-
-$departmentId = $data['department_name'] ? Department::where('department_name', $data['department_name'])->value('department_id') : null;
-// If neither department nor organization names are provided, both IDs remain unchanged
-
-        // Retrieve the department ID if a department name is provided, otherwise set it to null
-        
-
-        // Retrieve the organization ID if an organization name is provided, otherwise set it to null
-        
-        
-       
-
-
-
+            $organizationId = null;
+                
+        }// If only organization name is provided, set department ID to null
+        elseif ($data['organizerMultiple']) {
+            $departmentId = null;
+                
+        }
 
         // Insert the data into the target table along with department_id and organization_id
         $newActivity = Activity::create([
@@ -76,13 +71,14 @@ $departmentId = $data['department_name'] ? Department::where('department_name', 
             // Add other fields from the form as needed
         ]);
 
-        return redirect(route('create-activity'))->with('success', 'Activity Saved!');
+        return redirect(route('dashboard.index'));
     }
 
     public function show(){
         $activities = Activity::all();
-
+        
         return view('/activity-details', ['activities' => $activities]);
+        
     }
 
     
