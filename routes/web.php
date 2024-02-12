@@ -38,9 +38,7 @@ Route::get("/dashboard", [ActivityController::class,"index"])->name("dashboard.i
 
 //are naman ay sa activity table
 Route::post("/create-activity", [ActivityController::class, "store"])->name("create-activity.store");
-Route::get("/create-activity", [ActivityController::class, "organizer"])->name("create-activity.organizer");
-
-Route::get("/activity-details", [ActivityController::class,"show"])->name("activity-details");
+//Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
 
 
 //Route::get("/qr-scanner", [QRCodeController::class, "processQRCode"])->name("qr-scanner");
@@ -50,6 +48,12 @@ Route::get('/sidebar', function () {
 });
 
 //create an activity route
+
+
+//ito yung comment mo neil
+Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
+Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
+
 //Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
 //Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
 
@@ -79,8 +83,3 @@ Route::get('/profile-settings.blade.php', function () {
 Route::get('/qr-scanner', function () {
     return view('qr-scanner');
 });
-
-Route::get('/forgot-password', function () {
-    return view('forgot-password');
-});
-
