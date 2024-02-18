@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\OrganizerController;
 use App\Http\Controllers\QRCodeController;
-use App\Models\Organization;
+use App\Models\Activity;
+
 
 
 /*
@@ -21,65 +22,58 @@ use App\Models\Organization;
 
 //start
 
-//LOGIN
+// LOGIN
 Route::get('/login', function () {
     return view('login');
 });
 
-Route::post('/dashboard', function () {
-    return view('dashboard');
+Route::post('/login', function () {
+    // Process login data
 });
 
-// sa pagkuha to ng data sa database yung sa department at organization table
+// DASHBOARD
+Route::get('/dashboard', [ActivityController::class, 'index'])->name('dashboard.index');
 
 
-//dashboard
-Route::get("/dashboard", [ActivityController::class,"index"])->name("dashboard.index");
+// ACTIVITY CREATION
+Route::prefix('/admin')->group(function(){
+    Route::post('/create-activity', [ActivityController::class, 'store'])->name('create-activity.store');
+    Route::get('/create-activity', [ActivityController::class, 'organizer'])->name('create-activity.organizer');
+});
 
-//are naman ay sa activity table
-Route::post("/create-activity", [ActivityController::class, "store"])->name("create-activity.store");
-//Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
 
 
-//Route::get("/qr-scanner", [QRCodeController::class, "processQRCode"])->name("qr-scanner");
-
+// SIDEBAR
 Route::get('/sidebar', function () {
     return view('navigation-bar');
 });
 
-//create an activity route
-
-
-//ito yung comment mo neil
-Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
-
-//Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-//Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
-
-
-
-Route::get('/attendance.blade.php', function () {
+// ATTENDANCE
+Route::get('/attendance', function () {
     return view('attendance');
 });
 
-// Route::get('/create-activity', function () {
-//     return view('create-activity');
-// });
-
-Route::get('/fines.blade.php', function () {
+// FINES
+Route::get('/fines', function () {
     return view('fines');
 });
 
-Route::get('/community.blade.php', function () {
+// COMMUNITY
+Route::get('/community', function () {
     return view('community');
 });
 
-Route::get('/profile-settings.blade.php', function () {
+// PROFILE SETTINGS
+Route::get('/profile-settings', function () {
     return view('profile-settings');
 });
 
-
+// QR SCANNER
 Route::get('/qr-scanner', function () {
     return view('qr-scanner');
+});
+
+// CAPTURE PHOTO
+Route::get('/capture-photo', function () {
+    return view('capture-photo');
 });

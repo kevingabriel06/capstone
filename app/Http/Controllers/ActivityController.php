@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
+    
+    //displaying activity sa dashboard
     public function index(){
         $activities = Activity::all();
 
         return view('dashboard', ['activities'=> $activities]);
     }
 
+
+    //displaying organizer sa create-activity na page
     public function organizer(){
         $departments = Department::all();
         $organizations = Organization::all();
@@ -22,6 +26,7 @@ class ActivityController extends Controller
         return view('create-activity', compact('departments', 'organizations'));
     }
 
+    //inserting data sa database sa create-activity na page
     public function store(Request $request)
     {
         //dd($request->all());
@@ -35,25 +40,25 @@ class ActivityController extends Controller
             'registration_deadline' => 'nullable|date',
             'registration_fee' => 'nullable|numeric',
             'description' => 'nullable',
-            'image' => 'nullable',
-            'department_name' => 'nullable|string|exists:departments,department_name',
-            'organizerMultiple' => 'nullable|string|exists:organizations,organization_name',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            //'department_name' => 'nullable|string|exists:departments,department_name',
+            //'organization_name' => 'nullable|string|exists:organizations,organization_name',
             // Add validation rules for other form fields
         ]);
 
-        $organizationId = $data['organizerMultiple'] ? Organization::where('organization_name', $data['organizerMultiple'])->value('organization_id') : null;
+        // $organizationId = $data['organization_name'] ? Organization::where('organization_name', $data['organization_name'])->value('organization_id') : null;
 
-        $departmentId = $data['department_name'] ? Department::where('department_name', $data['department_name'])->value('department_id') : null;
+        // $departmentId = $data['department_name'] ? Department::where('department_name', $data['department_name'])->value('department_id') : null;
 
-        // If only department name is provided, set organization ID to null
-        if ($data['department_name']) {
-            $organizationId = null;
+        // // If only department name is provided, set organization ID to null
+        // if ($data['department_name']) {
+        //     $organizationId = null;
                 
-        }// If only organization name is provided, set department ID to null
-        elseif ($data['organizerMultiple']) {
-            $departmentId = null;
+        // }// If only organization name is provided, set department ID to null
+        // elseif ($data['organization_name']) {
+        //     $departmentId = null;
                 
-        }
+        // }
 
         // Insert the data into the target table along with department_id and organization_id
         $newActivity = Activity::create([
@@ -65,15 +70,24 @@ class ActivityController extends Controller
             'registration_deadline' => $data['registration_deadline'],
             'registration_fee' => $data['registration_fee'],
             'description' => $data['description'],
-            //'image' => $data['image'],
-            'department_id' => $departmentId,
-            'organization_id' => $organizationId,
+            //'department_id' => $departmentId,
+            //'organization_id' => $organizationId,
             // Add other fields from the form as needed
         ]);
 
-        return redirect(route('dashboard.index'));
+            // Handle image upload
+            $imageName = time().'.'.$request->image->extension();  
+            $request->image->move(public_path('uploads'), $imageName);
+
+            // Save image path to database
+            $image = new Activity();
+            $image->image_path = 'uploads/'.$imageName;
+            $image->save();
+
+        return redirect(route('dashboard.index'))->with('success','Image uploaded successfully.');
     }
 
+    //showing some data sa activity details na page sa dashboard
     public function show(){
         $activities = Activity::all();
         
