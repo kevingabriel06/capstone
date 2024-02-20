@@ -31,14 +31,25 @@ Route::post('/login', function () {
     // Process login data
 });
 
-// DASHBOARD
-Route::get('/dashboard', [ActivityController::class, 'index'])->name('dashboard.index');
 
-
-// ACTIVITY CREATION
+// ACTIVITY 
 Route::prefix('/admin')->group(function(){
+    
+    //CREATE
     Route::post('/create-activity', [ActivityController::class, 'store'])->name('create-activity.store');
     Route::get('/create-activity', [ActivityController::class, 'organizer'])->name('create-activity.organizer');
+
+    //READ
+    Route::get('/dashboard', [ActivityController::class, 'index'])->name('dashboard.index');
+
+    //Replace act id with token
+    Route::get('/activity-details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
+    Route::get('/qr-scanner', function () {
+        return view('qr-scanner');
+    });
+    Route::get('/capture-photo', function () {
+        return view('capture-photo');
+    });
 });
 
 
@@ -69,11 +80,9 @@ Route::get('/profile-settings', function () {
 });
 
 // QR SCANNER
-Route::get('/qr-scanner', function () {
-    return view('qr-scanner');
-});
+
 
 // CAPTURE PHOTO
-Route::get('/capture-photo', function () {
-    return view('capture-photo');
-});
+
+
+

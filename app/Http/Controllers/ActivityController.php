@@ -29,7 +29,7 @@ class ActivityController extends Controller
     //inserting data sa database sa create-activity na page
     public function store(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
         // // Validate the incoming data
         $data = $request->validate([
             'title' => 'required',
@@ -61,6 +61,11 @@ class ActivityController extends Controller
         // }
 
         // Insert the data into the target table along with department_id and organization_id
+
+        // Handle image upload
+        $imageName = time().'.'.$request->image->extension();  
+        $request->image->move(public_path('uploads'), $imageName);
+
         $newActivity = Activity::create([
             'title' => $data['title'],
             'date_start' => $data['date_start'],
@@ -73,27 +78,22 @@ class ActivityController extends Controller
             //'department_id' => $departmentId,
             //'organization_id' => $organizationId,
             // Add other fields from the form as needed
+            'image_path' => 'uploads/'.$imageName, // Assign the image path directly here
         ]);
-
-            // Handle image upload
-            $imageName = time().'.'.$request->image->extension();  
-            $request->image->move(public_path('uploads'), $imageName);
-
-            // Save image path to database
-            $image = new Activity();
-            $image->image_path = 'uploads/'.$imageName;
-            $image->save();
 
         return redirect(route('dashboard.index'))->with('success','Image uploaded successfully.');
     }
 
     //showing some data sa activity details na page sa dashboard
-    public function show(){
-        $activities = Activity::all();
+    public function show($activity_id)
+    {
+        $activity = Activity::findOrFail($activity_id);
         
-        return view('/activity-details', ['activities' => $activities]);
-        
+        return view('activity-details', ['activity' => $activity]);
     }
+    
+    
+    
 
     
 

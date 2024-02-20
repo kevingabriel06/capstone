@@ -428,8 +428,8 @@
            
             <div class="card cover-image mb-3"><img class="card-img-top" src="{{ url('assets/img/generic/13.jpg') }}" alt="" /><input class="d-none" id="upload-cover-image" type="file" /><label class="cover-image-file-input" for="upload-cover-image"><span class="fas fa-camera me-2"></span><span>Change cover photo</span></label></div>
             <div class="row g-0"> 
-              <div class="col-lg-12 pe-lg-2">
-                <div class="card mb-3">
+              <div class="card mt-3">
+                <div class="card mt-3">
                   <div class="card-header">
                     <h5 class="mb-0">Activity Details</h5>
                   </div>
@@ -475,7 +475,7 @@
                             <h5 class="mb-1">Upload Photos</h5>
                         </div>
                         <div class="fallback">
-                            <input name="image" type="file" multiple="multiple" />
+                            <input type="file" name="image" multiple="multiple" />
                         </div>
                         <div class="dz-message" data-dz-message="data-dz-message">
                             <img class="me-2" src="{{ asset('assets/img/icons/cloud-upload.svg') }}" width="25" alt="" />
