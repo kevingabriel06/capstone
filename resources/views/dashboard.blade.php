@@ -445,6 +445,8 @@
                     </tr>
                     </thead>
                     <tbody>
+
+
                     @foreach($activities as $activity)
                     <tr>
                         <td>{{$activity->date_start}}</td>
@@ -472,6 +474,8 @@
                     </tr>
                     @endforeach
 
+
+                    
                     </tbody>
                 </table>
             </div>

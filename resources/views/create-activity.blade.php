@@ -27,7 +27,6 @@
   <script src="{{ asset('assets/js/config.js') }}"></script>
   <script src="{{ asset('vendors/simplebar/simplebar.min.js') }}"></script>
 
-<<<<<<< HEAD
   <!-- =============================================== -->
   <!-- Stylesheets -->
   <!-- =============================================== -->
@@ -39,7 +38,6 @@
   <link href="{{ asset('assets/css/theme.min.css') }}" rel="stylesheet" id="style-default">
   <link href="{{ asset('assets/css/user-rtl.min.css') }}" rel="stylesheet" id="user-style-rtl">
   <link href="{{ asset('assets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
-=======
     <!-- =============================================== -->
     <!-- Stylesheets -->
     <!-- =============================================== -->
@@ -52,7 +50,6 @@
     <link href="{{ asset('assets/css/user-rtl.min.css') }}" rel="stylesheet" id="user-style-rtl">
     <link href="{{ asset('assets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
     <link href="{{ asset('vendors/choices/choices.min.css')}}" rel="stylesheet" />
->>>>>>> d4b94402be8fd8d18b535a7452560216bb445357
 
 
   <script>
@@ -185,9 +182,7 @@
 
             </ul>
 
-<<<<<<< HEAD
           </div>
-=======
           <!-- division -->
             <div class="card mb-3">
               <div class="card-body">
@@ -367,8 +362,7 @@
               </div>
             </div>
 
-          
->>>>>>> d4b94402be8fd8d18b535a7452560216bb445357
+
         </div>
       </nav>
 
@@ -718,30 +712,8 @@
 
 
       </div>
-<<<<<<< HEAD
     </div>
   </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
-=======
-    </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
-
-    
-
-    <!-- =============================================== -->
-    <!-- JavaScripts -->
-    <!-- =============================================== -->
-    <script src="{{ asset('vendors/popper/popper.min.js') }}"></script>
-    <script src="{{ asset('vendors/bootstrap/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('vendors/anchorjs/anchor.min.js') }}"></script>
-    <script src="{{ asset('vendors/is/is.min.js') }}"></script>
-    <script src="{{ asset('vendors/echarts/echarts.min.js') }}"></script>
-    <script src="{{ asset('vendors/prism/prism.js') }}"></script>
-    <script src="{{ asset('vendors/fontawesome/all.min.js') }}"></script>
-    <script src="{{ asset('vendors/lodash/lodash.min.js') }}"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-    <script src="{{ asset('vendors/list.js/list.min.js') }}"></script>
-    <script src="{{ asset('assets/js/theme.js') }}"></script>
-    <script src="{{ asset('vendors/choices/choices.min.js') }}"></script>
->>>>>>> d4b94402be8fd8d18b535a7452560216bb445357
 
 
 

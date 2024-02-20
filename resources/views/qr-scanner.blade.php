@@ -418,7 +418,7 @@
                     html5Qrcode.start({facingMode:"environment"}, config, qrCodeSuccessCallback);
                 </script>
                 <div class="card-body">
-                <a class="btn btn-primary btn-sm" href="#!">Capture</a>
+                <a class="btn btn-primary btn-sm" href="capture-photo.blade.php">Capture</a>
                 </div>
                 </div>
           </div>  

@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\OrganizerController;
+use App\Http\Controllers\UserController;
 use App\Models\Organization;
-
+use Illuminate\Session\Store;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,11 @@ use App\Models\Organization;
 |
 */
 
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('login');
 });
 
-Route::post('/dashboard', function () {
-    return view('dashboard');
-});
+Route::post('/login', [UserController::class, 'store']);
 
 // sa pagkuha to ng data sa database yung sa department at organization table
 Route::get("/create-activity", [OrganizerController::class, "index"])->name("create-activity-organizer");
@@ -36,7 +35,7 @@ Route::post("/create-activity", [ActivityController::class, "store"])->name("cre
 Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
 
 
-//Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
+// Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
 
 Route::get("/activity-details", [ActivityController::class,"show"])->name("activity-details.show");
 
@@ -48,8 +47,8 @@ Route::get('/sidebar', function () {
 
 
 //ito yung comment mo neil
-Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
+// Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
+// Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
 
 //Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
 //Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
