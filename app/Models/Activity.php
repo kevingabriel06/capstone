@@ -19,10 +19,10 @@ class Activity extends Model
         "department_id",
         "organization_id",
         "description",
-        "image",
+        "image_path"
+        
     ] ;
 
-  
+    protected $primaryKey = 'activity_id';
 
-    
 }

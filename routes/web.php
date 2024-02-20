@@ -1,11 +1,13 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\OrganizerController;
-use App\Http\Controllers\UserController;
-use App\Models\Organization;
-use Illuminate\Session\Store;
+use App\Http\Controllers\QRCodeController;
+use App\Models\Activity;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,64 +20,67 @@ use Illuminate\Session\Store;
 |
 */
 
-Route::get('/', function () {
+//start
+
+// LOGIN
+Route::get('/login', function () {
     return view('login');
 });
 
 Route::post('/login', [UserController::class, 'store']);
 
-// sa pagkuha to ng data sa database yung sa department at organization table
-Route::get("/create-activity", [OrganizerController::class, "index"])->name("create-activity-organizer");
 
-//dashboard
-Route::get("/dashboard", [ActivityController::class,"index"])->name("dashboard.index");
+// ACTIVITY 
+Route::prefix('/admin')->group(function(){
+    
+    //CREATE
+    Route::post('/create-activity', [ActivityController::class, 'store'])->name('create-activity.store');
+    Route::get('/create-activity', [ActivityController::class, 'organizer'])->name('create-activity.organizer');
 
-//are naman ay sa activity table
-Route::post("/create-activity", [ActivityController::class, "store"])->name("create-activity.store");
-Route::post("/create-activity", [OrganizerController::class, "store"])->name("create-activity.store");
+    //READ
+    Route::get('/dashboard', [ActivityController::class, 'index'])->name('dashboard.index');
+
+    //Replace act id with token
+    Route::get('/activity-details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
+    Route::get('/qr-scanner', function () {
+        return view('qr-scanner');
+    });
+    Route::get('/capture-photo', function () {
+        return view('capture-photo');
+    });
+});
 
 
-// Route::post("/create-activity$", [ActivityController::class, "show"])->name("create-activity.show");
 
-Route::get("/activity-details", [ActivityController::class,"show"])->name("activity-details.show");
-
+// SIDEBAR
 Route::get('/sidebar', function () {
     return view('navigation-bar');
 });
 
-//create an activity route
-
-
-//ito yung comment mo neil
-// Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-// Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
-
-//Route::get('/create-activity', [ActivityController::class, 'activityCreate'])->name('create-activity');
-//Route::post('/create-activity/store', [ActivityController::class, 'store'])->name('create-activity.store');
-
-
-
-Route::get('/attendance.blade.php', function () {
+// ATTENDANCE
+Route::get('/attendance', function () {
     return view('attendance');
 });
 
-Route::get('/fines.blade.php', function () {
+// FINES
+Route::get('/fines', function () {
     return view('fines');
 });
 
-Route::get('/community.blade.php', function () {
+// COMMUNITY
+Route::get('/community', function () {
     return view('community');
 });
 
-Route::get('/profile-settings.blade.php', function () {
+// PROFILE SETTINGS
+Route::get('/profile-settings', function () {
     return view('profile-settings');
 });
 
+// QR SCANNER
 
-Route::get('/qr-scanner.blade.php', function () {
-    return view('qr-scanner');
-});
 
-Route::get('/capture-photo.blade.php', function () {
-    return view('capture-photo');
-});
+// CAPTURE PHOTO
+
+
+

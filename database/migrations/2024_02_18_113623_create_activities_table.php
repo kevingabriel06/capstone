@@ -21,13 +21,13 @@ class CreateActivitiesTable extends Migration
             $table->date('date_end');
             $table->time('start_time');
             $table->time('end_time');
-            $table->dateTime('registration_deadline');
+            $table->datetime('registration_deadline');
             $table->decimal('registration_fee');
             $table->string('status');
-            $table->binary('image');
+            $table->string('image_path');
             $table->integer('department_id');
             $table->integer('organization_id');
-            $table->timestamp('created_at');
+            $table->timestamps();
         });
     }
 

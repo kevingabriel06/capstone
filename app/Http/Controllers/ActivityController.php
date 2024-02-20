@@ -9,11 +9,24 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
+    
+    //displaying activity sa dashboard
     public function index(){
         $activities = Activity::all();
 
         return view('dashboard', ['activities'=> $activities]);
     }
+
+
+    //displaying organizer sa create-activity na page
+    public function organizer(){
+        $departments = Department::all();
+        $organizations = Organization::all();
+    
+        return view('create-activity', compact('departments', 'organizations'));
+    }
+
+    //inserting data sa database sa create-activity na page
     public function store(Request $request)
     {
         // dd($request->all());
@@ -27,40 +40,32 @@ class ActivityController extends Controller
             'registration_deadline' => 'nullable|date',
             'registration_fee' => 'nullable|numeric',
             'description' => 'nullable',
-            'image' => 'nullable',
-            'department_name' => 'nullable|string|exists:departments,department_name',
-            'organization_name' => 'nullable|string|exists:organizations,organization_name',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            //'department_name' => 'nullable|string|exists:departments,department_name',
+            //'organization_name' => 'nullable|string|exists:organizations,organization_name',
             // Add validation rules for other form fields
         ]);
 
-        // If only department name is provided, set organization ID to null
-        if ($data['department_name']) {
-        $organizationId = null;
-        
-}
-        // If only organization name is provided, set department ID to null
-        elseif ($data['organization_name']) {
-         $departmentId = null;
-        
-}
+        // $organizationId = $data['organization_name'] ? Organization::where('organization_name', $data['organization_name'])->value('organization_id') : null;
 
-$organizationId = $data['organization_name'] ? Organization::where('organization_name', $data['organization_name'])->value('organization_id') : null;
+        // $departmentId = $data['department_name'] ? Department::where('department_name', $data['department_name'])->value('department_id') : null;
 
-$departmentId = $data['department_name'] ? Department::where('department_name', $data['department_name'])->value('department_id') : null;
-// If neither department nor organization names are provided, both IDs remain unchanged
-
-        // Retrieve the department ID if a department name is provided, otherwise set it to null
-        
-
-        // Retrieve the organization ID if an organization name is provided, otherwise set it to null
-        
-        
-       
-
-
-
+        // // If only department name is provided, set organization ID to null
+        // if ($data['department_name']) {
+        //     $organizationId = null;
+                
+        // }// If only organization name is provided, set department ID to null
+        // elseif ($data['organization_name']) {
+        //     $departmentId = null;
+                
+        // }
 
         // Insert the data into the target table along with department_id and organization_id
+
+        // Handle image upload
+        $imageName = time().'.'.$request->image->extension();  
+        $request->image->move(public_path('uploads'), $imageName);
+
         $newActivity = Activity::create([
             'title' => $data['title'],
             'date_start' => $data['date_start'],
@@ -70,20 +75,25 @@ $departmentId = $data['department_name'] ? Department::where('department_name', 
             'registration_deadline' => $data['registration_deadline'],
             'registration_fee' => $data['registration_fee'],
             'description' => $data['description'],
-            //'image' => $data['image'],
-            'department_id' => $departmentId,
-            'organization_id' => $organizationId,
+            //'department_id' => $departmentId,
+            //'organization_id' => $organizationId,
             // Add other fields from the form as needed
+            'image_path' => 'uploads/'.$imageName, // Assign the image path directly here
         ]);
 
-        return redirect(route('create-activity'))->with('success', 'Activity Saved!');
+        return redirect(route('dashboard.index'))->with('success','Image uploaded successfully.');
     }
 
-    public function show(){
-        $activities = Activity::all();
-
-        return view('/activity-details', ['activities' => $activities]);
+    //showing some data sa activity details na page sa dashboard
+    public function show($activity_id)
+    {
+        $activity = Activity::findOrFail($activity_id);
+        
+        return view('activity-details', ['activity' => $activity]);
     }
+    
+    
+    
 
     
 
