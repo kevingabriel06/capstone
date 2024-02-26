@@ -410,7 +410,7 @@
                     const qrCodeSuccessCallback = (decodedText, decodedResult) => {
                         if (decodedText) {
                             document.getElementById('show').style.display = 'block';
-                            document.getElementById('result').textContent = decodedText;
+                            document.getElementById('result').textContent = extractIntegers(decodedText);
                             html5Qrcode.stop();
                             // Send scanned data to Laravel route
                             const scannedData = decodedText;
@@ -430,6 +430,18 @@
                     };
                     const config = { fps: 10, qrbox: { width: 350, height: 350 } }
                     html5Qrcode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
+
+                                      function extractIntegers(text) {
+                      // Regular expression to match integers
+                      const regex = /\d+/g;
+                      const integersArray = text.match(regex);
+                      if (integersArray && integersArray.length > 0) {
+                          // Join integers with space
+                          return integersArray.join(' ');
+                      } else {
+                          return null; // No integers found
+                      }
+                  }
                 </script>
                 <div class="card-body">
                     <a class="btn btn-primary btn-sm" href="{{'capture-photo'}}">Capture</a>
