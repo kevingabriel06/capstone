@@ -1,12 +1,9 @@
 <?php
 
-use App\Models\Activity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\ScannedDataController;
 use Illuminate\Support\Facades\DB;
