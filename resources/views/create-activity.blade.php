@@ -440,23 +440,27 @@
                       <div class="row gx-2">
                         <div class="col-12 mb-3"><label class="form-label" for="event-name">Activity Title</label><input class="form-control" id="event-name" type="text" placeholder="Activity Title" name="title" required=""/></div>  
                         <div class="col-sm-6 mb-3"><label class="form-label" for="start-date">Start Date</label><input class="form-control datetimepicker" id="start-date" type="text" placeholder="yyyy-mm-dd" name="date_start" data-options='{"dateFormat":"y/m/d","disableMobile":true}' required=""/></div>
-                        <div class="col-sm-6 mb-3"><label class="form-label" for="start-time">Start Time</label><input class="form-control datetimepicker" id="start-time" type="text" placeholder="hh:mm" name="start_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' required=""/></div>
+                        <div class="col-sm-6 mb-3">
+                          <label class="form-label" for="start-time">Start Time</label>
+                          <input class="form-control datetimepicker" id="start-time" type="text" placeholder="hh:ii K" name="start_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"h:i K","disableMobile":true}' required=""/>
+                        </div>
+
                         <div class="col-sm-6 mb-3"><label class="form-label" for="end-date">End Date</label><input class="form-control datetimepicker" id="end-date" type="text" placeholder="yyyy-mm-dd" name="date_end" data-options='{"dateFormat":"y/m/d","disableMobile":true}' required=""/></div>
                         <div class="col-sm-6 mb-3"><label class="form-label" for="end-time">End Time</label><input class="form-control datetimepicker" id="end-time" type="text" placeholder="hh:mm" name="end_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' required=""/></div>
                         <div class="col-sm-6"><label class="form-label" for="registration-deadline">Registration Deadline</label><input class="form-control datetimepicker" id="registration-deadline" type="text" placeholder="yyyy-mm-dd" name="registration_deadline" data-options='{"dateFormat":"y/m/d","disableMobile":true}' /></div>
                         <div class="col-sm-6"><label class="form-label" for="registration-fee">Registration Fee</label><input class="form-control" id="registration-fee" type="text" placeholder="₱ 00.00" name="registration_fee"/></div>
                         <div class="border-bottom border-dashed my-3"></div>
 
-
-
-                      <!-- Organizer Dropdown -->
-                      <div class="col-sm-6 mb-3">
-                          <label class="form-label" for="organizer">Organizer</label>
-                          <select class="form-select" id="organizerSelect" name="organizer" required="">
-                              <option id="default" value="default">Select Organizer...</option>
-                              <option id="institution" value="institution">Institution</option>
-                              <option id="department" value="department">Department</option>
-                              <option id="organization" value="organization">Organization</option>
+                        <!-- department dropdown -->
+                        <div class="col-sm-6 mb-3">
+                          <label class="form-label" for="specific-dept">Department</label>
+                          <select class="form-select" id="departmentSelect" name="department_name">
+                              <option value="defaultdep" selected disabled>Select Department</option>
+                              @foreach($departments as $department)
+                                  <option value="{{$department->department_name}}" name="department_name">
+                                      {{$department->department_name}}
+                                  </option>
+                              @endforeach
                           </select>
                       </div>
 

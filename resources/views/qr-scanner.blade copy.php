@@ -25,6 +25,10 @@
     <script src="{{ asset('assets/js/config.js') }}"></script>
     <script src="{{ asset('vendors/simplebar/simplebar.min.js') }}"></script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
+        <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
     <!-- =============================================== -->
     <!-- Stylesheets -->
     <!-- =============================================== -->
@@ -74,103 +78,7 @@
               document.querySelector('.navbar-vertical').classList.add(`navbar-${navbarStyle}`);
             }
           </script>
-          <div class="d-flex align-items-center">
-            <div class="toggle-icon-wrapper">
-              <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
-            </div><a class="navbar-brand" href="../index.html">
-              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ url ('assets/images/logo/afmams.png') }}" alt="" width="40" /><span class="font-sans-serif text-primary">AFMAMS</span></div>
-            </a>
-          </div>
-          <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
-            <div class="navbar-vertical-content scrollbar">
-              <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
-                
-                <!-- Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="#dashboard" role="button" aria-expanded="false" aria-controls="dashboard">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-chart-pie"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Dashboard</span>
-                        </div>
-                    </a>
-                </li>
-
-                <!--main menu label -->
-                <li class="nav-item">
-                    <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
-                        <div class="col-auto navbar-vertical-label">Menu</div>
-                        <div class="col ps-0">
-                            <hr class="mb-0 navbar-vertical-divider" />
-                        </div>
-                    </div>
-
-                    <!-- Attendance-->
-                    <a class="nav-link" href="attendance.blade.php" role="button">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon">
-                                <span class="fas fa-calendar-alt"></span></span>
-                            <span class="nav-link-text ps-1">Attendance</span>
-                        </div>
-                    </a>
-
-                    <!-- Fines -->
-                    <a class="nav-link" href="{{ url('fines.blade.php') }}" role="button">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon">
-                                <span class="fas fa-coins"></span></span>
-                            <span class="nav-link-text ps-1">Fines</span>
-                        </div>
-                    </a>
-
-                    <!-- Activity-->
-                    <a class="nav-link dropdown-indicator" href="#email" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="email">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon"><span class="fab fa-buromobelexperte"></span></span>
-                            <span class="nav-link-text ps-1">Activity</span>
-                        </div>
-                    </a>
-                    <ul class="nav collapse" id="email">
-                    <!-- Create an Activity Bar  -->
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{ url('create-activity') }}">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Create an Activity</span></div>
-                            </a>
-                        </li>
-                    <!-- Add an Evaluation Form-->
-                        <li class="nav-item">
-                        <a class="nav-link" href="../app/email/email-detail.html">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Evaluation Form</span></div>
-                        </a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="../app/email/compose.html">
-                                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Review Excuse Form</span></div>
-                        </a>
-                        </li>
-                    </ul>
-
-                    <!-- Community -->
-                    <a class="nav-link" href="{{ url('community.blade.php') }}" role="button">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon">
-                                <span class="fas fa-comments"></span></span>
-                            <span class="nav-link-text ps-1">Community</span>
-                        </div>
-                    </a>
-
-                    <!-- About -->
-                    <a class="nav-link" href="../app/chat.html" role="button">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon">
-                                <span class="fas fa-info-circle"></span></span>
-                            <span class="nav-link-text ps-1">About</span>
-                        </div>
-                    </a>
-                </li>
-
-              </ul>
-              
-            </div>
-          </div>
-        </nav>
+         
 
         <!-- header -->
         <div class="content">
@@ -396,120 +304,74 @@
           </nav>
 
           <!-- division -->
-          <div class="card mb-3">
-            <img class="card-img-top" src="{{ asset($activity->image_path) }}" alt="">
 
-            <div class="card-body">
-              <div class="row justify-content-between align-items-center">
-                <div class="col">
-                  <div class="d-flex">
-                    <div class="calendar me-2">
-                      @if(isset($activity->date_start))
-                          @php
-                              $startDate = \Carbon\Carbon::parse($activity->date_start);
-                          @endphp
-                          <span class="calendar-month">{{ $startDate->format('M') }}</span>
-                          <span class="calendar-day">{{ $startDate->format('d') }}</span>
-                      @endif
-                    </div>
-    
-                    <div class="flex-1 fs-10">
-                    @if(isset($activity->title))
-                        <h5 class="fs-9">{{ $activity->title }}</h5>
-                    @endif
-
-                    <p class="mb-0">by  
-                      @if($activity->department_id == $department->department_id)
-                          <span class="mb-1">
-                              {{ $department->department_name }} 
-                          </span>
-                      @endif
-                    </p>
-
-                    @if(isset($activity->title))
-                    <span class="fs-9 text-warning fw-semi-bold">
-                      {{ $activity-> start_time }} - {{ $activity-> end_time }} 
-                    </span>
-                    @endif
-                    </div>
-                  </div>
+          <div class="card mb-3" style="flex-wrap:wrap; min-width: 700px;">
+            <div class="card-img-top">
+                <script src="{{ asset('assets/js/qrScript.js') }}"></script>
+                <div id="reader" style="flex-wrap: wrap;"></div>
+                <div id="show" style="display: none; text-align: center;">
+                    <h4>Scanned Result</h4>
+                    <form action="{{route('qr-scanner.store')}}" method="post" >
+                    @csrf
+                    @method('post')
+                    <input type="text" name="result" id="result" readonly="" placeholder="Scan QR code" class="form-control">
+                    </form>
                 </div>
+                <script>
+                    const html5Qrcode = new Html5Qrcode('reader');
+                    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                        if (decodedText) {
+                            document.getElementById('show').style.display = 'block';
+                            // Set the value instead of textContent
+                            document.getElementById('result').value = extractIntegers(decodedText);
+                            html5Qrcode.stop();
+                            // Send scanned data to Laravel route
+                            const scannedData = decodedText;
+                            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                            fetch('qr-scanner.store', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-Token': token
+                                },
+                                body: JSON.stringify({ result: scannedData }) // Updated key to 'result'
+                            })
+                            .then(response => response.json())
+                            .then(data => console.log(data))
+                            .catch(error => console.error('Error:', error));
+                        }
+                    };
+                    const config = { fps: 10, qrbox: { width: 350, height: 350 } }
+                    html5Qrcode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
 
-                <div class="col-md-auto mt-4 mt-md-0"><button class="btn btn-falcon-default btn-sm me-2" type="button"><span class="fas far fa-user text-danger me-1"></span>-0-</button><button class="btn btn-falcon-default btn-sm me-2" type="button"><span class="fas fa-share-alt me-1"></span>Share</button><button class="btn btn-falcon-primary btn-sm px-4 px-sm-5" type="button"><span class="far fa-address-card me-1"></span><a href="{{ url('admin/qr-scanner')}}">Scan QR</a></button></div>
+                    function extractIntegers(text) {
+                        // Regular expression to match integers
+                        const regex = /\d+/g;
+                        const integersArray = text.match(regex);
+                        if (integersArray && integersArray.length > 0) {
+                            // Join integers with space
+                            return integersArray.join(' ');
+                        } else {
+                            return null; // No integers found
+                        }
+                    }
+                </script>
+                <div class="card-body">
+                    <a class="btn btn-primary btn-sm" href="{{route('qr-scanner.store')}}">Capture</a>
                 </div>
             </div>
-          </div>
-
-          <div class="row g-0">
-            <div class="col-lg-8 pe-lg-2">
-                <div class="card mb-2 mb-lg-0">
-                    <div class="card-body">
-                        <p>{{ $activity->description }}</p>  
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-4 ps-lg-2">
-              <div class="sticky-sidebar">
-                <div class="card mb-3 mb-lg-0">
-                  <div class="card-header bg-body-tertiary">
-                    <h5 class="mb-0">Upcoming Activities</h5>
-                  </div>
-
-                  @if(isset($activities) && count($activities) > 0)
-                    @foreach($activities as $activityUp)
-                        @if($activityUp->status == 'Upcoming' && $activityUp->activity_id != $activity_id)
-                            <div class="card-body fs-10">
-                                <div class="d-flex btn-reveal-trigger">
-                                    <div class="calendar">
-                                      @if(isset($activityUp->date_start))
-                                          @php
-                                              $startDate = \Carbon\Carbon::parse($activityUp->date_start);
-                                          @endphp
-                                          <span class="calendar-month">{{ $startDate->format('M') }}</span>
-                                          <span class="calendar-day">{{ $startDate->format('d') }}</span>
-                                      @endif
-                                    </div>
-
-                                    <div class="flex-1 position-relative ps-3">
-                                        <h6 class="fs-9 mb-0"><a href="event-detail.html">{{ $activityUp->title }}</a></h6>
-                                        <p class="mb-1">Organized by
-                                          <strong>
-                                          @foreach($departments as $departmentUp)
-                                            @if($activityUp->department_id == $departmentUp->department_id)
-                                              {{$departmentUp->department_name}}
-                                            @endif
-                                          @endforeach
-                                          </strong>
-                                        </p>
-                                        <p class="text-1000 mb-0">Time: {{ $activityUp->start_time }}</p>
-                                        <p class="text-1000 mb-0">Duration: {{ $activityUp->start_time }} - {{ $activityUp->end_time }}</p>Place: {{ $activityUp->location }}<div class="border-bottom border-dashed my-3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                @else
-                    <div class="card-body bg-body-tertiary text-center">
-                        <h6 class="mb-0">No upcoming activities found.</h6>
-                    </div>
-                @endif
+        </div>
 
 
 
-
-
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
 
           
         </div>
       </div>
     </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
 
+    
 
     <!-- =============================================== -->
     <!-- JavaScripts -->

@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class ScannedData extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'department_name'
+        'decoded_text'
     ];
-
-    protected $primaryKey = 'department_id';
-
 }

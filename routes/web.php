@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\OrganizerController;
-
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ScannedDataController;
+use Illuminate\Support\Facades\DB;
+use App\Models\Activity;
+use App\Models\Attendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,23 +36,22 @@ Route::middleware("auth")->group(function(){
 
     Route::prefix('/admin')->group(function(){
     
-        //CREATE
-        Route::post('/create-activity', [ActivityController::class, 'store'])->name('create-activity.store');
-        Route::get('/create-activity', [ActivityController::class, 'organizer'])->name('create-activity.organizer');
-    
-        //READ
-        Route::get('/dashboard', [ActivityController::class, 'index'])->name('home');
-        
-    
-        //Replace act id with token
-        Route::get('/activity-details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
-        Route::get('/qr-scanner', function () {
-            return view('qr-scanner');
-        });
-        Route::get('/capture-photo', function () {
-            return view('capture-photo');
-        });
+    //CREATE
+    Route::post('/create-activity', [ActivityController::class, 'store'])->name('create-activity.store');
+    Route::get('/create-activity', [ActivityController::class, 'organizer'])->name('create-activity.organizer');
+
+    //READ
+    Route::get('/dashboard', [ActivityController::class, 'index'])->name('home');
+
+    //Replace act id with token
+    Route::get('/activity-details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
+    Route::get('/qr-scanner', function () {
+        return view('qr-scanner');
     });
+    Route::get('/capture-photo', function () {
+        return view('capture-photo');
+    });
+});
 
 });
 
