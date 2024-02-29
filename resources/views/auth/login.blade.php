@@ -54,6 +54,18 @@
           <div class="col-sm-10 col-md-6 px-sm-0 align-self-center mx-auto py-5">
             <div class="row justify-content-center g-0">
               <div class="col-lg-9 col-xl-8 col-xxl-6">
+
+                @if(session()->has("success"))
+              <div class="alert alert-success">
+              {{session()->get("success")}}
+              </div>
+            @endif
+            @if(session()->has("error"))
+              <div class="alert alert-success">
+              {{session()->get("error")}}
+              </div>
+            @endif
+
                 <div class="card">
                   <div class="card-header bg-circle-shape bg-shape text-center p-2"><a class="font-sans-serif fw-bolder fs-5 z-1 position-relative link-light" href="" data-bs-theme="light">AFMAMS</a></div>
 
@@ -64,12 +76,21 @@
                         <h3>Log In</h3>
                       </div>
                     </div>
-                    <form method="POST" action="login">
+                    <form method="POST" action="{{route("login.post")}}">
                       @csrf 
 
-                      <div class="mb-3"><label class="form-label" for="split-login-username">Username</label><input class="form-control" id="split-login-username" type="text" name="name" /></div>
+                      <div class="mb-3"><label class="form-label" for="split-login-username">Student ID</label><input class="form-control" id="split-login-username" type="text" name="name" />
+                        @if ($errors->has('name'))
+                        <span class="text-danger">
+                        {{$errors->first('student-id')}}</span>
+                        @endif
+                      </div>
                       <div class="mb-3">
-                        <div class="d-flex justify-content-between"><label class="form-label" for="split-login-password">Password</label></div><input class="form-control" id="split-login-password" type="password" name="password" />
+                        <div class="d-flex justify-content-between"><label class="form-label" for="split-login-password">Password</label></div><input class="form-control" id="split-login-password" type="password" name="password" required/>
+                        @if ($errors->has('password'))
+                        <span class="text-danger">
+                        {{$errors->first('password')}}</span>
+                        @endif
                       </div>
                       <div class="row flex-between-center">
                         <div class="col-auto">
