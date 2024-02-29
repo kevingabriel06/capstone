@@ -3,11 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\OrganizerController;
-use App\Http\Controllers\QRCodeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ScannedDataController;
+use Illuminate\Support\Facades\DB;
 use App\Models\Activity;
-
-
+use App\Models\Attendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,12 +43,23 @@ Route::prefix('/admin')->group(function(){
 
     //Replace act id with token
     Route::get('/activity-details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
-    Route::get('/qr-scanner', function () {
-        return view('qr-scanner');
-    });
+    
+    //qr-code
+    Route::get('/qr-scanner', [AttendanceController::class, 'index'])->name('qr-scanner.index');
+    Route::post('/qr-scanner', [AttendanceController::class, 'store'])->name('store');
+    
+
     Route::get('/capture-photo', function () {
         return view('capture-photo');
     });
+    Route::post('/insert', function () {
+        return view('insert');
+    });
+
+
+
+Route::post('/process-scanned-data', [ScannedDataController::class, 'processScannedData']);
+
 });
 
 

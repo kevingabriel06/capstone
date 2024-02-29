@@ -25,6 +25,10 @@
     <script src="{{ asset('assets/js/config.js') }}"></script>
     <script src="{{ asset('vendors/simplebar/simplebar.min.js') }}"></script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
+        <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
     <!-- =============================================== -->
     <!-- Stylesheets -->
     <!-- =============================================== -->
@@ -397,45 +401,39 @@
 
           <!-- division -->
 
-          <div class="card mb-3" style="flex-wrap:wrap; min-width: 700px;">
-            <div class="card-img-top">
-                <script src="{{ asset('assets/js/qrScript.js') }}"></script>
-                <div id="reader" style="flex-wrap: wrap;"></div>
-                <div id="show" style="display: none; text-align: center;">
-                    <h4>Scanned Result</h4>
-                    <p style="color: blue;" id="result" name="scanned_data"></p>
+          <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <video id="preview" width="100%"></video>
                 </div>
-                <script>
-                    const html5Qrcode = new Html5Qrcode('reader');
-                    const qrCodeSuccessCallback = (decodedText, decodedResult) => {
-                        if (decodedText) {
-                            document.getElementById('show').style.display = 'block';
-                            document.getElementById('result').textContent = decodedText;
-                            html5Qrcode.stop();
-                            // Send scanned data to Laravel route
-                            const scannedData = decodedText;
-                            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                            fetch('/process-scanned-data', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-Token': token
-                                },
-                                body: JSON.stringify({ scanned_data: scannedData })
-                            })
-                            .then(response => response.json())
-                            .then(data => console.log(data))
-                            .catch(error => console.error('Error:', error));
-                        }
-                    };
-                    const config = { fps: 10, qrbox: { width: 350, height: 350 } }
-                    html5Qrcode.start({ facingMode: "environment" }, config, qrCodeSuccessCallback);
-                </script>
-                <div class="card-body">
-                    <a class="btn btn-primary btn-sm" href="{{'capture-photo'}}">Capture</a>
+                <form action="{{route('store')}}" method="POST" class="form-horizontal" id='form'>
+                @csrf
+                <div class="col-md-6">
+                    <label>SCAN QR CODE</label>
+                    <input type="text" name="text" id="text" readonly="" placeholder="scan qr code" class="form-control">
                 </div>
+                </form>
             </div>
         </div>
+
+        <script>
+            let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
+            Instascan.Camera.getCameras().then(function(cameras){
+                if(cameras.length> 0){
+                    scanner.start(cameras[0]);
+                }else{
+                    alert('No cameras found.');
+                }
+            }).catch(function(e){
+                console.error(e);
+             });
+
+            scanner.addListener('scan', function(c){
+                document.getElementById('text').value=c;
+                document.getElementById('form').submit();
+            });
+
+        </script>
 
         </div>
 
