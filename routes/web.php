@@ -39,26 +39,21 @@ Route::prefix('/admin')->group(function(){
     Route::get('/create-activity', [ActivityController::class, 'organizer'])->name('create-activity.organizer');
 
     //READ
-    Route::get('/dashboard', [ActivityController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard', [ActivityController::class, 'index'])->name('dashboard');
+    Route::get('/create-activity', [ActivityController::class, 'organizer'])->name('create-activity');
 
     //Replace act id with token
     Route::get('/activity-details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
     
     //qr-code
     Route::get('/qr-scanner', [AttendanceController::class, 'index'])->name('qr-scanner.index');
-    Route::post('/qr-scanner', [AttendanceController::class, 'store'])->name('store');
+    Route::post('/qr-scanner', [AttendanceController::class, 'store'])->name('qr-scanner.store');
     
 
     Route::get('/capture-photo', function () {
         return view('capture-photo');
     });
-    Route::post('/insert', function () {
-        return view('insert');
-    });
 
-
-
-Route::post('/process-scanned-data', [ScannedDataController::class, 'processScannedData']);
 
 });
 
