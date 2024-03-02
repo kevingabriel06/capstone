@@ -14,7 +14,9 @@ class CreateAttendancesTable extends Migration
     public function up()
     {
         Schema::create('attendances', function (Blueprint $table) {
-            $table->id('student_id');
+            $table->string('student_id');
+            $table->string('name');
+            $table->string('department');
             $table->dateTime('time_in');
             $table->dateTime('time_out');
         });

@@ -43,9 +43,11 @@ Route::middleware("auth")->group(function(){
 
     //Replace act id with token
     Route::get('/activity-details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
-    Route::get('/qr-scanner', function () {
-        return view('qr-scanner');
-    });
+    //qr-code
+    Route::get('/qr-scanner', [AttendanceController::class, 'index'])->name('qr-scanner.index');
+    Route::post('/qr-scanner', [AttendanceController::class, 'store'])->name('store');
+
+    
     Route::get('/capture-photo', function () {
         return view('capture-photo');
     });
