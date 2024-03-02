@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layout.layout')
+
+@section('content')
 
       <!-- division -->
 
@@ -7,7 +9,7 @@
             <div class="col-md-6">
                 <video id="preview" width="100%"></video>
             </div>
-            <form action="{{route('qr-scanner.store')}}" method="POST" class="form-horizontal" id='form'>
+            <form action="{{route('attendance.scan')}}" method="POST" class="form-horizontal" id='form'>
             @csrf
             <div class="col-md-6">
                 <label>SCAN QR CODE</label>
@@ -35,4 +37,4 @@
           });
       </script>
 
-@include('partials.footer')
+@endsection

@@ -1,4 +1,6 @@
-@include('partials.header')
+@extends('layout.layout')
+
+@section('content')
 
           <!-- division -->
           <div class="card mb-3">
@@ -95,4 +97,4 @@
                 </table>
             </div>
             
- @include('partials.footer')         
+@endsection        
