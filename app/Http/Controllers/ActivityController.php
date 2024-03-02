@@ -32,7 +32,7 @@ class ActivityController extends Controller
         try {
             $departments = Department::all();
             $organizations = Organization::all();
-            return view('create-activity', compact('departments', 'organizations'));
+            return view('activity.create', compact('departments', 'organizations'));
         } catch (QueryException $e) {
             // Handle database query exceptions
             return view('error', ['error_message' => $e->getMessage()]);
@@ -84,7 +84,7 @@ class ActivityController extends Controller
                 // Add other fields from the form as needed
             ]);
     
-            return redirect(route('dashboard.index'))->with('success', 'Activity is Successfully Added');
+            return redirect(route('home'))->with('success', 'Activity is Successfully Added');
 
         // } catch (ValidationException $e) {
         //     // Redirect back with validation errors
@@ -107,7 +107,7 @@ class ActivityController extends Controller
             $department = Department::findOrFail($activity->department_id);
             $departments = Department::all();
             
-            return view('activity-details', ['activity' => $activity, 'department' => $department, 'activity_id' => $activity_id, 'activities' => $activities, 'departments' => $departments]);
+            return view('activity.show', ['activity' => $activity, 'department' => $department, 'activity_id' => $activity_id, 'activities' => $activities, 'departments' => $departments]);
         // } catch (ModelNotFoundException $e) {
         //     // Handle model not found errors
         //     return view('error', ['error_message' => 'Activity or Department not found.']);

@@ -4,15 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Attendance;
-use Illuminate\Support\Facades\DB;
-
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
 
 class AttendanceController extends Controller
 {
     public function index(){
-        return view("qr-scanner");
+        return view("attendance.scan");
     }
     public function store(Request $request)
     {
