@@ -1,16 +1,13 @@
 <?php
 
-use App\Models\Activity;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\OrganizerController;
+use App\Http\Controllers\AttendanceController; 
 
 
-use Illuminate\Support\Facades\DB;
-use App\Models\Activity;
-use App\Models\Attendance;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,38 +21,43 @@ use App\Models\Attendance;
 */
 
 //start
-
 // LOGIN
-Route::get('/login', function () {
-    return view('login');
-});
-
-Route::post('/login', [UserController::class, 'store']);
+Route::get('/', [UserController::class, 'login'])->name('login');
+Route::post('/', [UserController::class, 'loginPost'])->name('login.post');
 
 
-// ACTIVITY 
+
 Route::middleware("auth")->group(function(){
 
-Route::prefix('/admin')->group(function(){
-    
+    Route::prefix('/admin')->group(function(){
+
+    // ACTIVITY 
+
         //CREATE
-        Route::post('/create-activity', [ActivityController::class, 'store'])->name('create-activity.store');
-        Route::get('/create-activity', [ActivityController::class, 'organizer'])->name('create-activity.organizer');
-    
+            Route::post('/create', [ActivityController::class, 'store'])->name('create.store');
+            Route::get('/activity/create', [ActivityController::class, 'organizer'])->name('create');
+
         //READ
-        Route::get('/dashboard', [ActivityController::class, 'index'])->name('home');
-        
-    
-        //Replace act id with token
-        Route::get('/activity-details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
-        Route::get('/qr-scanner', function () {
-            return view('qr-scanner');
-        });
+            Route::get('/dashboard', [ActivityController::class, 'index'])->name('home'); //homepage
+
+            //Replace act id with token
+            Route::get('/activity/details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
+
+
+
+
         Route::get('/capture-photo', function () {
             return view('capture-photo');
         });
-    });
 
+    //ATTENDANCE
+
+        //INSERT
+            //qr-code
+            Route::get('/attendance/qr-scanner', [AttendanceController::class, 'index'])->name('qr-scanner');
+            Route::post('/attendance/scan', [AttendanceController::class, 'store'])->name('attendance.scan');
+
+});
 });
 
 

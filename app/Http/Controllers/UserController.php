@@ -11,11 +11,11 @@ class UserController extends Controller
 
     public function loginPost(Request $request){
         $request->validate([
-            'name' => ['required', 'min:3', 'max:8'],
+            'student_id' => ['required', 'min:3', 'max:8'],
             'password' => ['required', 'min:8', 'max:200']]);
 
 
-        $credentials = $request ->only("name", "password");
+        $credentials = $request ->only("student_id", "password");
 
         if (auth()->attempt($credentials)){
             
