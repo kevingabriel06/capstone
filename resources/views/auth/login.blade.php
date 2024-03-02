@@ -80,7 +80,7 @@
                       @csrf 
 
                       <div class="mb-3"><label class="form-label" for="split-login-username">Student ID</label><input class="form-control" id="split-login-username" type="text" name="name" />
-                        @if ($errors->has('name'))
+                        @if ($errors->has('student_id'))
                         <span class="text-danger">
                         {{$errors->first('student-id')}}</span>
                         @endif
