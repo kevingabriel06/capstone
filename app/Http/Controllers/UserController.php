@@ -15,7 +15,7 @@ class UserController extends Controller
             'password' => ['required', 'min:8', 'max:200']]);
 
 
-        $credentials = $request ->only("student_id", "password");
+        $credentials = $request->only("student_id", "password");
 
         if (auth()->attempt($credentials)){
             

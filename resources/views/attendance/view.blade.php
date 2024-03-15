@@ -31,19 +31,44 @@
                   </thead>
                   <tbody class="list" id="table-customers-body">
                     <tr class="btn-reveal-trigger">
-                      <td class="id-number align-middle white-space-nowrap py-2"><a href="customer-details.html">
-                          <div class="d-flex d-flex align-items-center">
-                            <div class="flex-1">
-                              <h5 class="mb-0 fs-10">11-00001</h5>
-                            </div>
-                          </div>
-                        </a></td>
-                      <td class="name align-middle py-2">Juan Dela Cruz</td>
-                      <td class="date align-middle py-2">30/03/2018</td>
-                      <td class="activity align-middle white-space-nowrap py-2">TAGISLAKASAN 2023</td>
-                      <td class="status align-middle white-space-wrap py-2">
-                        <span class="badge badge rounded-pill d-block p-2 badge-subtle-success">Present<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>
-                      </td>
+                    @foreach ($attendances as $attendance)
+                      <tr>
+                          <td class="id-number align-middle white-space-nowrap py-2">
+                              <a href="customer-details.html">
+                                  <div class="d-flex align-items-center"> <!-- Removed duplicate "d-flex" class -->
+                                      <div class="flex-1">
+                                          {{-- Check if the user relationship exists and if the student_id is not null --}}
+                                          @if($attendance->user && $attendance->user->student_id === $attendance->student_id) <!-- Fixed variable name -->
+                                              {{-- Display the student_id of the associated user --}}
+                                              <h5 class="mb-0 fs-10">{{ $attendance->user->student_id }}</h5> <!-- Fixed variable name -->
+                                          @else
+                                              <h5 class="mb-0 fs-10">N/A</h5>
+                                          @endif
+                                      </div>
+                                  </div>
+                              </a>
+                          </td>
+                          <td class="name align-middle py-2">
+                              {{-- Check if the user relationship exists --}}
+                              {{ $attendance->user ? $attendance->user->name : 'N/A' }}
+                          </td>
+                          <td class="date align-middle py-2">
+                              {{-- Check if the activity relationship exists --}}
+                              {{ $attendance->activity ? $attendance->activity->start_date : 'N/A' }}
+                          </td>
+                          <td class="activity align-middle white-space-nowrap py-2">
+                              {{-- Check if the activity relationship exists --}}
+                              {{ $attendance->activity ? $attendance->activity->activity_name : 'N/A' }}
+                          </td>
+                          <td class="status align-middle white-space-wrap py-2">
+                              <span class="badge badge rounded-pill d-block p-2 badge-subtle-success">Present<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>
+                          </td>
+                      </tr>
+                  @endforeach
+
+
+
+
                       
                       <td class="align-middle white-space-nowrap py-2 text-end">
                         <div class="dropdown font-sans-serif position-static"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button" id="customer-dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs-10"></span></button>

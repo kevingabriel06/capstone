@@ -79,7 +79,7 @@
                     <form method="POST" action="{{route("login.post")}}">
                       @csrf 
 
-                      <div class="mb-3"><label class="form-label" for="split-login-username">Student ID</label><input class="form-control" id="split-login-username" type="text" name="name" />
+                      <div class="mb-3"><label class="form-label" for="split-login-username">Student ID</label><input class="form-control" id="split-login-username" type="text" name="student_id" />
                         @if ($errors->has('student_id'))
                         <span class="text-danger">
                         {{$errors->first('student-id')}}</span>

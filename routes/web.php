@@ -3,11 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AttendanceController; 
-
-
-
-
+use App\Http\Controllers\AttendanceController;
+use App\Models\Attendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,9 +50,13 @@ Route::middleware("auth")->group(function(){
     //ATTENDANCE
 
         //INSERT
+            //Replace act id with token
+            Route::get('/attendance/qr-scanner/scan/{activity_id}', [AttendanceController::class, 'index'])->name('qr-scanner');
+
             //qr-code
-            Route::get('/attendance/qr-scanner', [AttendanceController::class, 'index'])->name('qr-scanner');
-            Route::post('/attendance/scan', [AttendanceController::class, 'store'])->name('attendance.scan');
+            Route::post('/attendance/scan/{activity_id}', [AttendanceController::class, 'store'])->name('attendance.scan');
+
+            Route::get('/attendance/list', [AttendanceController::class, 'show'])->name('list');
 
 });
 });
