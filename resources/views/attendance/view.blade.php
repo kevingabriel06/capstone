@@ -29,42 +29,49 @@
                       <th class="align-middle no-sort"></th>
                     </tr>
                   </thead>
+                  
                   <tbody class="list" id="table-customers-body">
                     <tr class="btn-reveal-trigger">
-                    @foreach ($attendances as $attendance)
+                    
+                    @foreach ($attendees as $attendee)
                       <tr>
-                          <td class="id-number align-middle white-space-nowrap py-2">
-                              <a href="customer-details.html">
-                                  <div class="d-flex align-items-center"> <!-- Removed duplicate "d-flex" class -->
-                                      <div class="flex-1">
-                                          {{-- Check if the user relationship exists and if the student_id is not null --}}
-                                          @if($attendance->user && $attendance->user->student_id === $attendance->student_id) <!-- Fixed variable name -->
-                                              {{-- Display the student_id of the associated user --}}
-                                              <h5 class="mb-0 fs-10">{{ $attendance->user->student_id }}</h5> <!-- Fixed variable name -->
-                                          @else
-                                              <h5 class="mb-0 fs-10">N/A</h5>
-                                          @endif
-                                      </div>
-                                  </div>
-                              </a>
-                          </td>
-                          <td class="name align-middle py-2">
-                              {{-- Check if the user relationship exists --}}
-                              {{ $attendance->user ? $attendance->user->name : 'N/A' }}
-                          </td>
-                          <td class="date align-middle py-2">
-                              {{-- Check if the activity relationship exists --}}
-                              {{ $attendance->activity ? $attendance->activity->start_date : 'N/A' }}
-                          </td>
-                          <td class="activity align-middle white-space-nowrap py-2">
-                              {{-- Check if the activity relationship exists --}}
-                              {{ $attendance->activity ? $attendance->activity->activity_name : 'N/A' }}
-                          </td>
-                          <td class="status align-middle white-space-wrap py-2">
-                              <span class="badge badge rounded-pill d-block p-2 badge-subtle-success">Present<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>
-                          </td>
+                        <td class="id-number align-middle white-space-nowrap py-2">
+                          <a href="customer-details.html">
+                            <div class="d-flex align-items-center">
+                              <div class="flex-1">
+                              
+                                
+                                @isset($attendee->user)
+                                  <h5 class="mb-0 fs-10">{{ $attendee->user->student_id }}</h5>
+                                @endif
+                              </div>
+                            </div>
+                          </a>
+                        </td>
+                        <td class="name align-middle py-2">
+                          {{-- Check if the user relationship exists --}}
+                          @isset($attendee->user)
+                            {{ $attendee->user->name }}
+                          @endif
+                        </td>
+                        <td class="date align-middle py-2">
+                          {{-- Check if the activity relationship exists --}}
+                          @isset($attendee->activity)
+                            {{ $attendee->activity->start_date }}
+                          @endif
+                        </td>
+                        <td class="activity align-middle white-space-nowrap py-2">
+                          {{-- Check if the activity relationship exists --}}
+                          @isset($attendee->activity)
+                            {{ $attendee->activity->activity_name }}
+                          @endif
+                        </td>
+                        <td class="status align-middle white-space-wrap py-2">
+                          <span class="badge badge rounded-pill d-block p-2 badge-subtle-success">Present<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>
+                        </td>
                       </tr>
-                  @endforeach
+                    @endforeach
+
 
 
 

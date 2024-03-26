@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Models\Activity;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 class Attendance extends Model
@@ -15,11 +16,13 @@ class Attendance extends Model
 
     protected $fillable = ['student_id', 'activity_id', 'time_in', 'time_out'];
 
-    public function users() {
-        return $this->belongsTo(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'student_id');
     }
 
-    public function activities() {
-        return $this->belongsTo(Activity::class);
+    public function activity()
+    {
+        return $this->belongsTo(Activity::class, 'activity_id');
     }
 }

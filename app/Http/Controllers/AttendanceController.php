@@ -51,9 +51,10 @@ class AttendanceController extends Controller
 
     public function show()
     {
-        $attendances = Attendance::with(['users', 'activities'])->get();
-
-        return view('attendance.view', compact('attendances'));
+        $attendees = Attendance::with(['user', 'activity'])->get();
+    
+        // dd($attendees);
+        return view('attendance.view', ['attendees' => $attendees]);
     }
 }
 
