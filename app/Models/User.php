@@ -48,6 +48,6 @@ class User extends Authenticatable
 
     public function attendances()
     {
-        return $this->hasMany(Attendance::class, 'student_id');
+        return $this->hasMany(Attendance::class, 'student_id', 'student_id');
     }
 }

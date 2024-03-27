@@ -80,39 +80,61 @@
 
                         <!-- upload photos -->
                         <div class="card-header">
-                            <h5 class="mb-1">Upload Photos</h5>
+                            <h5 class="mb-1">Upload Photo</h5>
                         </div>
-                        <div class="fallback">
-                            <input type="file" name="image" multiple="multiple" />
-                        </div>
-                        <div class="dz-message" data-dz-message="data-dz-message">
-                            <img class="me-2" src="{{ asset('assets/img/icons/cloud-upload.svg') }}" width="25" alt="" />
-                            Drop your files here
-                        </div>
-                        <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                            <div class="d-flex media align-items-center mb-3 pb-3 border-bottom btn-reveal-trigger">
-                                <img class="dz-image" src="{{ asset('assets/img/generic/image-file-2.png') }}" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
-                                <div class="flex-1 d-flex flex-between-center">
-                                    <div>
-                                        <h6 data-dz-name="data-dz-name"></h6>
-                                        <div class="d-flex align-items-center">
-                                            <p class="mb-0 fs-10 text-400 lh-1" data-dz-size="data-dz-size"></p>
-                                            <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown font-sans-serif">
-                                        <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="fas fa-ellipsis-h"></span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end border py-2">
-                                            <a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a>
-                                        </div>
-                                    </div>
+                        <div class="dropzone dropzone-single p-0" id="myDropzone" data-dropzone="data-dropzone" data-options='{"url":"{{ route("create.store") }}"}'>
+                            <div class="fallback">
+                                <input type="file" name="file" />
+                            </div>
+                            <div class="dz-preview dz-preview-single">
+                                <div class="dz-preview-cover dz-complete">
+                                    <img class="dz-preview-img" src="{{ asset('assets/img/generic/image-file-2.png') }}" alt="..." data-dz-thumbnail="" />
+                                    <a class="dz-remove text-danger" href="#!" data-dz-remove="data-dz-remove"><span class="fas fa-times"></span></a>
+                                    <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                                    <div class="dz-errormessage m-1"><span data-dz-errormessage="data-dz-errormessage"></span></div>
+                                </div>
+                                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
+                            </div>
+                            <div class="dz-message" data-dz-message="data-dz-message">
+                                <div class="dz-message-text">
+                                    <img class="me-2" src="{{ asset('assets/img/icons/cloud-upload.svg') }}" width="25" alt="" />Drop your file here
                                 </div>
                             </div>
                         </div>
 
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js"></script>
+                        <script>
+                            Dropzone.autoDiscover = false;
+                            $(document).ready(function () {
+                                var myDropzone = new Dropzone(".dropzone-single", {
+                                    acceptedFiles: 'image/*', // Allow only image files
+                                    addRemoveLinks: true,
+                                    dictRemoveFile: 'Remove File',
+                                    previewsContainer: ".dz-preview",
+                                    thumbnailWidth: 120,
+                                    thumbnailHeight: 120,
+                                    init: function () {
+                                        this.on("success", function (file, response) {
+                                            console.log(response); // Handle success response from server
+                                        });
+                                        this.on("removedfile", function (file) {
+                                            console.log(file); // Handle remove file event
+                                        });
+                                    }
+                                });
 
+                                // Customize remove file button
+                                $(".dz-remove").on("click", function (e) {
+                                    e.preventDefault();
+                                    var file = $(this).closest(".dz-preview");
+                                    myDropzone.removeFile(file.get(0));
+                                });
+                            });
+                        </script>
+
+                        
+
+                        <!--post privacy -->
                         <div class="border-bottom border-dashed my-3"></div>
                         <h6>Listing Privacy</h6>
                         <div class="mb-3 form-check"><input class="form-check-input" id="customRadio4" type="radio" name="listingPrivacy" checked="checked" /><label class="form-label mb-0" for="customRadio4"> <strong>Public</strong></label>

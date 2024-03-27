@@ -31,60 +31,50 @@
                   </thead>
                   
                   <tbody class="list" id="table-customers-body">
-                    <tr class="btn-reveal-trigger">
-                    
-                    @foreach ($attendees as $attendee)
-                      <tr>
+                  @foreach ($attendees as $attendee)  
+                    <tr class="btn-reveal-trigger"> 
                         <td class="id-number align-middle white-space-nowrap py-2">
-                          <a href="customer-details.html">
-                            <div class="d-flex align-items-center">
-                              <div class="flex-1">
-                              
-                                
-                                @isset($attendee->user)
-                                  <h5 class="mb-0 fs-10">{{ $attendee->user->student_id }}</h5>
-                                @endif
-                              </div>
-                            </div>
-                          </a>
+                            <a href="customer-details.html">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-1">
+                                        @isset($attendee->user)
+                                        <h5 class="mb-0 fs-10">{{ $attendee->user->student_id }}</h5>
+                                        @endisset
+                                    </div>
+                                </div>
+                            </a>
                         </td>
                         <td class="name align-middle py-2">
-                          {{-- Check if the user relationship exists --}}
-                          @isset($attendee->user)
+                            {{-- Check if the user relationship exists --}}
+                            @isset($attendee->user)
                             {{ $attendee->user->name }}
-                          @endif
+                            @endisset
                         </td>
                         <td class="date align-middle py-2">
-                          {{-- Check if the activity relationship exists --}}
-                          @isset($attendee->activity)
-                            {{ $attendee->activity->start_date }}
-                          @endif
+                            {{-- Check if the activity relationship exists --}}
+                            @isset($attendee->activity)
+                            {{ $attendee->activity->date_start }}
+                            @endisset
                         </td>
                         <td class="activity align-middle white-space-nowrap py-2">
-                          {{-- Check if the activity relationship exists --}}
-                          @isset($attendee->activity)
-                            {{ $attendee->activity->activity_name }}
-                          @endif
+                            {{-- Check if the activity relationship exists --}}
+                            @isset($attendee->activity)
+                            {{ $attendee->activity->title }}
+                            @endisset
                         </td>
                         <td class="status align-middle white-space-wrap py-2">
-                          <span class="badge badge rounded-pill d-block p-2 badge-subtle-success">Present<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>
+                            <span class="badge badge rounded-pill d-block p-2 badge-subtle-success">Present<span
+                                    class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>
                         </td>
-                      </tr>
-                    @endforeach
-
-
-
-
-
-                      
-                      <td class="align-middle white-space-nowrap py-2 text-end">
-                        <div class="dropdown font-sans-serif position-static"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button" id="customer-dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                          <div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="customer-dropdown-0">
-                            <div class="py-2"><a class="dropdown-item" href="#!">Edit</a></div>
+                        <td class="align-middle white-space-nowrap py-2 text-end">
+                          <div class="dropdown font-sans-serif position-static"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button" id="customer-dropdown-0" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs-10"></span></button>
+                            <div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="customer-dropdown-0">
+                              <div class="py-2"><a class="dropdown-item" href="#!">Edit</a></div>
+                            </div>
                           </div>
-                        </div>
-                      </td>
+                        </td>
                     </tr>
+                    @endforeach
                     
                     <tr class="btn-reveal-trigger">
                       <td class="id-number align-middle white-space-nowrap py-2"><a href="customer-details.html">
