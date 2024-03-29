@@ -50,7 +50,7 @@
                     // Add an event listener to the button
                     button.addEventListener('click', function() {
                         // Redirect to another page
-                        window.location.href = "{{ route('qr-scanner')}}";
+                        window.location.href = "{{ route('qr-scanner',  ['activity_id' => $activity_id] )}}";
                     });
                 </script>
                 

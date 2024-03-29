@@ -36,11 +36,17 @@
     <link href="{{ asset('assets/css/theme.min.css') }}" rel="stylesheet" id="style-default">
     <link href="{{ asset('assets/css/user-rtl.min.css') }}" rel="stylesheet" id="user-style-rtl">
     <link href="{{ asset('assets/css/user.min.css') }}" rel="stylesheet" id="user-style-default">
+    <link href="vendors/dropzone/dropzone.min.css" rel="stylesheet" />
+
+    <!-- Date and Time Picker -->
+    <link href="{{asset('vendors/flatpickr/flatpickr.min.css')}}" rel="stylesheet" />
+
 
     <!-- QR Scanner Script -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
     <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
 
 
     <script>
@@ -321,6 +327,10 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="{{ asset('vendors/list.js/list.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
+    <script src="vendors/dropzone/dropzone.min.js"></script>
+
+    <!-- script date and time picker -->
+    <script src="{{asset('assets/js/flatpickr.js')}}"></script>
 
   </body>
 

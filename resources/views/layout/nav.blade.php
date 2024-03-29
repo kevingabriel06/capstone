@@ -38,7 +38,7 @@
                     </div>
 
                     <!-- Attendance-->
-                    <a class="nav-link" href="attendance.blade.php" role="button">
+                    <a class="nav-link" href="{{route('list')}}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-calendar-alt"></span></span>
                             <span class="nav-link-text ps-1">Attendance</span>

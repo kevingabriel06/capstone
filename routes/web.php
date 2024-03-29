@@ -1,15 +1,10 @@
 <?php
 
-use App\Models\Activity;
-use App\Models\Attendance;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\QRCodeController;
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttendanceController;
-use App\Http\Controllers\ScannedDataController;
+use App\Models\Attendance;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +18,6 @@ use App\Http\Controllers\ScannedDataController;
 */
 
 //start
-
 // LOGIN
 Route::get('/', [UserController::class, 'login'])->name('login');
 Route::post('/', [UserController::class, 'loginPost'])->name('login.post');
@@ -33,9 +27,9 @@ Route::post('/', [UserController::class, 'loginPost'])->name('login.post');
 Route::middleware("auth")->group(function(){
 
     Route::prefix('/admin')->group(function(){
-    
+
     // ACTIVITY 
-    
+
         //CREATE
             Route::post('/create', [ActivityController::class, 'store'])->name('create.store');
             Route::get('/activity/create', [ActivityController::class, 'organizer'])->name('create');
@@ -45,24 +39,27 @@ Route::middleware("auth")->group(function(){
 
             //Replace act id with token
             Route::get('/activity/details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
-        
-            
-        
+
+
+
 
         Route::get('/capture-photo', function () {
             return view('capture-photo');
         });
 
     //ATTENDANCE
-        
+
         //INSERT
+            //Replace act id with token
+            Route::get('/attendance/qr-scanner/scan/{activity_id}', [AttendanceController::class, 'index'])->name('qr-scanner');
+
             //qr-code
-            Route::get('/attendance/qr-scanner', [AttendanceController::class, 'index'])->name('qr-scanner');
-            Route::post('/attendance/scan', [AttendanceController::class, 'store'])->name('attendance.scan');
+            Route::post('/attendance/scan/{activity_id}', [AttendanceController::class, 'store'])->name('attendance.scan');
+
+            Route::get('/attendance/list', [AttendanceController::class, 'show'])->name('list');
 
 });
 });
-
 
 
 
@@ -95,6 +92,3 @@ Route::get('/profile-settings', function () {
 
 
 // CAPTURE PHOTO
-
-
-
