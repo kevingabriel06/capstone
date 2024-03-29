@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use App\Models\Activity;
@@ -45,18 +46,20 @@ class ActivityController extends Controller
     //inserting data sa database sa create-activity na page
     public function store(Request $request)
     {
-        // try {
+       // try {
+       // try {
+    
             // Validate the incoming data
             $data = $request->validate([
                 'title' => 'required',
                 'date_start' => 'required|date',
                 'date_end' => 'required|date',
-                'start_time' => 'required',
-                'end_time' => 'required',
-                'registration_deadline' => 'nullable|date',
+                'start_time' => 'required',//|date_format:h:i A',
+                'end_time' => 'required',//|date_format:h:i A',
+                'registration_deadline' => 'nullable|date|date_format:Y-m-d',
                 'registration_fee' => 'nullable|numeric',
                 'description' => 'nullable',
-                'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:5000',
                 'department_name' => 'required|string|exists:departments,department_name',
                 // Add validation rules for other form fields
             ]);
@@ -64,17 +67,18 @@ class ActivityController extends Controller
             // Get the department ID based on the provided department name
             $departmentId = Department::where('department_name', $data['department_name'])->value('department_id');
     
-            // Handle image upload
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads'), $imageName);
-    
+            
+            $imageName = time() . '.' . $request->file('image')->extension();
+            $request->file('image')->move(public_path('uploads'), $imageName);
+            
+            
             // Create new Activity instance
             $newActivity = Activity::create([
                 'title' => $data['title'],
                 'date_start' => $data['date_start'],
                 'date_end' => $data['date_end'],
-                'start_time' => $data['start_time'],
-                'end_time' => $data['end_time'],
+                'start_time' =>  $data['start_time'],//$startTime24hr,
+                'end_time' =>  $data['end_time'],//$endTime24hr,
                 'registration_deadline' => $data['registration_deadline'],
                 'registration_fee' => $data['registration_fee'],
                 'description' => $data['description'],
@@ -85,7 +89,12 @@ class ActivityController extends Controller
             ]);
     
             return redirect(route('home'))->with('success', 'Activity is Successfully Added');
-
+    
+        // } catch (\Exception $e) {
+        //     // Handle exceptions
+        //     Log::error($e->getMessage());
+        //     return redirect()->back()->with('error', 'An error occurred. Please try again later.');
+        // }
         // } catch (ValidationException $e) {
         //     // Redirect back with validation errors
         //     return redirect()->back()->withErrors($e->errors())->withInput();
