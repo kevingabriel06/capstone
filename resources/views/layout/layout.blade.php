@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en-US" dir="ltr">
 
-  
+
 <!-- Mirrored from prium.github.io/falcon/v3.19.0/demo/navbar-vertical.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Nov 2023 06:21:15 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
@@ -78,7 +78,7 @@
             container.classList.add('container-fluid');
           }
         </script>
-        
+
         @include('layout.nav')
 
         <!-- header -->
@@ -292,7 +292,7 @@
                     <a class="dropdown-item" href="{{ url('profile-settings.blade.php') }}">Profile Settings</a>
                     <a class="dropdown-item" href="#!">Manage Admin</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../pages/authentication/card/logout.html">Logout</a>
+                    <a class="dropdown-item" href="{{route('admin.logout')}}">Logout</a>
                   </div>
                 </div>
               </li>
@@ -305,13 +305,13 @@
 
         </div>
 
-        
+
 
       </div>
     </div>
   </main><!-- =================--><!--    End of Main Content--><!-- =================-->
 
-    
+
 
     <!-- =============================================== -->
     <!-- JavaScripts -->

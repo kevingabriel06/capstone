@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\StudentController;//
+use App\Http\Controllers\OfficerController;//
 use App\Models\Attendance;
 
 /*
@@ -24,11 +26,11 @@ Route::post('/', [UserController::class, 'loginPost'])->name('login.post');
 
 
 
-Route::middleware("auth")->group(function(){
+Route::middleware('auth', 'role:admin')->group(function(){
 
     Route::prefix('/admin')->group(function(){
 
-    // ACTIVITY 
+    // ACTIVITY
 
         //CREATE
             Route::post('/create', [ActivityController::class, 'store'])->name('create.store');
@@ -36,6 +38,7 @@ Route::middleware("auth")->group(function(){
 
         //READ
             Route::get('/dashboard', [ActivityController::class, 'index'])->name('home'); //homepage
+            Route::get('/logout', [UserController::class, 'AdminLogout'])->name('admin.logout'); //logout
 
             //Replace act id with token
             Route::get('/activity/details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
@@ -92,3 +95,18 @@ Route::get('/profile-settings', function () {
 
 
 // CAPTURE PHOTO
+
+
+
+
+//Officer and Student Dashboards
+
+
+Route::middleware(['auth','role:student'])->group(function(){
+    Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.home'); //homepage
+    });
+
+
+    Route::middleware(['auth','role:officer'])->group(function(){
+        Route::get('/officer/dashboard', [OfficerController::class, 'index'])->name('officer.home'); //homepage
+        });
