@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card mb-3">
-            <img class="card-img-top" src="{{ asset($activity->image_path) }}" alt="">
+  <img class="card-img-top" src="{{ url($activity->image_path) }}" alt="">
 
             <div class="card-body">
               <div class="row justify-content-between align-items-center">
@@ -33,14 +33,37 @@
 
                     @if(isset($activity->title))
                     <span class="fs-9 text-warning fw-semi-bold">
-                      {{ $activity-> start_time }} - {{ $activity-> end_time }} 
+                      {{ \Carbon\Carbon::parse($activity->start_time)->format('h:i A') }} - 
+                      {{ \Carbon\Carbon::parse($activity->end_time)->format('h:i A') }}
                     </span>
                     @endif
                     </div>
                   </div>
                 </div>
 
-                <div class="col-md-auto mt-4 mt-md-0"><button class="btn btn-falcon-default btn-sm me-2" type="button"><span class="fas far fa-user text-danger me-1"></span>-0-</button><button class="btn btn-falcon-default btn-sm me-2" type="button"><span class="fas fa-share-alt me-1"></span>Share</button> <button class="btn btn-falcon-primary btn-sm px-4 px-sm-5" id="redirectButton"><span class="far fa-address-card me-1"></span>Scan QR</button>
+                @if(isset($activity->status) && $activity->status == 'Ongoing')
+                    <div class="col-md-auto mt-4 mt-md-0">
+                        <button class="btn btn-falcon-default btn-sm me-2" type="button">
+                            <span class="fas far fa-user text-danger me-1"></span>-0-
+                        </button>
+                        <button class="btn btn-falcon-default btn-sm me-2" type="button">
+                            <span class="fas fa-share-alt me-1"></span>Share
+                        </button>
+                        <button class="btn btn-falcon-primary btn-sm px-4 px-sm-5" id="redirectButton">
+                            <span class="far fa-address-card me-1"></span>Scan QR
+                        </button>
+                    </div>
+                @else
+                    <div class="col-md-auto mt-4 mt-md-0">
+                        <button class="btn btn-falcon-default btn-sm me-2" type="button">
+                            <span class="fas far fa-user text-danger me-1"></span>-0-
+                        </button>
+                        <button class="btn btn-falcon-default btn-sm me-2" type="button">
+                            <span class="fas fa-share-alt me-1"></span>Share
+                        </button>
+                    </div>
+                @endif
+
 
                 <!-- Script to handle button click -->
                 <script>
@@ -102,8 +125,9 @@
                                           @endforeach
                                           </strong>
                                         </p>
-                                        <p class="text-1000 mb-0">Time: {{ $activityUp->start_time }}</p>
-                                        <p class="text-1000 mb-0">Duration: {{ $activityUp->start_time }} - {{ $activityUp->end_time }}</p>Place: {{ $activityUp->location }}<div class="border-bottom border-dashed my-3"></div>
+                                        <p class="text-1000 mb-0">Time: {{ \Carbon\Carbon::parse($activityUp->start_time)->format('h:i A') }}</p>
+                                        <p class="text-1000 mb-0">Duration: {{ \Carbon\Carbon::parse($activityUp->start_time)->format('h:i A') }} - {{ \Carbon\Carbon::parse($activityUp->end_time)->format('h:i A') }}</p>
+                                        <div class="border-bottom border-dashed my-3"></div>
                                     </div>
                                 </div>
                             </div>

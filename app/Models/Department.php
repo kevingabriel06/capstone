@@ -15,4 +15,8 @@ class Department extends Model
 
     protected $primaryKey = 'department_id';
 
+    public function activities()
+    {
+        return $this->hasMany(Activity::class);
+    }
 }

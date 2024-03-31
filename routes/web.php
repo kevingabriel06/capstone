@@ -40,7 +40,13 @@ Route::middleware("auth")->group(function(){
             //Replace act id with token
             Route::get('/activity/details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
 
+        //EDIT
+            Route::get('/activity/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
+            Route::put('/activity/{activity}/update', [ActivityController::class, 'update'])->name('update');
 
+
+        //DELETE
+            Route::get('/activity/{activity_id}', [ActivityController::class, 'delete'])->name('delete');
 
 
         Route::get('/capture-photo', function () {

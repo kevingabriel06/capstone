@@ -81,7 +81,7 @@
                     </ul>
 
                     <!-- Community -->
-                    <a class="nav-link" href="{{ url('community.blade.php') }}" role="button">
+                    <a class="nav-link" href="{{ url('community') }}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-comments"></span></span>
                             <span class="nav-link-text ps-1">Community</span>
