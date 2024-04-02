@@ -397,7 +397,12 @@
 
           <!-- division -->
           <div class="row g-3">
+
+           
             <div class="col-lg-8">
+
+
+               {{-- this is create post div --}}
               <div class="card mb-3">
                 <div class="card-header bg-body-tertiary overflow-hidden">
                   <div class="d-flex align-items-center">
@@ -405,24 +410,78 @@
                       <img class="rounded-circle" src="../../assets/img/team/1.jpg" alt="" />
                     </div>
                     <div class="flex-1 ms-2">
-                      <h5 class="mb-0 fs-9">Create post</h5>
+                      <h5 class="mb-0 fs-9">New Entry</h5>
                     </div>
                   </div>
                 </div>
+
+
+                {{-- error handling code  --}}
+                <div>
+                  @if($errors->any())
+                  <ul>
+                    @foreach($errors->all() as $error)
+                      <li>{{$error}}</li>
+                    @endforeach
+                  </ul>
+                  @endif
+                </div>
+
                 <div class="card-body p-0">
-                  <form><textarea class="shadow-none form-control rounded-0 resize-none px-x1 border-y-0 border-200" placeholder="What do you want to talk about?" rows="4"></textarea>
-                    <div class="d-flex align-items-center ps-x1 border border-200"><label class="text-nowrap mb-0 me-2" for="hash-tags"><span class="fas fa-plus me-1 fs-11"></span><span class="fw-medium fs-10">Add hashtag</span></label><input class="form-control border-0 fs-10 shadow-none" id="hash-tags" type="text" placeholder="Help the right person to see" /></div>
+                  <form method="post" action="{{route("topics.store")}}" enctype="multipart/form-data" >
+                    @csrf
+                    @method('post')
+                    <textarea class="shadow-none form-control rounded-0 resize-none px-x1 border-y-0 border-200" 
+                              placeholder="Enter title" rows="1" name="title"></textarea>
+                    <div>
+                      <br>
+                    </div>
+                      
+
+                    <textarea class="shadow-none form-control rounded-0 resize-none px-x1 border-y-0 border-200" 
+                              placeholder="What do you want to talk about?" rows="4" name="description"></textarea>
+
+
+                    <div class="d-flex align-items-center ps-x1 border border-200">
+                      <label class="text-nowrap mb-0 me-2" for="hash-tags">
+                        <span class="fas fa-plus me-1 fs-11"></span>
+                        <span class="fw-medium fs-10">Category</span>
+                      </label>
+                        <input class="form-control border-0 fs-10 shadow-none" name="category" 
+                              type="text" placeholder="Help the right person to see" />
+                    </div>
+
+
+
                     <div class="row g-0 justify-content-between mt-3 px-x1 pb-3">
-                      <div class="col"><button class="btn btn-tertiary btn-sm rounded-pill shadow-none d-inline-flex align-items-center fs-10 mb-0 me-1" type="button"><img class="cursor-pointer" src="../../assets/img/icons/spot-illustrations/image.svg" width="17" alt="" /><span class="ms-2 d-none d-md-inline-block">Image</span></button><button class="btn btn-tertiary btn-sm rounded-pill shadow-none d-inline-flex align-items-center fs-10 me-1" type="button"><img class="cursor-pointer" src="../../assets/img/icons/spot-illustrations/calendar.svg" width="17" alt="" /><span class="ms-2 d-none d-md-inline-block">Event</span></button></div>
+                      <div class="col">
+                        <button class="btn btn-tertiary btn-sm rounded-pill shadow-none d-inline-flex align-items-center fs-10 mb-0 me-1" type="button">
+                          <img class="cursor-pointer" src="../../assets/img/icons/spot-illustrations/image.svg" width="17" alt="" />
+                          <span class="ms-2 d-none d-md-inline-block"><div class="fallback">
+                            <input id="fileInput" type="file" name="image" multiple />
+                        </div></span></button>
+                        
+                        <button class="btn btn-tertiary btn-sm rounded-pill shadow-none d-inline-flex align-items-center fs-10 me-1" type="button">
+                        <img class="cursor-pointer" src="../../assets/img/icons/spot-illustrations/calendar.svg" width="17" alt="" />
+                        <span class="ms-2 d-none d-md-inline-block">Event</span></button>
+                      </div>
                       <div class="col-auto">
                         <div class="dropdown d-inline-block me-1"><button class="btn btn-sm dropdown-toggle px-1" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-globe-americas"></span></button>
                           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Public</a><a class="dropdown-item" href="#">Private</a><a class="dropdown-item" href="#">Draft</a></div>
                         </div><button class="btn btn-primary btn-sm px-4 px-sm-5" type="submit">Share</button>
                       </div>
                     </div>
+
+
+
                   </form>
                 </div>
               </div>
+              {{-- end of create post div --}}
+
+
+              {{-- start of normal post --}}
+              @foreach($topics as $topic)
               <div class="card mb-3">
                 <div class="card-header bg-body-tertiary">
                   <div class="row justify-content-between">
@@ -431,31 +490,46 @@
                         <div class="avatar avatar-2xl status-online">
                           <img class="rounded-circle" src="../../assets/img/team/4.jpg" alt="" />
                         </div>
+
+
                         <div class="flex-1 align-self-center ms-2">
-                          <p class="mb-1 lh-1"><a class="fw-semi-bold" href="../../pages/user/profile.html">Rowan Atkinson</a> shared an <a href="#!">album</a></p>
-                          <p class="mb-0 fs-10">11 hrs &bull; Consett, UK &bull; <span class="fas fa-globe-americas"></span></p>
+
+                          {{-- change elements depends on who created the post --}}
+                          <p class="mb-1 lh-1"><a class="fw-semi-bold" href="../../pages/user/profile.html">Username</a> shared a <a href="#!">post</a></p>
+                          <p class="mb-0 fs-10">11 hrs timestamp &bull; department/organization &bull; <span class="fas fa-globe-americas"></span></p>
                         </div>
                       </div>
+
+
                     </div>
-                    <div class="col-auto">
-                      <div class="dropdown font-sans-serif btn-reveal-trigger"><button class="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal" type="button" id="post-album-action" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs-10"></span></button>
-                        <div class="dropdown-menu dropdown-menu-end py-3" aria-labelledby="post-album-action"><a class="dropdown-item" href="#!">View</a><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item" href="#!">Report</a>
-                          <div class="dropdown-divider"></div><a class="dropdown-item text-warning" href="#!">Archive</a><a class="dropdown-item text-danger" href="#!">Delete </a>
-                        </div>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
+
+                {{-- start of title and description --}}
                 <div class="card-body overflow-hidden">
-                  <p>Rowan Sebastian Atkinson CBE is an English actor, comedian and screenwriter best known for his work on the sitcoms Blackadder and Mr. Bean.</p>
+                  <h5>{{$topic->title}}</h5>
+                  <p>{{$topic->description}}</p>
+                  <h6>{{$topic->category}}</h6>
                   <div class="row mx-n1">
-                    <div class="col-6 p-1"><a href="../../assets/img/generic/4.jpg" data-gallery="gallery-1"><img class="img-fluid rounded" src="../../assets/img/generic/4.jpg" alt="" /></a></div>
+                    
+
+
+                    <div><a href="{{ asset($topic->image_path) }}" target="_blank" data-gallery="gallery-1"><img class="card-img-top" src="{{ asset($topic->image_path) }}" alt=""></a></div>
+
+                    {{-- FOR MULTIPLE FILES --}}
+                    {{--
+                    <div class="col-6 p-1"><a href="../../assets/img/generic/4.jpg" data-gallery="gallery-1"><img class="card-img-top" src="{{ asset($topic->image_path) }}" alt=""></a></div>  
                     <div class="col-6 p-1"><a href="../../assets/img/generic/5.jpg" data-gallery="gallery-1"><img class="img-fluid rounded" src="../../assets/img/generic/5.jpg" alt="" /></a></div>
                     <div class="col-4 p-1"><a href="../../assets/img/gallery/4.jpg" data-gallery="gallery-1"><img class="img-fluid rounded" src="../../assets/img/gallery/4.jpg" alt="" /></a></div>
                     <div class="col-4 p-1"><a href="../../assets/img/gallery/5.jpg" data-gallery="gallery-1"><img class="img-fluid rounded" src="../../assets/img/gallery/5.jpg" alt="" /></a></div>
-                    <div class="col-4 p-1"><a href="../../assets/img/gallery/3.jpg" data-gallery="gallery-1"><img class="img-fluid rounded" src="../../assets/img/gallery/3.jpg" alt="" /></a></div>
+                    <div class="col-4 p-1"><a href="../../assets/img/gallery/3.jpg" data-gallery="gallery-1"><img class="img-fluid rounded" src="../../assets/img/gallery/3.jpg" alt="" /></a></div> --}}
+
+
                   </div>
                 </div>
+
+                {{-- start of comment section --}}
                 <div class="card-footer bg-body-tertiary pt-0">
                   <div class="border-bottom border-200 fs-10 py-3"><a class="text-700" href="#!">345 Likes</a> &bull; <a class="text-700" href="#!">34 Comments</a></div>
                   <div class="row g-0 fw-semi-bold text-center py-2 fs-10">
@@ -488,7 +562,12 @@
                   </div><a class="fs-10 text-700 d-inline-block mt-2" href="#!">Load more comments (2 of 34)</a>
                 </div>
               </div>
+              @endforeach
+
+              {{-- end of normal post --}}
              
+
+              {{-- start of event post --}}
               <div class="card mb-3"><img class="card-img-top" src="../../assets/img/generic/13.jpg" alt="" />
                 <div class="card-body overflow-hidden">
                   <div class="row justify-content-between align-items-center">
@@ -517,14 +596,16 @@
                   </form>
                 </div>
               </div>
+              {{-- end of event post --}}
 
             </div>
+            {{-- end of whole post reflection --}}
 
 
             <div class="col-lg-4">
               <div class="card mb-3 mb-lg-0">
                 <div class="card-header bg-body-tertiary">
-                  <h5 class="mb-0">You may interested</h5>
+                  <h5 class="mb-0">You may be interested</h5>
                 </div>
                 <div class="card-body fs-10">
                   <div class="d-flex btn-reveal-trigger">

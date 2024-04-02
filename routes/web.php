@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\TopicController;
 use App\Models\Attendance;
 
 /*
@@ -79,9 +80,13 @@ Route::get('/fines', function () {
 });
 
 // COMMUNITY
-Route::get('/community', function () {
-    return view('community');
-});
+
+Route::get('/community', [TopicController::class, 'index'])->name('topics.index');
+Route::post('/community', [TopicController::class, 'store'])->name('topics.store');
+
+
+
+
 
 // PROFILE SETTINGS
 Route::get('/profile-settings', function () {

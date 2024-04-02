@@ -48,7 +48,8 @@ class ActivityController extends Controller
     {
        // try {
        // try {
-    
+            // dd($request->all());
+
             // Validate the incoming data
             $data = $request->validate([
                 'title' => 'required',
@@ -87,7 +88,7 @@ class ActivityController extends Controller
                 'image_path' => 'uploads/' . $imageName,
                 // Add other fields from the form as needed
             ]);
-    
+            
             return redirect(route('home'))->with('success', 'Activity is Successfully Added');
     
         // } catch (\Exception $e) {
@@ -116,7 +117,12 @@ class ActivityController extends Controller
             $department = Department::findOrFail($activity->department_id);
             $departments = Department::all();
             
-            return view('activity.show', ['activity' => $activity, 'department' => $department, 'activity_id' => $activity_id, 'activities' => $activities, 'departments' => $departments]);
+            return view('activity.show', [
+                'activity' => $activity, 
+                'department' => $department, 
+                'activity_id' => $activity_id, 
+                'activities' => $activities, 
+                'departments' => $departments]);
         // } catch (ModelNotFoundException $e) {
         //     // Handle model not found errors
         //     return view('error', ['error_message' => 'Activity or Department not found.']);
