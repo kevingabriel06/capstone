@@ -16,11 +16,25 @@
                     <h4 class="mb-1 font-sans-serif"><span class="text-700 mx-2" data-countup='{"endValue":"324"}'>0</span><span class="fw-normal text-600">Admins</span></h4>
                     <p class="fs-10 fw-semi-bold mb-0">301 <span class="text-600 fw-normal">last month</span></p>
                     </div>
+
+                    <!-- activity -->
                     <div class="col-xxl-3 col-md-6 px-3 text-center border-end-md border-bottom border-bottom-md-0 pb-3 pt-4 p-xxl-0 pb-md-0 ps-md-0">
-                    <div class="icon-circle icon-circle-success"><span class="fs-7 fas fa-book-open text-success"></span></div>
-                    <h4 class="mb-1 font-sans-serif"><span class="text-700 mx-2" data-countup='{"endValue":"3712"}'>0</span><span class="fw-normal text-600">Activity</span></h4>
-                    <p class="fs-10 fw-semi-bold mb-0">2779 <span class="text-600 fw-normal">last month</span></p>
+                        <div class="icon-circle icon-circle-success">
+                            <span class="fs-7 fas fa-book-open text-success"></span>
+                        </div>
+                        <h4 class="mb-1 font-sans-serif">
+                            <span class="text-700 mx-2" data-countup='{"endValue":"{{ $activityCountThisMonth }}"}'>
+                                {{ $activityCountThisMonth }}
+                            </span>
+                            <span class="fw-normal text-600">Activity</span>
+                        </h4>
+                        <p class="fs-10 fw-semi-bold mb-0">
+                            {{ $activityCountLastMonth }}
+                            <span class="text-600 fw-normal">last month</span>
+                        </p>
                     </div>
+
+
                     <div class="col-xxl-3 col-md-6 px-3 text-center pt-4 p-xxl-0 pb-0 pe-md-0">
                     <div class="icon-circle icon-circle-warning"><span class="fs-7 fas fa-dollar-sign text-warning"></span></div>
                     <h4 class="mb-1 font-sans-serif"><span class="text-700 mx-2" data-countup='{"endValue":"1054"}'>0</span><span class="fw-normal text-600">Fines</span></h4>
@@ -30,7 +44,7 @@
                 </div>
             </div>
 
-            <!-- profile updates -->
+            <!-- list of activities -->
           <div class="card mb-3">
             <div class="card-header">
               <div class="row align-items-center">
@@ -74,15 +88,15 @@
                                       <span class="text-500 far fa-eye"></span>
                                   </a>
                               @else
-                                  <button class="btn btn-link p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                      <span class="text-500 fas fa-edit"></span>
-                                  </button>
-                                  <a href="{{ route('activity-details', ['activity_id' => $activity->activity_id]) }}" class="btn btn-link p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                      <span class="text-500 far fa-eye"></span>
-                                  </a>
-                                  <button class="btn btn-link p-0 ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                      <span class="text-500 fas fa-trash-alt"></span>
-                                  </button>
+                                <a href="{{ route('edit', ['activity' => $activity]) }}" class="btn btn-link p-0 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                <span class="text-500 fas fa-edit"></span>
+                                </a>
+                                <a href="{{ route('activity-details', ['activity_id' => $activity->activity_id]) }}" class="btn btn-link p-0" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                    <span class="text-500 far fa-eye"></span>
+                                </a>
+                                <a href="{{ route('delete', ['activity_id' => $activity->activity_id]) }}" class="btn btn-link p-0 ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                <span class="text-500 fas fa-trash-alt"></span>
+                                </a>
                               @endif
 
                               </div>
