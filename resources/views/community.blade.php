@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
-    <title>AFMAMS | Dashboard </title>
+    <title>AFMAMS | Community </title>
 
     <!-- =============================================== -->
     <!-- Favicons -->
@@ -107,7 +107,7 @@
                     </div>
 
                     <!-- Attendance-->
-                    <a class="nav-link" href="attendance.blade.php" role="button">
+                    <a class="nav-link" href="{{route('list')}}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-calendar-alt"></span></span>
                             <span class="nav-link-text ps-1">Attendance</span>
@@ -132,7 +132,7 @@
                     <ul class="nav collapse" id="email">
                     <!-- Create an Activity Bar  -->
                         <li class="nav-item">
-                        <a class="nav-link" href="{{ url('create-activity.blade.php') }}">
+                        <a class="nav-link" href="{{ route('create') }}">
                                 <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Create an Activity</span></div>
                             </a>
                         </li>
@@ -150,7 +150,7 @@
                     </ul>
 
                     <!-- Community -->
-                    <a class="nav-link" href="{{ url('community.blade.php') }}" role="button">
+                    <a class="nav-link" href="{{route('topics.index')}}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-comments"></span></span>
                             <span class="nav-link-text ps-1">Community</span>
@@ -388,7 +388,7 @@
                     <a class="dropdown-item" href="{{ url('profile-settings.blade.php') }}">Profile Settings</a>
                     <a class="dropdown-item" href="#!">Manage Admin</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="../pages/authentication/card/logout.html">Logout</a>
+                    <a class="dropdown-item" href="{{route('admin.logout')}}">Logout</a>
                   </div>
                 </div>
               </li>
@@ -515,7 +515,7 @@
                     
 
 
-                    <div><a href="{{ asset($topic->image_path) }}" target="_blank" data-gallery="gallery-1"><img class="card-img-top" src="{{ asset($topic->image_path) }}" alt=""></a></div>
+                    <div><a href="../../assets/img/generic/4.jpg" data-gallery="gallery-1"><img class="card-img-top" src="{{ asset($topic->image_path) }}" alt=""></a></div>
 
                     {{-- FOR MULTIPLE FILES --}}
                     {{--
@@ -605,19 +605,36 @@
             <div class="col-lg-4">
               <div class="card mb-3 mb-lg-0">
                 <div class="card-header bg-body-tertiary">
-                  <h5 class="mb-0">You may be interested</h5>
+                  <h5 class="mb-0">Latest Added Events</h5>
                 </div>
                 <div class="card-body fs-10">
+
+                  @foreach($activities as $activity)
                   <div class="d-flex btn-reveal-trigger">
-                    <div class="calendar"><span class="calendar-month">Feb</span><span class="calendar-day">21</span></div>
+
+                  @php
+                    $date= new DateTime($activity->date_start) 
+                  @endphp                  
+                  @php
+                  $startTime = new DateTime($activity->start_time)
+                  @endphp
+                  @php
+                  $endTime = new DateTime($activity->end_time)
+                  @endphp
+                    <div class="calendar"><span class="calendar-month">{{$date->format('M')}}</span><span class="calendar-day">{{$date->format('d')}}</span></div>
                     <div class="flex-1 position-relative ps-3">
-                      <h6 class="fs-9 mb-0"><a href="../events/event-detail.html">Newmarket Nights</a></h6>
-                      <p class="mb-1">Organized by <a href="#!" class="text-700">University of Oxford</a></p>
-                      <p class="text-1000 mb-0">Time: 6:00AM</p>
-                      <p class="text-1000 mb-0">Duration: 6:00AM - 5:00PM</p>Place: Cambridge Boat Club, Cambridge<div class="border-bottom border-dashed my-3"></div>
+                      <h6 class="fs-9 mb-0"><a href="../events/event-detail.html">{{$activity->title}}</a></h6>
+                      <p class="mb-1">{{$activity->description}}<a href="#!" class="text-700"></a></p>
+                      <p class="text-1000 mb-0">Time: {{$startTime->format('H:i')}}</p>
+                      <p class="text-1000 mb-0">Duration: {{$startTime->format('H:i')}} - {{$endTime->format('H:i')}}</p>
+                      <div class="border-bottom border-dashed my-3"></div>
                     </div>
                   </div>
-                  <div class="d-flex btn-reveal-trigger">
+                  @if ($loop->iteration == 3) {{-- Limiting to 5 iterations --}}
+                     @break
+                     @endif
+                  @endforeach
+                  {{-- <div class="d-flex btn-reveal-trigger">
                     <div class="calendar"><span class="calendar-month">Dec</span><span class="calendar-day">31</span></div>
                     <div class="flex-1 position-relative ps-3">
                       <h6 class="fs-9 mb-0"><a href="../events/event-detail.html">31st Night Celebration</a></h6>
@@ -634,9 +651,9 @@
                       <p class="text-1000 mb-0">Time: 9:00AM</p>
                       <p class="text-1000 mb-0">Location: Cambridge Masonic Hall Association</p>Place: Porter Square, North Cambridge
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
-                <div class="card-footer bg-body-tertiary p-0 border-top"><a class="btn btn-link d-block w-100" href="../events/event-list.html">All Events<span class="fas fa-chevron-right ms-1 fs-11"></span></a></div>
+                <div class="card-footer bg-body-tertiary p-0 border-top"><a class="btn btn-link d-block w-100" href="{{route('home')}}">All Events<span class="fas fa-chevron-right ms-1 fs-11"></span></a></div>
               </div>
             </div>
           </div>

@@ -10,6 +10,7 @@ class Activity extends Model
 {
     use HasFactory;
     protected $fillable = [
+        "activity_id",
         "title",
         "date_start",
         "date_end",
@@ -30,4 +31,10 @@ class Activity extends Model
     {
         return $this->hasMany(Attendance::class, 'activity_id');
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    
 }

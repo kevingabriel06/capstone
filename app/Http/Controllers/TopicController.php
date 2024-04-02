@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Topic;
+use App\Models\Activity;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+
 
 class TopicController extends Controller
 {
@@ -14,8 +16,9 @@ class TopicController extends Controller
 
     public function index(){
 
+        $activities = Activity::all()->sortByDesc('id');
         $topics = Topic::all()->sortByDesc('id'); 
-        return view('/community', ['topics' => $topics]);
+        return view('/community', ['topics' => $topics, 'activities' => $activities]);
         
     }
 

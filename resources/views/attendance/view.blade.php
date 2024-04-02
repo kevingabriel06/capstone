@@ -41,6 +41,7 @@
                             </tr>
                         </thead>
                         <tbody class="list" id="table-customers-body">
+                        
                         @foreach ($attendees as $attendee)  
                             <tr class="btn-reveal-trigger"> 
                                 <td class="id-number align-middle white-space-wrap py-2">
