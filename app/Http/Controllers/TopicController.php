@@ -16,7 +16,7 @@ class TopicController extends Controller
 
     public function index(){
 
-        $activities = Activity::all()->sortByDesc('id');
+        $activities = Activity::all()->sortByDesc('activity_id');
         $topics = Topic::all()->sortByDesc('id'); 
         return view('/community', ['topics' => $topics, 'activities' => $activities]);
         

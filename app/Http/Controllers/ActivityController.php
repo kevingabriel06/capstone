@@ -126,11 +126,11 @@ class ActivityController extends Controller
     public function show($activity_id)
     {
         $activity = Activity::findOrFail($activity_id);
-        $activities = Activity::all()->sortByDesc('activity_id');
+        $activities = Activity::all()->sortByDesc('actvity_id');
         $department = Department::findOrFail($activity->department_id);
         $departments = Department::all();
         
-        return view('activity.show', ['activity' => $activity, 'department' => $department, 'activity_id' => $activity_id, 'activities' => $activities, 'departments' => $departments], 'activities');
+        return view('activity.show', ['activity' => $activity, 'department' => $department, 'activity_id' => $activity_id, 'activities' => $activities, 'departments' => $departments]);
     }
     
     public function edit(Activity $activity)
