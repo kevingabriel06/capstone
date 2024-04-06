@@ -623,7 +623,11 @@
                   @endphp
                     <div class="calendar"><span class="calendar-month">{{$date->format('M')}}</span><span class="calendar-day">{{$date->format('d')}}</span></div>
                     <div class="flex-1 position-relative ps-3">
+<<<<<<< HEAD
                       <h6 class="fs-9 mb-0"><a href="{{ route('activity-details', ['activity_id' => $activity->activity_id]) }}">{{$activity->title}}</a></h6>
+=======
+                      <h6 class="fs-9 mb-0"><a href="../events/event-detail.html">{{$activity->title}}</a></h6>
+>>>>>>> c4c3b64afbd6579709f6957b95d1228b9c115976
                       <p class="mb-1">{{$activity->description}}<a href="#!" class="text-700"></a></p>
                       <p class="text-1000 mb-0">Time: {{$startTime->format('H:i')}}</p>
                       <p class="text-1000 mb-0">Duration: {{$startTime->format('H:i')}} - {{$endTime->format('H:i')}}</p>

@@ -81,7 +81,11 @@
                     </ul>
 
                     <!-- Community -->
+<<<<<<< HEAD
                     <a class="nav-link" href="{{route('topics.index')}}" role="button">
+=======
+                    <a class="nav-link" href="{{ route('topics.index')}}" role="button">
+>>>>>>> c4c3b64afbd6579709f6957b95d1228b9c115976
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-comments"></span></span>
                             <span class="nav-link-text ps-1">Community</span>

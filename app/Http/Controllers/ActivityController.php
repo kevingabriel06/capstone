@@ -61,6 +61,10 @@ class ActivityController extends Controller
     //inserting data sa database sa create-activity na page
     public function store(Request $request)
     {
+       // try {
+       // try {
+            // dd($request->all());
+
        try {
             // Validate the incoming data
             $data = $request->validate([
@@ -103,7 +107,7 @@ class ActivityController extends Controller
                 'image_path' => 'uploads/' . $imageName,
                 // Add other fields from the form as needed
             ]);
-    
+            
             return redirect(route('home'))->with('success', 'Activity is Successfully Added');
     
         } catch (ValidationException $e) {
@@ -122,7 +126,7 @@ class ActivityController extends Controller
     public function show($activity_id)
     {
         $activity = Activity::findOrFail($activity_id);
-        $activities = Activity::all();
+        $activities = Activity::all()->sortByDesc('actvity_id');
         $department = Department::findOrFail($activity->department_id);
         $departments = Department::all();
         

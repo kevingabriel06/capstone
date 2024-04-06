@@ -100,6 +100,10 @@ Route::get('/fines', function () {
     return view('fines');
 });
 
+// COMMUNITY
+Route::get('/community', function () {
+    return view('community');
+});
 
 // PROFILE SETTINGS
 Route::get('/profile-settings', function () {
