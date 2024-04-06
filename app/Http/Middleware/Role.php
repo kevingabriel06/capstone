@@ -18,7 +18,7 @@ class Role
 
     {
         if($request->user()->user_role !== $role ) {
-            return redirect('admin/dashboard');
+            return redirect('/');
         }
         return $next($request);
     }

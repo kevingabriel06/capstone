@@ -14,7 +14,7 @@ class Attendance extends Model
 
     protected $guarded = ['updated_at', 'created_at'];
 
-    protected $fillable = ['student_id', 'activity_id', 'time_in', 'time_out'];
+    protected $fillable = ['student_id', 'activity_id', 'time_in', 'time_out', 'photo_path'];
 
     protected $primaryKey = 'attendance_id';
 

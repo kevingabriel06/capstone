@@ -72,25 +72,12 @@
                                     {{ $attendee->activity->title }}
                                     @endisset
                                 </td>
-                                <td class="status align-middle white-space-wrap py-2">
-                                  @php
-                                      // Convert date and time strings to DateTime objects for comparison
-                                      $activityStartTime = new DateTime($attendee->activity->start_time);
-                                      $timeIn = new DateTime($attendee->time_in);
-                                      
-                                      // Calculate the difference in minutes
-                                      $diff = $activityStartTime->diff($timeIn);
-                                      $minutesDiff = $diff->format('%i');
-                                      
-                                      // Check if the difference is within 15 minutes
-                                      if ($minutesDiff >= -15 && $minutesDiff <= 15) {
-                                          // Present
-                                          echo '<span class="badge badge rounded-pill d-block p-2 badge-subtle-success">Present<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>';
-                                      } else {
-                                          // Absent
-                                          echo '<span class="badge badge rounded-pill d-block p-2 badge-subtle-warning">Absent<span class="ms-1 fas fa-times" data-fa-transform="shrink-2"></span></span>';
-                                      }
-                                  @endphp
+                                <td class="status align-middle white-space-wrap py-2">      
+                                    @if($attendee->attendance_status === 'Present')
+                                        <span class="badge badge rounded-pill d-block p-2 badge-subtle-success">Present<span class="ms-1 fas fa-check" data-fa-transform="shrink-2"></span></span>
+                                    @else
+                                        <span class="badge badge rounded-pill d-block p-2 badge-subtle-warning">Absent<span class="ms-1 fas fa-times" data-fa-transform="shrink-2"></span></span>
+                                    @endif
                               </td>
 
                                 <td class="align-middle white-space-nowrap py-2 text-end">

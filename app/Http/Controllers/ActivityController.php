@@ -18,7 +18,7 @@ class ActivityController extends Controller
     {
         try {
             // Get all activities
-            $activities = Activity::all();
+            $activities = Activity::all()->sortByDesc('activity_id');
         
             // Get the start and end dates for this month
             $startOfThisMonth = Carbon::now()->startOfMonth();

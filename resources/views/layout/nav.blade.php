@@ -81,7 +81,7 @@
                     </ul>
 
                     <!-- Community -->
-                    <a class="nav-link" href="{{ url('community') }}" role="button">
+                    <a class="nav-link" href="{{route('topics.index')}}" role="button">
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-comments"></span></span>
                             <span class="nav-link-text ps-1">Community</span>
