@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en-US" dir="ltr">
 
-  
+
 <!-- Mirrored from prium.github.io/falcon/v3.19.0/demo/navbar-vertical.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Nov 2023 06:21:15 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="csrf-token" content="{{csrf_token()}}"> {{-- j. added this for profile update  --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {{-- //also this --}}
 
     <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
     <title>AFMAMS | Dashboard </title>
@@ -84,7 +87,7 @@
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
             <div class="navbar-vertical-content scrollbar">
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
-                
+
                 <!-- Dashboard -->
                 <li class="nav-item">
                     <a class="nav-link" href="dashboard" role="button" aria-expanded="false" aria-controls="dashboard">
@@ -167,7 +170,7 @@
                 </li>
 
               </ul>
-              
+
             </div>
           </div>
         </nav>
@@ -418,13 +421,22 @@
                         <h5 class="mb-0">Profile Settings</h5>
                         </div>
                         <div class="card-body bg-body-tertiary">
-                        <form class="row g-3">
-                            <div class="col-lg-6"> <label class="form-label" for="first-name">First Name</label><input class="form-control" id="first-name" type="text" value="Anthony" /></div>
-                            <div class="col-lg-6"> <label class="form-label" for="last-name">Last Name</label><input class="form-control" id="last-name" type="text" value="Hopkins" /></div>
-                            <div class="col-lg-6"> <label class="form-label" for="program">Program</label><input class="form-control" id="program" type="text" value="BSIS" /></div>
-                            <div class="col-lg-6"> <label class="form-label" for="year-level">Year Level</label><input class="form-control" id="year-level" type="text" value="3rd Year" /></div>
-                            <div class="col-12 d-flex justify-content-end"><button class="btn btn-primary" type="submit">Update </button></div>
-                        </form>
+                            <form class="row g-3" method="POST" action="{{route('adminUpdateInfo')}}" id="adminInfoForm">
+                                @csrf
+                                <div class="col-lg-6"> <label class="form-label" for="first-name">First Name</label><input class="form-control" id="first-name" name="name" type="text" value="{{Auth::user()->name}}" />
+                                 <span class="text-danger error-text name_error"></span> {{--// --}} </div>
+
+                                <div class="col-lg-6"> <label class="form-label" for="last-name">Last Name</label><input class="form-control" id="last-name" type="text" name="lastName" value="Hopkins" />
+                                <span class="text-danger error-text lastName_error"></span> {{--// --}} </div>
+
+                                <div class="col-lg-6"> <label class="form-label" for="program">Program</label><input class="form-control" id="program" type="text" name="department" value="{{ Auth::user()->department }}" />
+                                <span class="text-danger error-text department_error"></span> {{--// --}} </div>
+
+                                <div class="col-lg-6"> <label class="form-label" for="year-level">Email</label><input class="form-control" id="email" type="email" name="email" value="{{Auth::user()->email}}" />
+                                <span class="text-danger error-text email_error"></span> {{--// --}} </div>
+
+                                <div class="col-12 d-flex justify-content-end"><button class="btn btn-primary" type="submit">Update </button></div>
+                            </form>
                         </div>
                     </div>
 
@@ -450,7 +462,7 @@
                             </div>
                             <div class="d-flex"><a href="#!"> <img class="img-fluid" src="../../assets/img/logos/g.png" alt="" width="56" /></a>
                                 <div class="flex-1 position-relative ps-3">
-                                <h6 class="fs-9 mb-0">JPCS-CCC<span data-bs-toggle="tooltip" data-bs-placement="top" title="Verified"><small class="fa fa-check-circle text-primary" data-fa-transform="shrink-4 down-2"></small></span></h6>
+                                <h6 class="fs-9 mb-0">{{ Auth::user()->organization->organization_name }}<span data-bs-toggle="tooltip" data-bs-placement="top" title="Verified"><small class="fa fa-check-circle text-primary" data-fa-transform="shrink-4 down-2"></small></span></h6>
                                 <p class="mb-1"> <a href="#!">Member</a></p>
                                 <p class="text-1000 mb-0">August 2021 - Present</p>
                                 <div class="border-bottom border-dashed my-3"></div>
@@ -470,26 +482,29 @@
                         <h5 class="mb-0">Change Password</h5>
                     </div>
                     <div class="card-body bg-body-tertiary">
-                        <form>
-                        <div class="mb-3"><label class="form-label" for="old-password">Old Password</label><input class="form-control" id="old-password" type="password" /></div>
-                        <div class="mb-3"><label class="form-label" for="new-password">New Password</label><input class="form-control" id="new-password" type="password" /></div>
-                        <div class="mb-3"><label class="form-label" for="confirm-password">Confirm Password</label><input class="form-control" id="confirm-password" type="password" /></div><button class="btn btn-primary d-block w-100" type="submit">Update Password </button>
-                        </form>
+                        <form action="{{route('changeAdminPassword')}}" method="POST" id="adminChangePasswordForm">
+                            <div class="mb-3"><label class="form-label" for="old-password">Old Password</label><input class="form-control" id="old-password" type="password" name="oldpassword" value="{{Auth::user()->password}}"/>
+                                <span class="text-danger error-text oldpassword_error"></span> {{--// --}} </div>
+                            <div class="mb-3"><label class="form-label" for="new-password">New Password</label><input class="form-control" id="new-password" type="password" name="newpassword"/>
+                                <span class="text-danger error-text newpassword_error"></span> {{--// --}}</div>
+                            <div class="mb-3"><label class="form-label" for="confirm-password">Confirm Password</label><input class="form-control" id="confirm-password" type="password" name="confirmpassword"/>
+                                <span class="text-danger error-text confirmpassword_error"></span> {{--// --}} </div><button class="btn btn-primary d-block w-100" type="submit">Update Password </button>
+                            </form>
                     </div>
                     </div>
-                    
+
                 </div>
                 </div>
             </div>
 
 
-          
-           
+
+
         </div>
       </div>
     </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
 
-    
+
 
     <!-- =============================================== -->
     <!-- JavaScripts -->
@@ -505,6 +520,96 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="{{ asset('vendors/list.js/list.min.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
+
+    {{-- this script is for profile update with ajax --}}
+
+    {{-- jQuery --}}
+
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="dist/js/adminlte.min.js"></script>
+
+
+
+    <script>
+
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(function() {
+
+            //j. update admin personal info
+            $('#adminInfoForm').on('submit',function(e){
+                e.preventDefault();
+
+                $.ajax({
+                    url:$(this).attr('action'),
+                    method:$(this).attr('method'),
+                    data:new FormData(this),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function(){
+                        $(document).find('span.error-text').text('');
+
+                    },
+                    success:function(data){
+                          if(data.status == 0) {
+                            $.each(data.error, function(prefix,val){
+                                $('span.'+prefix+'_error').text(val[0]);
+                          });
+
+                        } else {
+                            // $('#adminInfoForm')[0].reset();
+                            alert(data.msg);
+                        }
+                    }
+                });
+            });
+
+// codes for changepassword
+
+          $('#adminChangePasswordForm').on('submit',function(e){
+                e.preventDefault();
+
+                $.ajax({
+                    url:$(this).attr('action'),
+                    method:$(this).attr('method'),
+                    data:new FormData(this),
+                    processData:false,
+                    dataType:'json',
+                    contentType:false,
+                    beforeSend:function(){
+                        $(document).find('span.error-text').text('');
+
+                    },  success:function(data){
+                          if(data.status == 0) {
+                            $.each(data.error, function(prefix,val){
+                                $('span.'+prefix+'_error').text(val[0]);
+                          });
+
+                        } else {
+                            // $('#adminChangePasswordForm')[0].reset();
+                            alert(data.msg);
+                        }
+                    }
+                });
+            });
+
+
+
+
+
+        });
+
+
+
+
+        </script>   {{--profile update ends here---}}
+
 
   </body>
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\AdminController;//
 
 /*
 |--------------------------------------------------------------------------
@@ -43,12 +44,17 @@ Route::middleware('auth','role:admin')->group(function(){
             Route::get('/dashboard', [ActivityController::class, 'index'])->name('home'); //homepage
             Route::get('/logout', [UserController::class, 'AdminLogout'])->name('admin.logout'); //logout
 
+             // PROFILE SETTINGS
+            Route::get('/profile-settings',[AdminController::class, 'settings'])->name('profilesettings'); //
+
             //Replace act id with token
             Route::get('/activity/details/{activity_id}', [ActivityController::class, 'show'])->name('activity-details');
 
         //EDIT
             Route::get('/activity/{activity}/edit', [ActivityController::class, 'edit'])->name('edit');
             Route::put('/activity/{activity}/update', [ActivityController::class, 'update'])->name('update');
+            Route::post('update-profile',[AdminController::class,'updateInfo'])->name('adminUpdateInfo'); //j
+            Route::post('change-password',[AdminController::class,'changePassword'])->name('changeAdminPassword'); //j
 
 
         //DELETE
@@ -106,9 +112,9 @@ Route::get('/community', function () {
 });
 
 // PROFILE SETTINGS
-Route::get('/profile-settings', function () {
-    return view('profile-settings');
-});
+// Route::get('/profile-settings', function () {
+//     return view('profile-settings');
+// });
 
 // QR SCANNER
 

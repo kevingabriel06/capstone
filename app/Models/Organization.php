@@ -13,5 +13,6 @@ class Organization extends Model
         'organization_name',
     ];
 
-    
+    protected $primaryKey = 'organization_id'; //
+
 }
