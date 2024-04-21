@@ -289,6 +289,7 @@
                     <img class="rounded-circle" src="../assets/img/team/3-thumb.png" alt="user img" />
                   </div>
                 </a>
+                @if(auth()->user()->user_role === 'admin')
                 <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                   <div class="bg-white dark__bg-1000 rounded-2 py-2">
                     <a class="dropdown-item" href="{{ url('profile-settings.blade.php') }}">Profile Settings</a>
@@ -297,6 +298,15 @@
                     <a class="dropdown-item" href="{{route('admin.logout')}}">Logout</a>
                   </div>
                 </div>
+                @else
+                  <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
+                  <div class="bg-white dark__bg-1000 rounded-2 py-2">
+                    <a class="dropdown-item" href="{{ url('profile-settings.blade.php') }}">Profile Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{route('admin.logout')}}">Logout</a>
+                  </div>
+                </div>
+                @endif
               </li>
             </ul>
           </nav>

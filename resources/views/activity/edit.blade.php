@@ -23,7 +23,8 @@
             <h5 class="mb-0">Activity Details</h5>
         </div>
         <div class="card-body bg-body-tertiary">
-            <form method="post" id="form1" action="{{route('update', ['activity' => $activity]) }}" novalidate="novalidate" class="row g-3 needs-validation dropzone dropzone-multiple p-0" id="my-awesome-dropzone" data-dropzone="data-dropzone" enctype="multipart/form-data">
+            <form method="post" id="form1" action="{{Auth::user()->user_role === 'admin' ? route('update', ['activity' => $activity]) : (Auth::user()->user_role === 'officer' ? route('officer.update', ['activity' => $activity]) : null) }}
+" novalidate="novalidate" class="row g-3 needs-validation dropzone dropzone-multiple p-0" id="my-awesome-dropzone" data-dropzone="data-dropzone" enctype="multipart/form-data">
                 @csrf
                 @method('put')
                 <div class="row gx-2">
@@ -43,26 +44,13 @@
   
                     
                     <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="start-time">Start Time</label>
-                        <input class="form-control datetimepicker" id="start-time" type="text" placeholder="H:i " name="start_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->start_time }}" required=""/>
-                        @error('start_time')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-sm-6 mb-3">
                         <label class="form-label" for="end-date">End Date</label>
                         <input class="form-control datetimepicker" id="end-date" type="text" placeholder="yyyy-mm-dd" name="date_end" data-options='{"dateFormat":"Y-m-d","disableMobile":true}' value="{{ $activity->date_end }}" required=""/>
                         @error('date_end')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="end-time">End Time</label>
-                        <input class="form-control datetimepicker" id="end-time" type="text" placeholder="h:i " name="end_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->end_time }}" required=""/>
-                        @error('end_time')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
+
                     <div class="col-sm-6 mb-3">
                         <label class="form-label" for="registration-deadline">Registration Deadline</label>
                         <input class="form-control datetimepicker" id="registration-deadline" type="text" placeholder="yyyy-mm-dd" name="registration_deadline" data-options='{"dateFormat":"Y-m-d","disableMobile":true}' value="{{ $activity->registration_deadline }}" />
@@ -70,6 +58,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="col-sm-6 mb-3">
                         <label class="form-label" for="registration-fee">Registration Fee</label>
                         <input class="form-control" id="registration-fee" type="text" placeholder="₱ 00.00" name="registration_fee" value="{{ $activity->registration_fee }}"/>
@@ -77,23 +66,121 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="border-bottom border-dashed my-3"></div>
 
-                    <div class="col-sm-6 mb-3">
-                    <label class="form-label" for="specific-dept">Department</label>
-                    <select class="form-select" id="departmentSelect" name="department_name">
-                        <option value="defaultdep">Select Department</option>
-                        @foreach($departments as $department)
-                            <option value="{{$department->department_name}}" @if($activity->department_id == $department->department_id) selected @endif>
-                                {{$department->department_name}}
-                            </option>
-                        @endforeach
-                    </select>
+                    <!-- schedule details -->
+                    <div class="card-header">
+                        <h5 class="mb-1">Schedule Details</h5>
                     </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="am_in">Morning Time In <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="am_in" type="text" placeholder="H:i " name="am_in" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->am_in }}" required=""/>
+                        @error('am_in')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="am_out">Morning Time Out <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="am_out" type="text" placeholder="H:i " name="am_out" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->am_out }}" required=""/>
+                        @error('am_out')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="pm_in">Afternoon Time In <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="pm_in" type="text" placeholder="H:i " name="pm_in" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->pm_in }}" required=""/>
+                        @error('pm_in')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="pm_out">Afternoon Time Out <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="pm_out" type="text" placeholder="H:i " name="pm_out" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->pm_out }}" required=""/>
+                        @error('pm_out')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                   
+                   
+                    <div class="col-sm-6 mb-3" id="customFieldsAInC" style="display: none;">
+                        <label class="form-label" for="am_inC">Morning Time In Cut-off <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="am_inC" type="text" placeholder="H:i " name="am_in_cut" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->am_in_cut }}" required=""/>
+                        @error('am_inC')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3" id="customFieldsAOutC" style="display: none;">
+                        <label class="form-label" for="am_outC">Morning Time Out Cut-off<label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="am_outC" type="text" placeholder="H:i " name="am_out_cut" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->am_out_cut }}" required=""/>
+                        @error('am_outC')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3" id="customFieldsPInC" style="display: none;">
+                        <label class="form-label" for="pm_inC">Afternoon Time In Cut-off<label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="pm_inC" type="text" placeholder="H:i " name="pm_in_cut" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->pm_in_cut }}" required=""/>
+                        @error('pm_inC')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3" id="customFieldsPOutC" style="display: none;">
+                        <label class="form-label" for="pm_outC">Afternoon Time Out Cut-off <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="pm_outC" type="text" placeholder="H:i " name="pm_out_cut" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' value="{{ $activity->pm_out_cut }}" required=""/>
+                        @error('pm_outC')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+
+                    <button class="btn btn-falcon-default btn-sm me-2" type="button" id="showCustomFieldsBtn">
+                        <span class="far fa-clock text-danger me-1"></span>Edit Cut-Off Time
+                    </button>
+
+                    <div class="col-12">
+                        <br>
+                        <div class="form-text mt-0"><i> * Note: The default cut-off time for scheduling is 15 minutes, but it can be edited depending on the situation.</i></div>
+                    </div>
+
+                    <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        // Get the button and custom fields containers
+                        var showCustomFieldsBtn = document.getElementById("showCustomFieldsBtn");
+                        var customFieldsContainer1 = document.getElementById("customFieldsAInC");
+                        var customFieldsContainer2 = document.getElementById("customFieldsAOutC");
+                        var customFieldsContainer3 = document.getElementById("customFieldsPInC");
+                        var customFieldsContainer4 = document.getElementById("customFieldsPOutC");
+
+                        // Add event listener to the button
+                        showCustomFieldsBtn.addEventListener("click", function() {
+                            // Toggle the visibility of the custom fields containers
+                            if (customFieldsContainer1.style.display === "none") {
+                                customFieldsContainer1.style.display = "block";
+                                customFieldsContainer2.style.display = "block";
+                                customFieldsContainer3.style.display = "block";
+                                customFieldsContainer4.style.display = "block";
+                            } else {
+                                // customFieldsContainer1.style.display = "none";
+                                // customFieldsContainer2.style.display = "none";
+                                // customFieldsContainer3.style.display = "none";
+                                // customFieldsContainer4.style.display = "none";
+                            }
+                        });
+                    });
+                    </script>
+
 
                     <div class="col-12">
                         <div class="border-bottom border-dashed my-3"></div>
                     </div>
+
                     <div class="col-12">
                         <label class="form-label" for="description">Description</label>
                         <textarea class="form-control" id="description" name="description" rows="6" > {{ $activity->description }}</textarea>

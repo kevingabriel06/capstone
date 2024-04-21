@@ -12,6 +12,7 @@ class UserController extends Controller
 {
 
     public function loginPost(Request $request){
+
         $request->validate([
             'student_id' => ['required', 'min:3', 'max:8'],
             'password' => ['required', 'min:8', 'max:200']]);
@@ -19,11 +20,13 @@ class UserController extends Controller
 
         $credentials = $request->only("student_id", "password");
 
+        
+
         if (auth()->attempt($credentials)){
 
             $url = '';
 
-            if($request->user()->user_role== 'admin') { //added this code
+            if($request->user()->user_role === 'admin') { //added this code
 
             return redirect()->intended(route('home'))->with("success", "Admin Login Successful");
             }  else if($request->user()->user_role== 'officer') { //added this code

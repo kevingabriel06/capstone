@@ -13,7 +13,7 @@ class TopicController extends Controller
 
         $activities = Activity::all()->sortByDesc('activity_id');
         $topics = Topic::all()->sortByDesc('id'); 
-        return view('/community', ['topics' => $topics, 'activities' => $activities]);
+        return view('pages.community', ['topics' => $topics, 'activities' => $activities]);
         
     }
 
@@ -27,7 +27,7 @@ class TopicController extends Controller
             'title' => 'required|min:3|max:30',
             'description' => 'required|min:3|max:255', 
             'category' => 'required|min:3|max:30',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:5000',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:50000',
         ]);
         // FOR MULTPILE FILES = NOT YET FIGURED OUT
 

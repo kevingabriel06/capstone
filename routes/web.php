@@ -37,7 +37,7 @@ Route::middleware('auth','role:admin')->group(function(){
 
         //CREATE
             Route::post('/create', [ActivityController::class, 'store'])->name('create.store');
-            Route::get('/activity/create', [ActivityController::class, 'organizer'])->name('create');
+            Route::get('/activity/create', [ActivityController::class, 'activityIndex'])->name('create');
 
         //READ
             Route::get('/dashboard', [ActivityController::class, 'index'])->name('home'); //homepage
@@ -85,50 +85,64 @@ Route::middleware('auth','role:admin')->group(function(){
 
 
 
-// SIDEBAR
-Route::get('/sidebar', function () {
-    return view('navigation-bar');
-});
-
-// ATTENDANCE
-Route::get('/attendance', function () {
-    return view('attendance');
-});
-
-// FINES
-Route::get('/fines', function () {
-    return view('fines');
-});
-
-// COMMUNITY
-Route::get('/community', function () {
-    return view('community');
-});
-
-// PROFILE SETTINGS
-Route::get('/profile-settings', function () {
-    return view('profile-settings');
-});
-
-// QR SCANNER
-
-
-// CAPTURE PHOTO
-Route::get('/capture', function () {
-    return view('capture-photo');
-});
-
-
 
 //Officer and Student Dashboards
     Route::middleware(['auth','role:student'])->group(function(){
-    Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.home'); //homepage
-    });
-
-
-    Route::middleware(['auth','role:officer'])->group(function(){
-        Route::get('/officer/dashboard', [OfficerController::class, 'index'])->name('officer.home'); //homepage
+        Route::get('/student/home', [StudentController::class, 'index'])->name('student.home'); //homepage
         });
 
+        // OFFICER ROUTES
+        Route::middleware(['auth','role:officer'])->group(function(){
+            Route::prefix('/officer')->group(function(){
+                
+                // ACTIVITY
+        
+                // CREATE
+                Route::post('/create/{department_id}', [ActivityController::class, 'store'])->name('officer.create.store');
+                Route::get('/activity/create/{department_id}', [ActivityController::class, 'activityIndex'])->name('officer.create');
+        
+                // READ
+                Route::get('/dashboard', [ActivityController::class, 'index'])->name('officer.home'); // homepage
+                Route::get('/logout', [UserController::class, 'AdminLogout'])->name('officer.logout'); // logout
+        
+                // Replace act id with token
+                Route::get('/activity/details/{activity_id}', [ActivityController::class, 'show'])->name('officer.activity-details');
+        
+                // EDIT
+                Route::get('/activity/{activity}/edit', [ActivityController::class, 'edit'])->name('officer.edit');
+                Route::put('/activity/{activity}/update', [ActivityController::class, 'update'])->name('officer.update');
+        
+                // DELETE
+                Route::get('/activity/{activity_id}', [ActivityController::class, 'delete'])->name('officer.delete');
+        
+                Route::get('/capture-photo', function () {
+                    return view('capture-photo');
+                });
+        
+                // ATTENDANCE
+        
+                // INSERT
+                // Replace act id with token
+                Route::get('/attendance/qr-scanner/scan/{activity_id}', [AttendanceController::class, 'index'])->name('officer.qr-scanner');
+        
+                // qr-code
+                Route::post('/attendance/scan/{activity_id}', [AttendanceController::class, 'store'])->name('officer.attendance.scan');
+        
+                // capture-photo
+                Route::post('/attendance/capture', [AttendanceController::class, 'capture'])->name('officer.attendance.capture');
+                Route::get('/attendance/capture/{activity_id}', [AttendanceController::class, 'indexCap'])->name('officer.capture');
+        
+                // READ
+                Route::get('/attendance/list', [AttendanceController::class, 'show'])->name('officer.list');
+        
+                // COMMUNITY
+                Route::get('/community', [TopicController::class, 'index'])->name('officer.topics.index');
+                Route::post('/community', [TopicController::class, 'store'])->name('officer.topics.store');
+            
+            });
+        
+        });
+        
 
-    }); //for PreventBackHistoryRoute
+
+}); //for PreventBackHistoryRoute

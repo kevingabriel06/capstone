@@ -33,8 +33,8 @@
 
                     @if(isset($activity->title))
                     <span class="fs-9 text-warning fw-semi-bold">
-                      {{ \Carbon\Carbon::parse($activity->start_time)->format('h:i A') }} - 
-                      {{ \Carbon\Carbon::parse($activity->end_time)->format('h:i A') }}
+                      {{ \Carbon\Carbon::parse($activity->am_in)->format('h:i A') }} - 
+                      {{ \Carbon\Carbon::parse($activity->pm_out)->format('h:i A') }}
                     </span>
                     @endif
                     </div>
@@ -47,6 +47,9 @@
                             <span class="fas far fa-user text-danger me-1"></span>-0-
                         </button>
                         <button class="btn btn-falcon-default btn-sm me-2" type="button">
+                            <span class="fas far fa-user text-danger me-1"></span>Edit Schedules
+                        </button>
+                        <button class="btn btn-falcon-default btn-sm me-2" type="button">
                             <span class="fas fa-share-alt me-1"></span>Share
                         </button>
                         <button class="btn btn-falcon-primary btn-sm px-4 px-sm-5" id="redirectButton">
@@ -55,9 +58,6 @@
                     </div>
                 @else
                     <div class="col-md-auto mt-4 mt-md-0">
-                        <button class="btn btn-falcon-default btn-sm me-2" type="button">
-                            <span class="fas far fa-user text-danger me-1"></span>-0-
-                        </button>
                         <button class="btn btn-falcon-default btn-sm me-2" type="button">
                             <span class="fas fa-share-alt me-1"></span>Share
                         </button>
@@ -100,48 +100,44 @@
                   </div>
 
                   @if(isset($activities) && count($activities) > 0)
-                    @foreach($activities as $activityUp)
-                        @if($activityUp->status == 'Upcoming' && $activityUp->activity_id != $activity_id)
-                            <div class="card-body fs-10">
-                                <div class="d-flex btn-reveal-trigger">
-                                    <div class="calendar">
-                                      @if(isset($activityUp->date_start))
-                                          @php
-                                              $startDate = \Carbon\Carbon::parse($activityUp->date_start);
-                                          @endphp
-                                          <span class="calendar-month">{{ $startDate->format('M') }}</span>
-                                          <span class="calendar-day">{{ $startDate->format('d') }}</span>
-                                      @endif
-                                    </div>
+                      @foreach($activities as $activityUp)
+                          @if($activityUp->status == 'Upcoming' && $activityUp->activity_id != $activity_id)
+                              <div class="card-body fs-10">
+                                  <div class="d-flex btn-reveal-trigger">
+                                      <div class="calendar">
+                                          @if(isset($activityUp->date_start))
+                                              @php
+                                                  $startDate = \Carbon\Carbon::parse($activityUp->date_start);
+                                              @endphp
+                                              <span class="calendar-month">{{ $startDate->format('M') }}</span>
+                                              <span class="calendar-day">{{ $startDate->format('d') }}</span>
+                                          @endif
+                                      </div>
 
-                                    <div class="flex-1 position-relative ps-3">
-                                        <h6 class="fs-9 mb-0"><a href="event-detail.html">{{ $activityUp->title }}</a></h6>
-                                        <p class="mb-1">Organized by
-                                          <strong>
-                                          @foreach($departments as $departmentUp)
-                                            @if($activityUp->department_id == $departmentUp->department_id)
-                                              {{$departmentUp->department_name}}
-                                            @endif
-                                          @endforeach
-                                          </strong>
-                                        </p>
-                                        <p class="text-1000 mb-0">Time: {{ \Carbon\Carbon::parse($activityUp->start_time)->format('h:i A') }}</p>
-                                        <p class="text-1000 mb-0">Duration: {{ \Carbon\Carbon::parse($activityUp->start_time)->format('h:i A') }} - {{ \Carbon\Carbon::parse($activityUp->end_time)->format('h:i A') }}</p>
-                                        <div class="border-bottom border-dashed my-3"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endif
-                    @endforeach
-                @else
-                    <div class="card-body bg-body-tertiary text-center">
-                        <h6 class="mb-0">No upcoming activities found.</h6>
-                    </div>
-                @endif
-
-
-
-
+                                      <div class="flex-1 position-relative ps-3">
+                                          <h6 class="fs-9 mb-0"><a href="event-detail.html">{{ $activityUp->title }}</a></h6>
+                                          <p class="mb-1">Organized by
+                                              <strong>
+                                                  @foreach($departments as $departmentUp)
+                                                      @if($activityUp->department_id == $departmentUp->department_id)
+                                                          {{ $departmentUp->department_name }}
+                                                      @endif
+                                                  @endforeach
+                                              </strong>
+                                          </p>
+                                          <p class="text-1000 mb-0">Time: {{ \Carbon\Carbon::parse($activityUp->am_im)->format('h:i A') }}</p>
+                                          <p class="text-1000 mb-0">Duration: {{ \Carbon\Carbon::parse($activityUp->am_in)->format('h:i A') }} - {{ \Carbon\Carbon::parse($activityUp->pm_in)->format('h:i A') }}</p>
+                                          <div class="border-bottom border-dashed my-3"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                          @endif
+                      @endforeach
+                  @else
+                      <div class="card-body bg-body-tertiary text-center">
+                          <h6 class="mb-0">No upcoming activities found.</h6>
+                      </div>
+                  @endif
 
                 </div>
               </div>
