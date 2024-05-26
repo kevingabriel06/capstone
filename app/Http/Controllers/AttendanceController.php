@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
- 
+
     public function index($activity_id)
     {
         // Find the activity
@@ -46,16 +46,17 @@ class AttendanceController extends Controller
         // Save the image to a storage location (e.g., public storage)
         $imageName = date("Y.m.d") . " - " . date("h.i.sa") . ' .jpeg';
         file_put_contents(public_path('imgCapture/' . $imageName), $imageData);
-        
+
+
         // Retrieve student_id from the request
         $student_id = $request->input('student_id');
-        
+
         // Retrieve the existing attendance record for the student on the current activity
         $attendance = Attendance::where([
             'activity_id' => $activity_id,
             'student_id' => $student_id,
         ])->first();
-        
+
         if ($attendance) {
             // Attendance record exists
             if (!is_null($attendance->time_in) && $attendance->attendance_status == 'Absent' && $attendance->student_id == $student_id) {
@@ -75,13 +76,13 @@ class AttendanceController extends Controller
             ]);
             return redirect()->back()->with('success', 'Time in recorded successfully.');
         }
-        
-    } 
+
+    }
 
     public function show()
     {
         $attendees = Attendance::with(['user', 'activity'])->get();
-        
+
         return view('attendance.view', compact('attendees'));
     }
 
@@ -102,14 +103,14 @@ class AttendanceController extends Controller
             'photo_path' => 'imgCapture/' . $imageName,
             // Add other fields from the form as needed
         ]);
-        
+
 
         //Return a response indicating success
         return response()->json(['message' => 'Image saved successfully', 'photo_path' => $imageName]);
-        
+
     }
 
 }
 
-    
+
 

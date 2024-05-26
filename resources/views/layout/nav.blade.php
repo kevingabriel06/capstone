@@ -15,7 +15,7 @@
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
             <div class="navbar-vertical-content scrollbar">
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
-                
+
                 <!-- Dashboard -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('home')}}" role="button" aria-expanded="false" aria-controls="dashboard">
@@ -81,11 +81,7 @@
                     </ul>
 
                     <!-- Community -->
-<<<<<<< HEAD
-                    <a class="nav-link" href="{{route('topics.index')}}" role="button">
-=======
                     <a class="nav-link" href="{{ route('topics.index')}}" role="button">
->>>>>>> c4c3b64afbd6579709f6957b95d1228b9c115976
                         <div class="d-flex align-items-center"><span class="nav-link-icon">
                                 <span class="fas fa-comments"></span></span>
                             <span class="nav-link-text ps-1">Community</span>
@@ -102,7 +98,7 @@
                 </li>
 
               </ul>
-              
+
             </div>
           </div>
         </nav>

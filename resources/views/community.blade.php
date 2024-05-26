@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en-US" dir="ltr">
 
-  
+
 <!-- Mirrored from prium.github.io/falcon/v3.19.0/demo/navbar-vertical.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Nov 2023 06:21:15 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
@@ -84,7 +84,7 @@
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
             <div class="navbar-vertical-content scrollbar">
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
-                
+
                 <!-- Dashboard -->
                 <li class="nav-item">
                     <a class="nav-link" href="dashboard" role="button" aria-expanded="false" aria-controls="dashboard">
@@ -167,7 +167,7 @@
                 </li>
 
               </ul>
-              
+
             </div>
           </div>
         </nav>
@@ -398,7 +398,7 @@
           <!-- division -->
           <div class="row g-3">
 
-           
+
             <div class="col-lg-8">
 
 
@@ -431,14 +431,14 @@
                   <form method="post" action="{{route("topics.store")}}" enctype="multipart/form-data" >
                     @csrf
                     @method('post')
-                    <textarea class="shadow-none form-control rounded-0 resize-none px-x1 border-y-0 border-200" 
+                    <textarea class="shadow-none form-control rounded-0 resize-none px-x1 border-y-0 border-200"
                               placeholder="Enter title" rows="1" name="title"></textarea>
                     <div>
                       <br>
                     </div>
-                      
 
-                    <textarea class="shadow-none form-control rounded-0 resize-none px-x1 border-y-0 border-200" 
+
+                    <textarea class="shadow-none form-control rounded-0 resize-none px-x1 border-y-0 border-200"
                               placeholder="What do you want to talk about?" rows="4" name="description"></textarea>
 
 
@@ -447,7 +447,7 @@
                         <span class="fas fa-plus me-1 fs-11"></span>
                         <span class="fw-medium fs-10">Category</span>
                       </label>
-                        <input class="form-control border-0 fs-10 shadow-none" name="category" 
+                        <input class="form-control border-0 fs-10 shadow-none" name="category"
                               type="text" placeholder="Help the right person to see" />
                     </div>
 
@@ -460,7 +460,7 @@
                           <span class="ms-2 d-none d-md-inline-block"><div class="fallback">
                             <input id="fileInput" type="file" name="image" multiple />
                         </div></span></button>
-                        
+
                         <button class="btn btn-tertiary btn-sm rounded-pill shadow-none d-inline-flex align-items-center fs-10 me-1" type="button">
                         <img class="cursor-pointer" src="../../assets/img/icons/spot-illustrations/calendar.svg" width="17" alt="" />
                         <span class="ms-2 d-none d-md-inline-block">Event</span></button>
@@ -502,7 +502,7 @@
 
 
                     </div>
-                    
+
                   </div>
                 </div>
 
@@ -512,14 +512,14 @@
                   <p>{{$topic->description}}</p>
                   <h6>{{$topic->category}}</h6>
                   <div class="row mx-n1">
-                    
+
 
 
                     <div><a href="../../assets/img/generic/4.jpg" data-gallery="gallery-1"><img class="card-img-top" src="{{ asset($topic->image_path) }}" alt=""></a></div>
 
                     {{-- FOR MULTIPLE FILES --}}
                     {{--
-                    <div class="col-6 p-1"><a href="../../assets/img/generic/4.jpg" data-gallery="gallery-1"><img class="card-img-top" src="{{ asset($topic->image_path) }}" alt=""></a></div>  
+                    <div class="col-6 p-1"><a href="../../assets/img/generic/4.jpg" data-gallery="gallery-1"><img class="card-img-top" src="{{ asset($topic->image_path) }}" alt=""></a></div>
                     <div class="col-6 p-1"><a href="../../assets/img/generic/5.jpg" data-gallery="gallery-1"><img class="img-fluid rounded" src="../../assets/img/generic/5.jpg" alt="" /></a></div>
                     <div class="col-4 p-1"><a href="../../assets/img/gallery/4.jpg" data-gallery="gallery-1"><img class="img-fluid rounded" src="../../assets/img/gallery/4.jpg" alt="" /></a></div>
                     <div class="col-4 p-1"><a href="../../assets/img/gallery/5.jpg" data-gallery="gallery-1"><img class="img-fluid rounded" src="../../assets/img/gallery/5.jpg" alt="" /></a></div>
@@ -565,7 +565,7 @@
               @endforeach
 
               {{-- end of normal post --}}
-             
+
 
               {{-- start of event post --}}
               <div class="card mb-3"><img class="card-img-top" src="../../assets/img/generic/13.jpg" alt="" />
@@ -613,8 +613,8 @@
                   <div class="d-flex btn-reveal-trigger">
 
                   @php
-                    $date= new DateTime($activity->date_start) 
-                  @endphp                  
+                    $date= new DateTime($activity->date_start)
+                  @endphp
                   @php
                   $startTime = new DateTime($activity->start_time)
                   @endphp
@@ -623,11 +623,7 @@
                   @endphp
                     <div class="calendar"><span class="calendar-month">{{$date->format('M')}}</span><span class="calendar-day">{{$date->format('d')}}</span></div>
                     <div class="flex-1 position-relative ps-3">
-<<<<<<< HEAD
-                      <h6 class="fs-9 mb-0"><a href="{{ route('activity-details', ['activity_id' => $activity->activity_id]) }}">{{$activity->title}}</a></h6>
-=======
                       <h6 class="fs-9 mb-0"><a href="../events/event-detail.html">{{$activity->title}}</a></h6>
->>>>>>> c4c3b64afbd6579709f6957b95d1228b9c115976
                       <p class="mb-1">{{$activity->description}}<a href="#!" class="text-700"></a></p>
                       <p class="text-1000 mb-0">Time: {{$startTime->format('H:i')}}</p>
                       <p class="text-1000 mb-0">Duration: {{$startTime->format('H:i')}} - {{$endTime->format('H:i')}}</p>
@@ -668,7 +664,7 @@
       </div>
     </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
 
-    
+
 
     <!-- =============================================== -->
     <!-- JavaScripts -->

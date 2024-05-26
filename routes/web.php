@@ -8,6 +8,9 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\AdminController;//
+use App\Http\Controllers\ExcuseApplicationController;
+use App\Http\Controllers\QRCodeLoginController;//
+
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +87,12 @@ Route::middleware('auth','role:admin')->group(function(){
         // COMMUNITY
             Route::get('/community', [TopicController::class, 'index'])->name('topics.index');
             Route::post('/community', [TopicController::class, 'store'])->name('topics.store');
+
+            //excuse application
+
+            Route::get('/excuseapplication', [ExcuseApplicationController::class, 'index'])->name('excuseapp'); //homepage
+            Route::get('/adminexcuseapplication', [ExcuseApplicationController::class, 'adminindex'])->name('adminexcuseapp'); //homepage
+
 });
 
 
@@ -117,6 +126,25 @@ Route::get('/community', function () {
 // });
 
 // QR SCANNER
+
+// Route::get('/qr-login', function () {
+//     return view('student.qr-login');
+// });
+
+Route::get('/qr-login', [QRCodeLoginController::class, 'qrloginindex'])->name('qr-loginpage');
+// Route::post('/qr-login', [QRCodeLoginController::class, 'qrloginindex'])->name('qr-loginpage');
+// Route for handling the QR code login authentication
+Route::post('/qr-login/authenticate', [QRCodeLoginController::class, 'authenticate'])->name('qr.authenticate');
+
+// Route::post('/qr-login/check-user', [QrCodeLoginController::class, 'checkUser'])->name('qr-code-login.checkUser');
+
+
+
+
+
+
+// Route::get('/scan-qr-codelogin', [QRCodeLoginController::class, 'scanQRcode'])->name('qr-login');
+
 
 
 // CAPTURE PHOTO
