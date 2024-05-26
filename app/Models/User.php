@@ -26,6 +26,8 @@ class User extends Authenticatable
         'email',
         'password',
         'user_role',
+        'department',
+        'organization_id',
     ];
 
     /**
@@ -51,4 +53,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Attendance::class, 'student_id', 'student_id');
     }
+
+
+    //function for foreign keys department_id and organization_id
+
+    public function department() {
+
+        return $this->belongsTo(Department::class,'department_id');   //
+      }
+
+
+      public function organization() {
+
+        return $this->belongsTo(Organization::class,'organization_id'); //
+      }
 }

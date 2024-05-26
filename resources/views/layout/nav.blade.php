@@ -15,7 +15,7 @@
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
             <div class="navbar-vertical-content scrollbar">
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
-                
+
               @if(auth()->check()) <!-- Assuming the user is authenticated -->
                     @if(auth()->user()->user_role === 'admin')
                         <!-- Dashboard for admin or officer -->
@@ -209,7 +209,7 @@
                                     </div>
                                 </a>
                             </li>
-                            
+
                         @endif
                     </ul>
 
@@ -249,7 +249,7 @@
                     </a>
                 </li>
               </ul>
-              
+
             </div>
           </div>
         </nav>

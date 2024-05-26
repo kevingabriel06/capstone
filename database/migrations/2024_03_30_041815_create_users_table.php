@@ -19,9 +19,12 @@ class CreateUsersTable extends Migration
                 $table->string('name');
                 $table->string('email')->unique();
                 $table->timestamp('email_verified_at')->nullable();
-                $table->string('department')->nullable();;
-                $table->dateTime('time_in')->nullable();;
-                $table->dateTime('time_out')->nullable();;
+                $table->unsignedBigInteger('department')->nullable(); //
+                $table->unsignedBigInteger('organization_id')->nullable(); //
+                $table->foreign('department')->references('department_id')->on('departments')->onDelete('cascade'); //
+                $table->foreign('organization_id')->references('organization_id')->on('organizations')->onDelete('cascade'); //
+                $table->dateTime('time_in')->nullable();
+                $table->dateTime('time_out')->nullable();
                 $table->enum('user_role',['admin','student','officer'])->default('student');
                 $table->string('password');
                 $table->string('stripe_id')->nullable();
