@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-        
+
 <div class="card mb-3">
     <div class="card-body">
     <div class="row flex-between-center">
@@ -20,48 +20,37 @@
 <div class="row g-0">
     <div class="card mt-3">
         <div class="card-header">
-            <h5 class="mb-0">Activity Details</h5>
+            <h5 class="mb-1">Activity Details</h5>
         </div>
         <div class="card-body bg-body-tertiary">
-            <form method="post" id="form1" action="{{route('create.store')}}" novalidate="novalidate" class="row g-3 needs-validation dropzone dropzone-multiple p-0" id="my-awesome-dropzone" data-dropzone="data-dropzone" enctype="multipart/form-data">
+        <form method="post" id="form1" action="{{ Auth::user()->user_role === 'admin' ? route('create.store') : (Auth::user()->user_role === 'officer' ? route('officer.create.store', ['department_id' => $department_id]) : '') }}" novalidate="novalidate" class="row g-3 needs-validation dropzone dropzone-multiple p-0" id="my-awesome-dropzone" data-dropzone="data-dropzone" enctype="multipart/form-data">
+
                 @csrf
                 @method('post')
                 <div class="row gx-2">
                     <div class="col-12 mb-3">
-                        <label class="form-label" for="activity-title">Activity Title</label>
+                        <label class="form-label" for="activity-title">Activity Title <label style="color: red;"> * </label> </label>
                         <input class="form-control" id="activity-title" type="text" placeholder="Activity Title" name="title" required=""/>
                         @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div> 
-                    <div class="col-sm-6 mb-3"><label class="form-label" for="date-start">Start Date</label><input class="form-control datetimepicker" id="date_start" type="text" placeholder="yyyy-mm-dd" name="date_start" data-options='{"dateFormat":"Y-m-d","disableMobile":true}' required="" />
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="date-start">Start Date <label style="color: red;"> * </label></label>
+                        <input class="form-control datetimepicker" id="date_start" type="text" placeholder="yyyy-mm-dd" name="date_start" data-options='{"dateFormat":"Y-m-d","disableMobile":true, "minDate": "today"}' required="" />
                         @error('date_start')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-  
-                    
+
                     <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="start-time">Start Time</label>
-                        <input class="form-control datetimepicker" id="start-time" type="text" placeholder="H:i " name="start_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' required=""/>
-                        @error('start_time')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="end-date">End Date</label>
-                        <input class="form-control datetimepicker" id="end-date" type="text" placeholder="yyyy-mm-dd" name="date_end" data-options='{"dateFormat":"Y-m-d","disableMobile":true}' required=""/>
+                        <label class="form-label" for="end-date">End Date <label style="color: red;"> * </label></label>
+                        <input class="form-control datetimepicker" id="end-date" type="text" placeholder="yyyy-mm-dd" name="date_end" data-options='{"dateFormat":"Y-m-d","disableMobile":true, "minDate":"today"}' required=""/>
                         @error('date_end')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="end-time">End Time</label>
-                        <input class="form-control datetimepicker" id="end-time" type="text" placeholder="h:i " name="end_time" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' required=""/>
-                        @error('end_time')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
+
                     <div class="col-sm-6 mb-3">
                         <label class="form-label" for="registration-deadline">Registration Deadline</label>
                         <input class="form-control datetimepicker" id="registration-deadline" type="text" placeholder="yyyy-mm-dd" name="registration_deadline" data-options='{"dateFormat":"Y-m-d","disableMobile":true}' />
@@ -69,6 +58,7 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="col-sm-6 mb-3">
                         <label class="form-label" for="registration-fee">Registration Fee</label>
                         <input class="form-control" id="registration-fee" type="text" placeholder="₱ 00.00" name="registration_fee"/>
@@ -76,24 +66,53 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="border-bottom border-dashed my-3"></div>
-
-                    <!-- department dropdown -->
-                    <div class="col-sm-6 mb-3">
-                        <label class="form-label" for="specific-dept">Department</label>
-                        <select class="form-select" id="departmentSelect" name="department_name">
-                            <option value="defaultdep" selected disabled>Select Department</option>
-                            @foreach($departments as $department)
-                            <option value="{{$department->department_name}}" name="department_name">
-                                {{$department->department_name}}
-                            </option>
-                            @endforeach
-                        </select>
-                    </div>
 
                     <div class="col-12">
                         <div class="border-bottom border-dashed my-3"></div>
                     </div>
+
+                    <!-- schedule details -->
+                    <div class="card-header">
+                        <h5 class="mb-1">Schedule Details</h5>
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="am_in">Morning Time In <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="am_in" type="text" placeholder="H:i " name="am_in" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' required=""/>
+                        @error('am_in')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="am_out">Morning Time Out <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="am_out" type="text" placeholder="H:i " name="am_out" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' required=""/>
+                        @error('am_out')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="pm_in">Afternoon Time In <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="pm_in" type="text" placeholder="H:i " name="pm_in" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' required=""/>
+                        @error('pm_in')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3">
+                        <label class="form-label" for="am_out">Afternoon Time Out <label style="color: blue;"> * </label> </label>
+                        <input class="form-control datetimepicker" id="pm_out" type="text" placeholder="H:i " name="pm_out" data-options='{"enableTime":true,"noCalendar":true,"dateFormat":"H:i","disableMobile":true}' required=""/>
+                        @error('pm_out')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    <div class="col-12">
+                        <div class="form-text mt-0"><i> * Note: The default cut-off time for scheduling is 15 minutes, but it can be edited depending on the situation.</i></div>
+                        <div class="border-bottom border-dashed my-3"></div>
+                    </div>
+
                     <div class="col-12">
                         <label class="form-label" for="description">Description</label>
                         <textarea class="form-control" id="description" name="description" rows="6"></textarea>
