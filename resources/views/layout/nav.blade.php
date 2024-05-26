@@ -15,21 +15,7 @@
           <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
             <div class="navbar-vertical-content scrollbar">
               <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
-<<<<<<< HEAD
 
-                <!-- Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('home')}}" role="button" aria-expanded="false" aria-controls="dashboard">
-                        <div class="d-flex align-items-center">
-                            <span class="nav-link-icon">
-                                <span class="fas fa-chart-pie"></span>
-                            </span>
-                            <span class="nav-link-text ps-1">Dashboard</span>
-                        </div>
-                    </a>
-                </li>
-=======
-                
               @if(auth()->check()) <!-- Assuming the user is authenticated -->
                     @if(auth()->user()->user_role === 'admin')
                         <!-- Dashboard for admin or officer -->
@@ -68,7 +54,6 @@
                         </li>
                     @endif
                 @endif
->>>>>>> master
 
                 <!--main menu label -->
                 <li class="nav-item">
@@ -224,24 +209,18 @@
                                     </div>
                                 </a>
                             </li>
-                            
+
                         @endif
                     </ul>
 
                 <li class="nav-item">
                     @if(auth()->user()->user_role === 'admin')
                     <!-- Community -->
-<<<<<<< HEAD
-                    <a class="nav-link" href="{{ route('topics.index')}}" role="button">
-                        <div class="d-flex align-items-center"><span class="nav-link-icon">
-                                <span class="fas fa-comments"></span></span>
-=======
                     <a class="nav-link" href="{{ route('topics.index') }}" role="button">
                         <div class="d-flex align-items-center">
                             <span class="nav-link-icon">
                                 <span class="fas fa-comments"></span>
                             </span>
->>>>>>> master
                             <span class="nav-link-text ps-1">Community</span>
                         </div>
                     </a>
