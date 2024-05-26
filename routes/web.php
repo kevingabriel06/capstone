@@ -30,6 +30,10 @@ Route::group(['middleware'=>'prevent-back-history'],function(){
 
 Route::get('/', [UserController::class, 'login'])->name('login');
 Route::post('/', [UserController::class, 'loginPost'])->name('login.post');
+Route::post('/qr-authenticate', [QRCodeLoginController::class, 'authenticate'])->name('qr.authenticate');
+
+//Route::get('/qr-login', [QRCodeLoginController::class, 'qrloginindex'])->name('qr.login');
+
 
 
 
